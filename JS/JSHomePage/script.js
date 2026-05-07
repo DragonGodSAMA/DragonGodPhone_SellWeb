@@ -1,6 +1,6 @@
 const routes = {
     login: {
-        path: "../Login and Registration_Xwk/Login.html",
+        path: "../Login&Registration/Login.html",
         defaultParams: {
             mode: "login",
             source: "homepage",
@@ -8,7 +8,7 @@ const routes = {
         }
     },
     register: {
-        path: "../Login and Registration_Xwk/Registration.html",
+        path: "../Login&Registration/Registration.html",
         defaultParams: {
             mode: "register",
             source: "homepage",
@@ -16,7 +16,7 @@ const routes = {
         }
     },
     detail: {
-        path: "../Detail_Introduction_Page-ZhuoChen/DetailIntroductinoPage-ZhuoChen.html",
+        path: "../DetailIntroduction/DetailIntroductinoDragonGodXProMax.html",
         defaultParams: {
             product: "aether-fold-one",
             section: "story",
@@ -24,7 +24,7 @@ const routes = {
         }
     },
     sell: {
-        path: "../SellPage/SellPage.html",
+        path: "../SellPage(addcar)/SellPage.html",
         defaultParams: {
             sku: "aether-fold-one-512",
             campaign: "homepage",
@@ -43,7 +43,7 @@ const showcaseContent = {
             "Moodboard-style generation framing",
             "Stylus-first concept drafting"
         ],
-        image: "assets/feature-stylus.svg",
+        image: (window.ASSET_BASE || '') + "feature-stylus.svg",
         alt: "Stylized stylus illustration"
     },
     camera: {
@@ -55,7 +55,7 @@ const showcaseContent = {
             "Color-balanced evening scenes",
             "Macro depth for texture shots"
         ],
-        image: "assets/feature-camera.svg",
+        image: (window.ASSET_BASE || '') + "feature-camera.svg",
         alt: "Stylized camera illustration"
     },
     travel: {
@@ -67,7 +67,7 @@ const showcaseContent = {
             "Context-driven topic suggestions",
             "Source-aware links into login or buy"
         ],
-        image: "assets/feature-core.svg",
+        image: (window.ASSET_BASE || '') + "feature-core.svg",
         alt: "Stylized AI core illustration"
     },
     workflow: {
@@ -79,7 +79,7 @@ const showcaseContent = {
             "Wide-layout document preview",
             "Accessory-ready productivity story"
         ],
-        image: "assets/hero-device.svg",
+        image: (window.ASSET_BASE || '') + "hero-device.svg",
         alt: "Stylized foldable device illustration"
     }
 };
