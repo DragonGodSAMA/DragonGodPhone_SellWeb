@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Register page for DragonGod Phone mobile sales platform -->
+    <title>DragonGod Phone - Register</title>
+    <!-- Import Font Awesome for password visibility toggle icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Top header bar */
+        .page-header {
+            background-color: #f5f5f5;
+            padding: 18px 60px;
+            display: flex;
+            align-items: center;
+        }
+        .brand-logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #222222;
+            letter-spacing: 1px;
+        }
+
+        /* Global Register title (centered above register area) */
+        .form-main-title {
+            font-size: 32px;
+            font-weight: 500;
+            color: #222222;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Register form area */
+        .register-container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        /* Form input item styles */
+        .form-item {
+            margin-bottom: 20px;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .form-input {
+            width: 100%;
+            height: 48px;
+            padding: 0 16px;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            color: #333;
+        }
+        .form-input:focus {
+            outline: none;
+            background-color: #eeeeee;
+        }
+        .form-input::placeholder {
+            color: #999999;
+        }
+
+        /* Password visibility toggle button */
+        .eye-toggle-btn {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #666666;
+        }
+
+        /* Register submit button */
+        .register-submit-btn {
+            width: 100%;
+            height: 48px;
+            background-color: #e89aa0;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            margin-bottom: 28px;
+        }
+        .register-submit-btn:hover {
+            opacity: 0.92;
+        }
+
+        /* Bottom link: Go to login */
+        .bottom-link {
+            text-align: center;
+            font-size: 14px;
+        }
+        .bottom-link a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* Form error message styles */
+        .error-message {
+            font-size: 12px;
+            color: #e53e3e;
+            margin-top: 6px;
+            display: none;
+        }
+
+        /* Page footer copyright section */
+        .page-footer {
+            background-color: #f5f5f5;
+            padding: 24px 0;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+        }
+        .footer-links {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #666666;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+        .footer-copyright {
+            color: #999999;
+        }
+
+        /* Responsive adaptation for mobile devices */
+        @media (max-width: 768px) {
+            .form-main-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top header bar with brand logo text -->
+    <header class="page-header">
+        <a href="../HomePage_Chen Hetian/index.html" class="brand-logo-text" style="text-decoration: none;">DragonGod Phone(click to return to homepage)</a>
+    </header>
+
+    <!-- Centered Register Title -->
+    <h1 class="form-main-title">Create Account</h1>
+
+    <!-- Register Form -->
+    <div class="register-container">
+        <!-- Username Input -->
+        <div class="form-item">
+            <div class="input-wrapper">
+                <input type="text" class="form-input" id="username" placeholder="Full Name">
+            </div>
+            <div class="error-message" id="nameError">Full name cannot be empty</div>
+        </div>
+
+        <!-- Email Input -->
+        <div class="form-item">
+            <div class="input-wrapper">
+                <input type="text" class="form-input" id="email" placeholder="Email Address">
+            </div>
+            <div class="error-message" id="emailError">Email cannot be empty</div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="form-item">
+            <div class="input-wrapper">
+                <input type="password" class="form-input" id="password" placeholder="Password">
+                <button class="eye-toggle-btn" id="eyeBtn">
+                    <i class="fa-solid fa-eye-slash"></i>
+                </button>
+            </div>
+            <div class="error-message" id="pwdError">Password cannot be empty</div>
+        </div>
+
+        <!-- Confirm Password Input -->
+        <div class="form-item">
+            <div class="input-wrapper">
+                <input type="password" class="form-input" id="confirmPwd" placeholder="Confirm Password">
+            </div>
+            <div class="error-message" id="confirmError">Please confirm your password</div>
+        </div>
+
+        <!-- Register Button -->
+        <button class="register-submit-btn" id="registerBtn">Register</button>
+
+        <!-- Go to Login Link -->
+        <div class="bottom-link">
+            Already have an account? <a href="Login.html">Login Now</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+        <div class="footer-links">
+            <a href="User.html">User Agreement</a>
+            <a href="Privacy.html">Privacy Policy</a>
+            <a href="FAQ.html">FAQ</a>
+            <a href="Cookies.html">Cookies</a>
+        </div>
+        <div class="footer-copyright">Copyright © 2011-2026 DragonGod Phone. All rights reserved.</div>
+    </footer>
+
+    <script>
+        // Get elements
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const confirmPwd = document.getElementById('confirmPwd');
+        const eyeBtn = document.getElementById('eyeBtn');
+        const eyeIcon = eyeBtn.querySelector('i');
+        const registerBtn = document.getElementById('registerBtn');
+
+        // Toggle password visibility
+        eyeBtn.addEventListener('click', function(){
+            if(password.type === 'password'){
+                password.type = 'text';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }else{
+                password.type = 'password';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            }
+        });
+
+        function isEmailValid(emailVal) {
+            const reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return reg.test(emailVal);
+        }
+
+        function isPasswordStrong(pwdVal) {
+            return pwdVal.length >= 6;
+        }
+
+        function isPasswordMatch(pwd1, pwd2) {
+            return pwd1 === pwd2;
+        }
+
+        // Register validation
+        registerBtn.addEventListener('click', function(){
+            let valid = true;
+
+            // Empty check
+            if(!username.value.trim()){
+                document.getElementById('nameError').style.display = 'block';
+                valid = false;
+            }else{
+                document.getElementById('nameError').style.display = 'none';
+            }
+
+            if(!email.value.trim()){
+                document.getElementById('emailError').innerText = "Email cannot be empty";
+                document.getElementById('emailError').style.display = 'block';
+                valid = false;
+            }else{
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            if(!password.value.trim()){
+                document.getElementById('pwdError').innerText = "Password cannot be empty";
+                document.getElementById('pwdError').style.display = 'block';
+                valid = false;
+            }else{
+                document.getElementById('pwdError').style.display = 'none';
+            }
+
+            if(!confirmPwd.value.trim()){
+                document.getElementById('confirmError').innerText = "Please confirm your password";
+                document.getElementById('confirmError').style.display = 'block';
+                valid = false;
+            }else{
+                document.getElementById('confirmError').style.display = 'none';
+            }
+
+            // Enhanced validation after empty check
+            if(valid){
+                let pass = true;
+
+                // Email format check
+                if(!isEmailValid(email.value.trim())){
+                    document.getElementById('emailError').innerText = "Please enter a valid email address";
+                    document.getElementById('emailError').style.display = 'block';
+                    pass = false;
+                }
+
+                // Password strength check (at least 6 characters)
+                if(!isPasswordStrong(password.value.trim())){
+                    document.getElementById('pwdError').innerText = "Password must contain at least 6 characters";
+                    document.getElementById('pwdError').style.display = 'block';
+                    pass = false;
+                }
+
+                // Password match check
+                if(!isPasswordMatch(password.value, confirmPwd.value)){
+                    document.getElementById('confirmError').innerText = "Two passwords do not match";
+                    document.getElementById('confirmError').style.display = 'block';
+                    pass = false;
+                }
+
+                if(pass){
+                    alert('Registration Successful! Please login.');
+                    window.location.href = 'Login.html';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

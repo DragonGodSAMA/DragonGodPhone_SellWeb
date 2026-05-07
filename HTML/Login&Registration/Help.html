@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragonGod Phone - Help & Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            line-height: 1.6;
+            color: #333333;
+        }
+
+        /* Header - 与全站完全统一 */
+        .page-header {
+            background-color: #f5f5f5;
+            padding: 18px 60px;
+            display: flex;
+            align-items: center;
+        }
+        .brand-logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #222222;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        /* 页面主标题 */
+        .page-main-title {
+            font-size: 32px;
+            font-weight: 500;
+            color: #222222;
+            text-align: center;
+            margin: 40px 0 10px;
+        }
+        .page-subtitle {
+            font-size: 14px;
+            color: #666666;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* 内容容器 */
+        .content-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        /* 返回链接 - 与全站统一 */
+        .back-to-home {
+            display: inline-block;
+            font-size: 14px;
+            color: #0066cc;
+            text-decoration: none;
+            margin-bottom: 30px;
+        }
+        .back-to-home:hover {
+            text-decoration: underline;
+        }
+
+        /* 快速帮助卡片区域 */
+        .help-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .help-card {
+            background-color: #fafafa;
+            border: 1px solid #eeeeee;
+            border-radius: 8px;
+            padding: 24px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .help-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transform: translateY(-2px);
+        }
+        .help-card-icon {
+            font-size: 32px;
+            color: #e89aa0;
+            margin-bottom: 12px;
+        }
+        .help-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222222;
+            margin-bottom: 6px;
+        }
+        .help-card-desc {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        /* 帮助板块通用样式 */
+        .help-section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #222222;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f5f5f5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-content {
+            padding-left: 8px;
+        }
+        .help-item {
+            margin-bottom: 16px;
+        }
+        .help-item-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 6px;
+        }
+        .help-item-desc {
+            font-size: 14px;
+            color: #444444;
+            margin-bottom: 8px;
+        }
+        .help-item-link {
+            font-size: 14px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .help-item-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 步骤列表 */
+        .step-list {
+            margin: 12px 0 12px 24px;
+            font-size: 14px;
+            color: #444444;
+        }
+        .step-list li {
+            margin-bottom: 8px;
+        }
+
+        /* 联系客服板块 */
+        .contact-box {
+            background-color: #fafafa;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid #eeeeee;
+        }
+        .contact-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #222222;
+            margin-bottom: 16px;
+        }
+        .contact-info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 16px;
+        }
+        .contact-info-item {
+            flex: 1;
+            min-width: 200px;
+        }
+        .contact-info-label {
+            font-size: 13px;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+        .contact-info-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: #222222;
+        }
+        .service-time {
+            font-size: 14px;
+            color: #444444;
+            margin-top: 10px;
+        }
+
+        /* FAQ快捷按钮 */
+        .faq-shortcut-box {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .faq-shortcut-btn {
+            display: inline-block;
+            padding: 12px 36px;
+            background-color: #e89aa0;
+            color: #ffffff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+        .faq-shortcut-btn:hover {
+            opacity: 0.92;
+        }
+
+        /* 分隔线通用样式 - 与全站统一 */
+        .link-divider {
+            color: #dddddd;
+            line-height: 1;
+        }
+
+        /* Footer - 与全站完全统一 */
+        .page-footer {
+            background-color: #f5f5f5;
+            padding: 24px 0;
+            margin-top: auto;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+        }
+        .footer-links {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer-links a {
+            color: #666666;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .footer-copyright {
+            color: #999999;
+        }
+
+        /* 响应式适配 - 与全站完全统一 */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 18px 20px;
+            }
+            .page-main-title {
+                font-size: 24px;
+                margin: 30px 0 8px;
+            }
+            .section-title {
+                font-size: 20px;
+            }
+            .help-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .contact-info-row {
+                gap: 20px;
+            }
+            .contact-box {
+                padding: 20px;
+            }
+            .footer-links a {
+                margin: 0 6px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="page-header">
+        <a href="Login.html" class="brand-logo-text">DragonGod Phone</a>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="content-container">
+        <!-- 返回登录页链接 -->
+        <a href="Login.html" class="back-to-home"><i class="fa-solid fa-arrow-left"></i> Back to Login</a><br>
+        <a href="../Detail_Introduction_Page-ZhuoChen/DetailIntroductinoPage-ZhuoChen.html" class="back-to-home"><i class="fa-solid fa-arrow-left"></i> Back to Detail</a>
+
+        <!-- 页面标题 -->
+        <h1 class="page-main-title">Help & Support</h1>
+        <p class="page-subtitle">Find answers and solutions to all your questions about DragonGod Phone services</p>
+
+        <!-- 快速帮助卡片 -->
+        <div class="help-cards-grid">
+            <a href="#account-help" class="help-card">
+                <div class="help-card-icon"><i class="fa-solid fa-user"></i></div>
+                <div class="help-card-title">Account & Login</div>
+                <div class="help-card-desc">Solve login, registration and account issues</div>
+            </a>
+            <a href="#order-help" class="help-card">
+                <div class="help-card-icon"><i class="fa-solid fa-box"></i></div>
+                <div class="help-card-title">Orders & Payment</div>
+                <div class="help-card-desc">Track orders, payment issues and invoices</div>
+            </a>
+            <a href="#shipping-help" class="help-card">
+                <div class="help-card-icon"><i class="fa-solid fa-truck"></i></div>
+                <div class="help-card-title">Shipping & Delivery</div>
+                <div class="help-card-desc">Delivery time, tracking and shipping policy</div>
+            </a>
+            <a href="#aftersales-help" class="help-card">
+                <div class="help-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="help-card-title">After-sales Service</div>
+                <div class="help-card-desc">Returns, exchanges and warranty service</div>
+            </a>
+        </div>
+
+        <!-- FAQ快捷入口 -->
+        <div class="faq-shortcut-box">
+            <a href="FAQ.html" class="faq-shortcut-btn">
+                <i class="fa-solid fa-circle-question"></i> View Full FAQ
+            </a>
+        </div>
+
+        <!-- 账号与登录帮助板块 -->
+        <div class="help-section" id="account-help">
+            <h2 class="section-title">
+                <i class="fa-solid fa-user"></i> Account & Login Help
+            </h2>
+            <div class="section-content">
+                <div class="help-item">
+                    <h3 class="help-item-title">Can't log in to my account</h3>
+                    <p class="help-item-desc">If you are unable to log in, please try the following solutions:</p>
+                    <ol class="step-list">
+                        <li>Check that your username/email/phone number and password are entered correctly, and that Caps Lock is not enabled</li>
+                        <li>Reset your password by clicking "Forgot Password" on the login page</li>
+                        <li>Clear your browser cache and cookies, or try logging in with a different browser/device</li>
+                        <li>If your account is locked, please contact customer service for assistance</li>
+                    </ol>
+                </div>
+
+                <div class="help-item">
+                    <h3 class="help-item-title">How to register a new account</h3>
+                    <p class="help-item-desc">Click the "Register" button on the login page, enter your valid email/phone number, complete the verification, set a password, and you can complete the registration. You need to be at least 18 years old to register an account.</p>
+                </div>
+
+                <div class="help-item">
+                    <h3 class="help-item-title">How to change my account password</h3>
+                    <p class="help-item-desc">After logging in to your account, go to "Account Settings" - "Security Settings" to change your password. If you can't log in, you can reset your password via the "Forgot Password" function on the login page.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 订单与支付帮助板块 -->
+        <div class="help-section" id="order-help">
+            <h2 class="section-title">
+                <i class="fa-solid fa-box"></i> Orders & Payment Help
+            </h2>
+            <div class="section-content">
+                <div class="help-item">
+                    <h3 class="help-item-title">How to check my order status</h3>
+                    <p class="help-item-desc">After logging in to your account, go to the "My Orders" page to view all your order details, shipping status, tracking numbers and other information. We will also send order update notifications to your registered email.</p>
+                </div>
+
+                <div class="help-item">
+                    <h3 class="help-item-title">What payment methods are supported</h3>
+                    <p class="help-item-desc">We support all major credit and debit cards (Visa, Mastercard, American Express), bank transfers, and mainstream digital payment methods. All payments are processed through encrypted secure channels, and we will not store your complete payment information.</p>
+                </div>
+
+                <div class="help-item">
+                    <h3 class="help-item-title">Can I cancel or modify my order</h3>
+                    <p class="help-item-desc">You can apply for order cancellation or modification within 24 hours of placing the order (before the order is shipped). Please contact customer service as soon as possible to process your request. Once the order has been shipped, you will need to apply for a return after receiving the goods.</p>
+                    <a href="User.html" class="help-item-link">View full order policy in User Agreement</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 配送与产品帮助板块 -->
+        <div class="help-section" id="shipping-help">
+            <h2 class="section-title">
+                <i class="fa-solid fa-truck"></i> Shipping & Product Help
+            </h2>
+            <div class="section-content">
+                <div class="help-item">
+                    <h3 class="help-item-title">Delivery time and shipping range</h3>
+                    <p class="help-item-desc">Domestic standard delivery takes 3-7 working days, and international delivery takes 7-15 working days. We support shipping to most countries and regions around the world. The specific shipping cost and delivery time will be calculated at checkout according to your address.</p>
+                </div>
+
+                <div class="help-item">
+                    <h3 class="help-item-title">How to track my package</h3>
+                    <p class="help-item-desc">After your order is shipped, we will send a shipping notification email with the tracking number and logistics query link. You can also check the real-time tracking information of the package in the order details page.</p>
+                </div>
+
+                <div class="help-item">
+                    <h3 class="help-item-title">Are all products authentic and have a warranty</h3>
+                    <p class="help-item-desc">All products sold on the platform are 100% brand new and authentic, sourced directly from official manufacturers and authorized distributors. All mobile phones come with a standard 12-month manufacturer's warranty, and accessories come with a 6-month warranty.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 售后与退换帮助板块 -->
+        <div class="help-section" id="aftersales-help">
+            <h2 class="section-title">
+                <i class="fa-solid fa-shield-halved"></i> After-sales & Returns Help
+            </h2>
+            <div class="section-content">
+                <div class="help-item">
+                    <h3 class="help-item-title">Return and exchange policy</h3>
+                    <p class="help-item-desc">We offer a 7-day no-reason return policy for unopened products in original packaging, and a 30-day free return/exchange policy for products with quality issues. For products within the warranty period, we provide free repair services according to the warranty terms.</p>
+                    <a href="User.html" class="help-item-link">View full after-sales policy</a>
+                </div>
+
+                <div class="help-item">
+                    <h3 class="help-item-title">How to apply for a return</h3>
+                    <p class="help-item-desc">To apply for a return, please contact our customer service team within the eligible return period, provide your order number and the reason for the return. After the application is approved, we will guide you to return the product, and process the refund or exchange after receiving and inspecting the product.</p>
+                </div>
+
+                <div class="help-item">
+                    <h3 class="help-item-title">How long does it take to process a refund</h3>
+                    <p class="help-item-desc">After we receive and confirm the returned product, the refund will be processed within 3-5 working days. The time for the refund to arrive in your account depends on your payment institution, usually 5-10 working days.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 联系客服板块 -->
+        <div class="help-section">
+            <h2 class="section-title">
+                <i class="fa-solid fa-headset"></i> Contact Customer Service
+            </h2>
+            <div class="contact-box">
+                <h3 class="contact-title">Can't find the answer you need? Contact our support team</h3>
+                <div class="contact-info-row">
+                    <div class="contact-info-item">
+                        <div class="contact-info-label">Email Support</div>
+                        <div class="contact-info-value">support@dragongodphone.com</div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-label">Hotline Support</div>
+                        <div class="contact-info-value">+1-800-123-4567</div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-label">Live Chat</div>
+                        <div class="contact-info-value">Available on website & App</div>
+                    </div>
+                </div>
+                <p class="service-time"><i class="fa-solid fa-clock"></i> Service Time: Monday to Sunday, 9:00 AM - 9:00 PM (Local Time)</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 - 与全站完全统一 -->
+    <footer class="page-footer">
+        <div class="footer-links">
+            <a href="User.html">User Agreement</a>
+            <span class="link-divider">|</span>
+            <a href="Privacy.html">Privacy Policy</a>
+            <span class="link-divider">|</span>
+            <a href="FAQ.html">FAQ</a>
+            <span class="link-divider">|</span>
+            <a href="Cookies.html">Cookies</a>
+        </div>
+        <div class="footer-copyright">Copyright © 2011-2026 DragonGod Phone. All rights reserved.</div>
+    </footer>
+
+    <script>
+        // 卡片锚点平滑滚动
+        document.querySelectorAll('.help-card[href^="#"]').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

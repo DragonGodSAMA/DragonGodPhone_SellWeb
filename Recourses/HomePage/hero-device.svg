@@ -1,0 +1,62 @@
+<svg width="1400" height="760" viewBox="0 0 1400 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="backBody" x1="186" y1="188" x2="435" y2="544" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4C46A3"/>
+      <stop offset="1" stop-color="#1B216A"/>
+    </linearGradient>
+    <linearGradient id="screenGlow" x1="680" y1="178" x2="1212" y2="570" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E0B3A"/>
+      <stop offset="0.48" stop-color="#3F2FFF"/>
+      <stop offset="1" stop-color="#D8B7FF"/>
+    </linearGradient>
+    <linearGradient id="screenHighlight" x1="932" y1="208" x2="932" y2="564" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D7DBFF" stop-opacity="0.94"/>
+      <stop offset="0.36" stop-color="#8FB1FF" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#FFF0C7" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="shadowLeft" x="106" y="122" width="430" height="462" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="18"/>
+      <feGaussianBlur stdDeviation="16"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0784314 0 0 0 0 0.0705882 0 0 0 0 0.243137 0 0 0 0.18 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_left"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_left" result="shape"/>
+    </filter>
+    <filter id="shadowRight" x="560" y="140" width="718" height="472" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="20"/>
+      <feGaussianBlur stdDeviation="18"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0392157 0 0 0 0 0.0431373 0 0 0 0 0.121569 0 0 0 0.22 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_right"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_right" result="shape"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadowLeft)">
+    <rect x="138" y="154" width="300" height="390" rx="38" fill="#2B2B71"/>
+    <rect x="144" y="160" width="288" height="378" rx="34" fill="url(#backBody)"/>
+    <rect x="188" y="204" width="196" height="66" rx="24" fill="#0F1228" stroke="#8E95EC" stroke-width="8"/>
+    <circle cx="240" cy="237" r="18" fill="#11142A" stroke="#2C3378" stroke-width="6"/>
+    <circle cx="288" cy="237" r="22" fill="#0B0D23" stroke="#2F337B" stroke-width="6"/>
+    <circle cx="346" cy="237" r="16" fill="#0B0D23" stroke="#2F337B" stroke-width="6"/>
+    <rect x="148" y="320" width="280" height="214" rx="0" fill="#272178"/>
+    <path d="M278 320V534" stroke="#8F96F2" stroke-opacity="0.6" stroke-width="2"/>
+    <text x="194" y="500" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">DRAGONGOD</text>
+  </g>
+
+  <g filter="url(#shadowRight)">
+    <rect x="596" y="174" width="646" height="378" rx="40" fill="#141414"/>
+    <rect x="616" y="192" width="606" height="342" rx="28" fill="url(#screenGlow)"/>
+    <ellipse cx="920" cy="388" rx="212" ry="132" fill="url(#screenHighlight)"/>
+    <path d="M736 214V512" stroke="#F8F8FF" stroke-opacity="0.72" stroke-width="3"/>
+    <path d="M776 214V512" stroke="#F8F8FF" stroke-opacity="0.28" stroke-width="3"/>
+    <path d="M1060 214V512" stroke="#F8F8FF" stroke-opacity="0.72" stroke-width="3"/>
+    <path d="M1100 214V512" stroke="#F8F8FF" stroke-opacity="0.28" stroke-width="3"/>
+    <text x="856" y="360" fill="#D7D7FF" font-family="Segoe UI, Arial, sans-serif" font-size="92" font-weight="700">08:08</text>
+    <text x="866" y="416" fill="#EDEBFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="500">AETHER DISPLAY</text>
+  </g>
+</svg>
