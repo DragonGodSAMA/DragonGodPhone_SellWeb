@@ -609,8 +609,7 @@
             </div>
             <!-- 购物车图标 添加点击跳转事件 -->
             <span id="cartIcon">🛒</span>
-            <!-- Login/Reserve 按钮 添加点击跳转事件 -->
-            <button class="btn-reserve" id="loginReserveBtn">Login / Reserve</button>
+            <button class="ghost-button btn-reserve" type="button" data-route="login">Login</button>
         </div>
         <div class="hamburger" id="hamburger">☰</div>
     </nav>
@@ -622,7 +621,7 @@
         <a href="#display">Display</a>
         <a href="#performance">Performance</a>
         <a href="#battery">Battery</a>
-        <a href="../Login&Registration/Login.html">Login</a>
+        <button class="ghost-button" type="button" data-route="login" style="margin-top: 10px;">Login</button>
         <a href="../SellPage(addcar)/SellPage.html">Cart</a>
     </div>
 
@@ -887,11 +886,8 @@
         cartIcon.addEventListener('click', () => {
             window.location.href = '../SellPage(addcar)/SellPage.html';
         });
-
-        const loginReserveBtn = document.getElementById('loginReserveBtn');
-        loginReserveBtn.addEventListener('click', () => {
-            window.location.href = '../Login&Registration/Login.html';
-        });
     </script>
+    <script src="../../JS/JSHomePage/common.js"></script>
+    <script src="../../JS/JSHomePage/script.js"></script>
 </body>
 </html>

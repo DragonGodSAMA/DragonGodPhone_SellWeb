@@ -184,7 +184,7 @@
 
     <!-- Register Form -->
     <div class="register-container">
-        <form id="registerForm" class="register-grid" novalidate>
+        <form id="registerForm" class="register-grid" novalidate action="../../PHP/register.php" method="POST">
             <!-- Left column: identity fields -->
             <div>
                 <div class="form-item">
@@ -250,7 +250,19 @@
                 </div>
 
                 <div class="form-item col-full">
-                    <button class="register-submit-btn" id="registerBtn" type="button">Register</button>
+                    <button class="register-submit-btn" id="registerBtn" type="submit">Register</button>
+                </div>
+
+                <div class="form-item">
+                    <label style="display:block;margin-bottom:6px;font-weight:600;color:#333">Identity</label>
+                    <div class="input-wrapper" style="display:flex;gap:20px;align-items:center;padding:10px;">
+                        <label>
+                            <input type="radio" name="role" value="Buyer" checked> Buyer
+                        </label>
+                        <label>
+                            <input type="radio" name="role" value="Seller"> Seller
+                        </label>
+                    </div>
                 </div>
 
                 <div class="col-full bottom-link" style="margin-top:6px;">
@@ -379,11 +391,13 @@
             }
 
             if(ok){
-                // simulate success (replace with actual submit logic)
+                // 弹出成功提示
                 alert('Registration Successful! Please login.');
-                window.location.href = 'Login.html';
+                // 提交表单到 PHP
+                document.getElementById('registerForm').submit();
             }
         });
     </script>
+    <script src="../../JS/JSHomePage/common.js"></script>
 </body>
 </html>

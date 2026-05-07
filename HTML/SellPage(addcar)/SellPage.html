@@ -54,6 +54,7 @@
             background-color: #fff5f5;
         }
     </style>
+    <link rel="stylesheet" href="../../CSS/CSSHomePage/stylesofindex.css">
 </head>
 <body class="bg-white font-sans text-gray-800">
     
@@ -63,7 +64,7 @@
             <div class="flex items-center justify-between h-full">
                 <!-- Logo Area -->
                 <div class="flex-shrink-0">
-                    <a href="#" class="text-xl font-bold text-gray-900 hover:text-red-600 transition-colors">
+                    <a href="../HomePages/index.html" class="text-xl font-bold text-gray-900 hover:text-red-600 transition-colors">
                         Online Store
                     </a>
                 </div>
@@ -75,6 +76,11 @@
                     <a href="../HomePages/index.html" class="text-gray-700 hover:text-red-600 font-medium transition-colors">Deals</a>
                     <a href="../Login&Registration/Help.html" class="text-gray-700 hover:text-red-600 font-medium transition-colors">About</a>
                     <a href="../Login&Registration/Privacy.html" class="text-gray-700 hover:text-red-600 font-medium transition-colors">Contact</a>
+                </div>
+                
+                <!-- Login Button -->
+                <div class="hidden md:block">
+                    <button class="ghost-button" type="button" data-route="login">Login</button>
                 </div>
                 
                 <!-- Mobile Menu Button -->
@@ -96,6 +102,7 @@
                 <a href="../HomePages/index.html" class="block text-gray-700 hover:text-red-600 font-medium py-2 transition-colors">Deals</a>
                 <a href="../Login&Registration/Help.html" class="block text-gray-700 hover:text-red-600 font-medium py-2 transition-colors">About</a>
                 <a href="../Login&Registration/Privacy.html" class="block text-gray-700 hover:text-red-600 font-medium py-2 transition-colors">Contact</a>
+                <button class="ghost-button w-full text-left mt-2" type="button" data-route="login">Login</button>
             </div>
         </div>
     </nav>
@@ -652,6 +659,7 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', init);
     </script>
+    <script src="../../JS/JSHomePage/common.js"></script>
+    <script src="../../JS/JSHomePage/script.js"></script>
 </body>
 </html>
-```
