@@ -17,9 +17,9 @@ const UTILITY_LINKS = [
     { slug: "store", label: "DragonMall", href: "store.html" }
 ];
 
-const DETAIL_URL = "../../Detail_Introduction_Page-ZhuoChen/DetailIntroductinoPage-ZhuoChen.html?product=aether-fold-one&section=story&scene=phones-channel";
-const SELL_URL = "../../SellPage/SellPage.html?sku=aether-fold-one-512&campaign=channel-pages&source=channel-pages";
-const LOGIN_URL = "../../Login and Registration_Xwk/Login.html?source=channel-pages&redirect=sell";
+const DETAIL_URL = "../../DetailIntroduction/DetailIntroductinoDragonGodXProMax.html?product=aether-fold-one&section=story&scene=phones-channel";
+const SELL_URL = "../../SellPage(addcar)/SellPage.html?sku=aether-fold-one-512&campaign=channel-pages&source=channel-pages";
+const LOGIN_URL = "../../Login&Registration/Login.html?source=channel-pages&redirect=sell";
 
 const PAGE_DATA = {
     phones: {

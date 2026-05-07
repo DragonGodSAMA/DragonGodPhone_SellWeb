@@ -216,11 +216,12 @@
         phoneImg.style.opacity = 0;
         
         setTimeout(() => {
-            if (color === "black") {
-                phoneImg.src = "DragonGodPhone_Black.png";
-            } else if (color === "gold") {
-                phoneImg.src = "DragonGodPhone_Gold.png";
-            }
+                const base = "../../Recourses/DragonGod80ProMaxWindRush/";
+                if (color === "black") {
+                    phoneImg.src = base + "DragonGodPhone_Black.png";
+                } else if (color === "gold") {
+                    phoneImg.src = base + "DragonGodPhone_Gold.png";
+                }
             phoneImg.style.opacity = 1;
             
             document.querySelectorAll(".Dot").forEach(dot => {
@@ -242,14 +243,14 @@
             <a href="#">Laptops</a>
             <a href="#">Tablets</a>
             <a href="#">Support</a>
-            <img src="HamburgerMenu.png" alt="menu" onclick="toggleMenu()">
+            <img src="../../Recourses/DragonGod80ProMaxWindRush/HamburgerMenu.png" alt="menu" onclick="toggleMenu()">
         </div>
     </div>
 
     
 
     <section class="main_part">
-        <img src="DragonGodPhone.png" class="Phone_Img">
+        <img src="../../Recourses/DragonGod80ProMaxWindRush/DragonGodPhone.png" class="Phone_Img">
         <h1>Dragon God 80 Pro Max <span style="font-family: 'microsoft yahei';">WindRush Edition</span> </h1>
         <p>Redefine flagship performance with ultimate power, display and camera.</p>
     </section>
@@ -288,7 +289,7 @@
     </section>
 
     <section>
-        <img src="DragonGodPhone_Black.png" class="Phone_Img_dyn" alt="DragonGod Phone">
+        <img src="../../Recourses/DragonGod80ProMaxWindRush/DragonGodPhone_Black.png" class="Phone_Img_dyn" alt="DragonGod Phone">
     </section>
 
     <section class="Phone_Colors">
