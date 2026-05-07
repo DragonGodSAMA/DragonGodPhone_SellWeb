@@ -357,22 +357,22 @@
         window.addEventListener('load', function() {
             const urlParams = new URLSearchParams(window.location.search);
 
-            // ✅ 登录成功：保存用户名
             if (urlParams.get('success') === '1') {
-                const username = urlParams.get('username');
-                localStorage.setItem('loggedInUser', username); // 保存到本地
+                const username = urlParams.get('username') || 'User';
+                const role = urlParams.get('role') || 'Buyer';
+                // 同时存用户名和身份
+                localStorage.setItem('loggedInUser', username);
+                localStorage.setItem('userRole', role);
 
                 alert('Login Successful! Welcome to DragonGod Phone Sales Platform');
                 window.location.href = '../../HTML/HomePages/index.html';
             }
 
-            // ❌ 登录失败
             if (urlParams.get('error') === '1') {
                 alert('Login Failed! Incorrect username or password.');
             }
         });
 
-        // 直接提交，不验证
         loginBtn.addEventListener('click', function() {
             document.getElementById('loginForm').submit();
         });

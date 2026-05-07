@@ -5,6 +5,7 @@ $phone      = $_POST['phone'] ?? '';
 $email      = $_POST['email'] ?? '';
 $regUsername= $_POST['regUsername'] ?? '';
 $password   = $_POST['password'] ?? '';
+$role       = $_POST['role'] ?? 'Buyer'; // 接收身份
 $time       = date("Y-m-d H:i:s");
 
 $text = "
@@ -16,12 +17,12 @@ Phone: $phone
 Email: $email
 Username: $regUsername
 Password: $password
+Role: $role
 ====================================
 ";
 
 file_put_contents(__DIR__ . "/../user_data.txt", $text, FILE_APPEND);
 
-// 直接跳转到登录页，不显示任何内容
 header("Location: ../../HTML/Login&Registration/Login.html");
 exit;
 ?>
