@@ -211,7 +211,7 @@
                 top: 70px;
                 right: 30px;
                 border-radius: 10px;
-                flex-direction: column;
+                flex-direction: column; 
                 z-index: 999;
                 padding: 0; 
             }
@@ -220,11 +220,11 @@
                 width: 200px;
                 height: auto;
                 padding: 10px 0;
-                align-items: flex-start;
+                align-items: flex-start; 
             }
 
             .nav_links.active .search-container {
-                margin: 10px 25px;
+                margin: 10px 25px; 
                 width: 80%;
             }
             .nav_links.active .search-input.active {
@@ -239,7 +239,7 @@
                 position: absolute;
                 top: 25px;
                 right: 40px;
-                z-index: 1000; 
+                z-index: 1000;
             }
             .nav_links img:hover{
                 width:30px;
@@ -291,7 +291,7 @@
         searchIcon.addEventListener('click', () => {
             searchInput.classList.toggle('active');
             if (searchInput.classList.contains('active')) {
-                searchInput.focus();
+                searchInput.focus(); 
             }
         });
 
@@ -301,9 +301,11 @@
             }
         });
 
+        // 按回车触发搜索（可自定义逻辑）
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && searchInput.value.trim() !== '') {
                 alert('Searching for: ' + searchInput.value);
+                // 可替换为实际搜索逻辑，比如跳转搜索页面
                 // window.location.href = '../search.html?keyword=' + searchInput.value;
             }
         });
@@ -314,10 +316,15 @@
     <div class="nav">
         <a href="../HomePages/index.html" class="Logo" style="text-decoration: none; color: inherit;">DragonGod Phone</a>
         <div class="nav_links">
-            <a href="">Phones</a>
-            <a href="#">Laptops</a>
-            <a href="#">Tablets</a>
-            <a href="#">Support</a>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <a href="../HomePages/index.html">Phones</a>
+            <a href="../HomePages/pages/computers.html">Laptops</a>
+            <a href="../HomePages/pages/tablets.html">Tablets</a>
+            <a href="../HomePages/pages/support.html">Support</a>
+            
             <img src="../../Recourses/DragonGod80ProMaxWindRush/HamburgerMenu.png" alt="menu" onclick="toggleMenu()">
         </div>
     </div>
@@ -376,6 +383,6 @@
     <div class="footer">
         © 2026 DragonGod Phone. All rights reserved.
     </div>
-    <script src="../../JS/common.js"></script>
+
 </body>
 </html>
