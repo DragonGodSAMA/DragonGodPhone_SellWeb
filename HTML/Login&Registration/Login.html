@@ -267,7 +267,7 @@
 </head>
 <body>
     <header class="page-header">
-        <a href="../HomePage_Chen Hetian/index.html" class="brand-logo-text" style="text-decoration: none;">DragonGod Phone(click to return to homepage)</a>
+        <a href="../HomePages/index.html" class="brand-logo-text" style="text-decoration: none;">DragonGod Phone(click to return to homepage)</a>
     </header>
 
     <h1 class="form-main-title">DragonGod Account Login</h1>
@@ -275,25 +275,27 @@
     <main class="login-container">
         <section class="qrcode-area">
             <div class="qrcode-box">
-                <img src="QRcode.png" class="qrcode-img" alt="Scan to login">
+                <img src="../../Recourses/QRcode/QRcode.png" class="qrcode-img" alt="Scan to login">
             </div>
             <p class="qrcode-tip-text">Use DragonGod Phone App > Scan to login</p>
         </section>
 
         <div class="vertical-line"></div>
 
+        <form action="../../PHP/login.php" method="POST" id="loginForm">
+
         <section class="login-form-area">
             <div class="form-item">
                 <div class="input-wrapper">
-                    <input type="text" class="form-input" id="accountInput" placeholder="Phone Number / Email Address / Username">
+                    <input type="text" class="form-input" id="accountInput" name="loginAccount" placeholder="Phone Number / Email Address / Username">
                 </div>
                 <div class="error-message" id="accountError">Account cannot be empty</div>
             </div>
 
             <div class="form-item">
                 <div class="input-wrapper">
-                    <input type="password" class="form-input" id="passwordInput" placeholder="Password">
-                    <button class="eye-toggle-btn" id="eyeBtn">
+                    <input type="password" class="form-input" id="passwordInput" name="loginPassword" placeholder="Password">
+                    <button class="eye-toggle-btn" id="eyeBtn" type="button">
                         <i class="fa-solid fa-eye-slash"></i>
                     </button>
                 </div>
@@ -302,7 +304,7 @@
 
             <a href="SMS.html" class="sms-login-link">Login with SMS Verification Code</a>
 
-            <button class="login-submit-btn" id="loginBtn">Login</button>
+            <button class="login-submit-btn" id="loginBtn" type="submit">Login</button>
 
             <div class="bottom-form-links">
                 <a href="Registration.html">Register</a>
@@ -312,6 +314,8 @@
                 <a href="Help.html">Help</a>
             </div>
         </section>
+
+        </form>
     </main>
 
     <footer class="page-footer">
@@ -350,24 +354,29 @@
         });
 
         // Login form validation
-        loginBtn.addEventListener('click', function(){
-            let loginValid = true;
-            if(!accountInput.value.trim()){
-                accountError.style.display = 'block';
-                loginValid = false;
-            }else{
-                accountError.style.display = 'none';
-            }
-            if(!passwordInput.value.trim()){
-                passwordError.style.display = 'block';
-                loginValid = false;
-            }else{
-                passwordError.style.display = 'none';
-            }
-            if(loginValid){
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // ✅ 登录成功：保存用户名
+            if (urlParams.get('success') === '1') {
+                const username = urlParams.get('username');
+                localStorage.setItem('loggedInUser', username); // 保存到本地
+
                 alert('Login Successful! Welcome to DragonGod Phone Sales Platform');
+                window.location.href = '../../HTML/HomePages/index.html';
+            }
+
+            // ❌ 登录失败
+            if (urlParams.get('error') === '1') {
+                alert('Login Failed! Incorrect username or password.');
             }
         });
+
+        // 直接提交，不验证
+        loginBtn.addEventListener('click', function() {
+            document.getElementById('loginForm').submit();
+        });
     </script>
+    <script src="../../JS/JSHomePage/common.js"></script>
 </body>
 </html>

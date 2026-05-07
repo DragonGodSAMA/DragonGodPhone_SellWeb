@@ -217,10 +217,9 @@
 
     <!-- Register Form -->
     <div class="register-container">
-        <form id="registerForm" class="register-grid" novalidate>
+        <form id="registerForm" class="register-grid" novalidate action="../../PHP/register.php" method="POST">
             <!-- Left column: identity fields -->
             <div>
-                
                 <div class="form-item">
                     <label for="fullName" style="display:block;margin-bottom:6px;font-weight:600;color:#333">Full name</label>
                     <div class="input-wrapper">
@@ -283,18 +282,8 @@
                     <div class="error-message" id="confirmError">Passwords do not match</div>
                 </div>
 
-                <div class="form-item">
-                    <label class="identity-label">Register as</label>
-                    <div class="input-wrapper identity-group">
-                        <button type="button" class="identity-btn" data-identity="Seller">Seller</button>
-                        <button type="button" class="identity-btn" data-identity="Buyer">Buyer</button>
-                        <input type="hidden" id="identityInput" name="identity" value="">
-                    </div>
-                    <div class="error-message" id="identityError">Please select Seller or Buyer</div>
-                </div>
-
                 <div class="form-item col-full">
-                    <button class="register-submit-btn" id="registerBtn" type="button">Register</button>
+                    <button class="register-submit-btn" id="registerBtn" type="submit">Register</button>
                 </div>
 
                 <div class="col-full bottom-link" style="margin-top:6px;">
@@ -344,19 +333,6 @@
             }
         });
 
-        // Identity selection handling
-        identityBtns.forEach(btn => {
-            btn.addEventListener('click', function(){
-                identityBtns.forEach(b => b.classList.remove('selected'));
-                this.classList.add('selected');
-                const val = this.getAttribute('data-identity') || '';
-                identityInput.value = val;
-                const err = document.getElementById('identityError');
-                if(err) err.style.display = 'none';
-                if(formTitle && val) formTitle.textContent = val + ' Registration';
-            });
-        });
-
         function isNameValid(val) {
             return /^[A-Za-z\s]+$/.test(val.trim());
         }
@@ -389,18 +365,12 @@
         // Register validation
         registerBtn.addEventListener('click', function(){
             // hide all errors first
-            ['identityError','nameError','addressError','phoneError','emailError','usernameError','pwdError','confirmError'].forEach(id => {
+            ['nameError','addressError','phoneError','emailError','usernameError','pwdError','confirmError'].forEach(id => {
                 const el = document.getElementById(id);
                 if(el) el.style.display = 'none';
             });
 
             let ok = true;
-
-            // Identity selected
-            if(!identityInput.value){
-                document.getElementById('identityError').style.display = 'block';
-                ok = false;
-            }
 
             // Full name
             if(!fullName.value.trim() || !isNameValid(fullName.value)){
@@ -445,11 +415,13 @@
             }
 
             if(ok){
-                // simulate success (replace with actual submit logic)
+                // 弹出成功提示
                 alert('Registration Successful! Please login.');
-                window.location.href = 'Login.html';
+                // 提交表单到 PHP
+                document.getElementById('registerForm').submit();
             }
         });
     </script>
+    <script src="../../JS/JSHomePage/common.js"></script>
 </body>
 </html>
