@@ -117,14 +117,21 @@ function updateShowcase(key) {
         return;
     }
 
-    document.getElementById("showcase-tag").textContent = content.tag;
-    document.getElementById("showcase-title").textContent = content.title;
-    document.getElementById("showcase-text").textContent = content.text;
-
+    const tag = document.getElementById("showcase-tag");
+    const title = document.getElementById("showcase-title");
+    const text = document.getElementById("showcase-text");
     const list = document.getElementById("showcase-points");
+    const image = document.getElementById("showcase-image");
+
+    if (!tag || !title || !text || !list || !image) {
+        return;
+    }
+
+    tag.textContent = content.tag;
+    title.textContent = content.title;
+    text.textContent = content.text;
     list.innerHTML = content.points.map((point) => `<li>${point}</li>`).join("");
 
-    const image = document.getElementById("showcase-image");
     image.src = content.image;
     image.alt = content.alt;
 }
@@ -198,6 +205,10 @@ function setupMenu() {
     const header = document.querySelector(".site-header");
     const toggle = document.querySelector(".menu-toggle");
 
+    if (!header || !toggle) {
+        return;
+    }
+
     toggle.addEventListener("click", () => {
         const expanded = toggle.getAttribute("aria-expanded") === "true";
         toggle.setAttribute("aria-expanded", String(!expanded));
@@ -208,6 +219,10 @@ function setupMenu() {
 function setupNotice() {
     const notice = document.getElementById("notice-bar");
     const closeButton = document.querySelector(".notice-close");
+
+    if (!notice || !closeButton) {
+        return;
+    }
 
     closeButton.addEventListener("click", () => {
         notice.hidden = true;
