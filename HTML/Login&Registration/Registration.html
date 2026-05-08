@@ -95,6 +95,39 @@
             color: #999999;
         }
 
+        /* Identity selection buttons */
+        .identity-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .identity-btn {
+            appearance: none;
+            -webkit-appearance: none;
+            padding: 10px 40px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            background: #ffffff;
+            color: #333333;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .identity-btn:hover {
+            opacity: 0.95;
+        }
+        .identity-btn.selected {
+            background: #e89aa0;
+            color: #fff;
+            border-color: #e89aa0;
+        }
+        .identity-label {
+            display:block;
+            margin-bottom:6px;
+            font-weight:600;
+            color:#333;
+        }
+
         /* Password visibility toggle button */
         .eye-toggle-btn {
             position: absolute;
@@ -295,6 +328,9 @@
         const eyeBtn = document.getElementById('eyeBtn');
         const eyeIcon = eyeBtn.querySelector('i');
         const registerBtn = document.getElementById('registerBtn');
+        const identityInput = document.getElementById('identityInput');
+        const identityBtns = document.querySelectorAll('.identity-btn');
+        const formTitle = document.querySelector('.form-main-title');
 
         // Toggle password visibility
         eyeBtn.addEventListener('click', function(){
