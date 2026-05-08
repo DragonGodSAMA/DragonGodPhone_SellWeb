@@ -1,10 +1,12 @@
 <?php
+require_once __DIR__ . '/data_paths.php';
+
 function seller_products_database_path() {
-    return __DIR__ . '/../data/seller_products.json';
+    return project_seller_products_path();
 }
 
 function seller_transactions_database_path() {
-    return __DIR__ . '/../data/seller_transactions.json';
+    return project_seller_transactions_path();
 }
 
 function seller_clean_value($value) {
