@@ -32,6 +32,10 @@
                 <a href="pages/retail.html">Retail</a>
                 <a href="pages/business.html">Business</a>
                 <a href="pages/store.html">Store</a>
+                <form class="global-search-form" action="pages/search.html" method="get" role="search">
+                    <input class="global-search-input" type="search" name="q" placeholder="Search phones">
+                    <button class="global-search-button" type="submit" aria-label="Search">🔍</button>
+                </form>
             </div>
         </div>
     </div>
@@ -54,6 +58,10 @@
             </nav>
 
             <div class="header-actions">
+                <form class="global-search-form" action="pages/search.html" method="get" role="search">
+                    <input class="global-search-input" type="search" name="q" placeholder="Search phones">
+                    <button class="global-search-button" type="submit" aria-label="Search">🔍</button>
+                </form>
                 <button class="ghost-button" type="button" data-route="detail" data-query='{"section":"specs","scene":"subnav"}'>Specs</button>
                 <button class="ghost-button" type="button" data-route="login">Login</button>
                 <button class="solid-button" type="button" data-route="sell" data-query='{"entry":"top-nav"}'>Buy</button>
@@ -110,7 +118,7 @@
                         <h2>Wide when opened. Controlled when closed.</h2>
                         <p>The revised layout reduces decorative effects and keeps the product presentation closer to Huawei's restrained launch-page rhythm.</p>
                     </div>
-                    <button class="text-button" type="button" data-route="detail" data-query='{"section":"display"}'>View detail route</button>
+                    <button class="text-button" type="button" data-route="detail" data-query='{"section":"display"}'>View details page</button>
                 </article>
 
                 <article class="feature-card">
@@ -138,7 +146,7 @@
                     <h2>A homepage that covers the brand story while reserving purchase and account flows for teammates.</h2>
                     <p>
                         The official reference uses a long-form product narrative. This version keeps that structure but rewrites the content,
-                        replaces all names, and exposes handoff points through route-aware buttons and placeholder targets.
+                        replaces all names, and exposes handoff points through route-aware buttons and linked pages.
                     </p>
                 </div>
 
@@ -200,7 +208,7 @@
                     <h2>Original naming, premium layout, and a clean separation of responsibilities.</h2>
                     <p>
                         The landing page introduces performance, durability, and ecosystem value. It does not duplicate the product order matrix,
-                        which is intentionally delegated to the SellPage placeholder route.
+                        which is intentionally delegated to the SellPage route.
                     </p>
                 </div>
 
@@ -248,7 +256,7 @@
                     <p class="eyebrow">Reserved Interfaces</p>
                     <h2>Cross-page routes are already wired for teammate integration.</h2>
                     <p>
-                        Replace the placeholder file paths later, but keep the query parameters so the integration contract remains stable across the project.
+                        The target pages are already wired, and the query parameters stay in place so the integration contract remains stable across the project.
                     </p>
                 </div>
 
@@ -257,19 +265,19 @@
                         <span>Team Member A</span>
                         <h3>Login / Registration</h3>
                         <p>Reserved query contract: mode, source, and redirect.</p>
-                        <button class="ghost-button" type="button" data-route="login" data-query='{"source":"handoff","redirect":"sell"}'>Open Login Route</button>
+                        <button class="ghost-button" type="button" data-route="login" data-query='{"source":"handoff","redirect":"sell"}'>Open Login Page</button>
                     </article>
                     <article class="handoff-card">
                         <span>Team Member B</span>
                         <h3>Detail Introduction</h3>
                         <p>Reserved query contract: product, section, and scene.</p>
-                        <button class="ghost-button" type="button" data-route="detail" data-query='{"product":"aether-fold-one","section":"camera","scene":"handoff"}'>Open Detail Route</button>
+                        <button class="ghost-button" type="button" data-route="detail" data-query='{"product":"aether-fold-one","section":"camera","scene":"handoff"}'>Open Details Page</button>
                     </article>
                     <article class="handoff-card">
                         <span>Team Member C</span>
                         <h3>SellPage</h3>
                         <p>Reserved query contract: sku, campaign, and source.</p>
-                        <button class="solid-button" type="button" data-route="sell" data-query='{"sku":"aether-fold-one-512","campaign":"handoff","source":"homepage"}'>Open Sell Route</button>
+                        <button class="solid-button" type="button" data-route="sell" data-query='{"sku":"aether-fold-one-512","campaign":"handoff","source":"homepage"}'>Open Buy Page</button>
                     </article>
                 </div>
             </section>
@@ -281,8 +289,8 @@
                 <p>Student homepage package by Chen Hetian. The revised visual direction is intentionally closer to Huawei's layout language, while the product identity and content remain original.</p>
             </div>
             <div class="footer-actions">
-                <button class="text-button" type="button" data-route="detail" data-query='{"section":"footer"}'>Detail placeholder</button>
-                <button class="text-button" type="button" data-route="sell" data-query='{"entry":"footer"}'>Sell placeholder</button>
+                <button class="text-button" type="button" data-route="detail" data-query='{"section":"footer"}'>Details Page</button>
+                <button class="text-button" type="button" data-route="sell" data-query='{"entry":"footer"}'>Buy Page</button>
             </div>
         </footer>
     </div>
