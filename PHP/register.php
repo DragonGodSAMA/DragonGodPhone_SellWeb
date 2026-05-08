@@ -21,7 +21,7 @@ Role: $role
 ====================================
 ";
 
-file_put_contents(__DIR__ . "/../user_data.txt", $text, FILE_APPEND);
+file_put_contents(__DIR__ . "/../data/user_data.txt", $text, FILE_APPEND);
 
 header("Location: ../../HTML/Login&Registration/Login.html");
 exit;

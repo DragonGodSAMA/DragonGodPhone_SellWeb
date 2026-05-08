@@ -893,6 +893,11 @@ function renderPage(currentSlug) {
                 <nav class="channel-utility-nav" aria-label="Utility pages">
                     ${renderNavLinks(UTILITY_LINKS, currentSlug)}
                 </nav>
+
+                <form class="channel-search-form" action="search.html" method="get" role="search">
+                    <input class="channel-search-input" type="search" name="q" placeholder="Search phones">
+                    <button class="channel-search-button" type="submit" aria-label="Search">🔍</button>
+                </form>
             </div>
         </header>
 

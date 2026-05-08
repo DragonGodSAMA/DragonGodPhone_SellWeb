@@ -360,12 +360,29 @@
             if (urlParams.get('success') === '1') {
                 const username = urlParams.get('username') || 'User';
                 const role = urlParams.get('role') || 'Buyer';
+                const redirect = urlParams.get('redirect') || '';
+                const redirectUrl = urlParams.get('redirectUrl') || '';
                 // 同时存用户名和身份
                 localStorage.setItem('loggedInUser', username);
                 localStorage.setItem('userRole', role);
 
                 alert('Login Successful! Welcome to DragonGod Phone Sales Platform');
-                window.location.href = '../../HTML/HomePages/index.html';
+
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                    return;
+                }
+
+                const redirectTargets = {
+                    search: '../../HTML/HomePages/pages/search.html',
+                    sell: '../../HTML/SellPage(addcar)/SellPage.html',
+                    detail: '../../HTML/DetailIntroduction/DetailIntroductinoDragonGodXProMax.html'
+                };
+
+                const nextPage = redirectTargets[redirect]
+                    || (role === 'Seller' ? '../../HTML/Sell_Product/Sell_Product.html' : '../../HTML/HomePages/index.html');
+
+                window.location.href = nextPage;
             }
 
             if (urlParams.get('error') === '1') {

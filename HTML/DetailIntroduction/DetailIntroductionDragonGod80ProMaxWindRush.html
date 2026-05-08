@@ -288,11 +288,22 @@
         const searchIcon = document.querySelector('.search-icon');
         const searchInput = document.querySelector('.search-input');
 
-        searchIcon.addEventListener('click', () => {
+        function submitSearchQuery() {
+            const query = searchInput.value.trim();
+
+            if (query) {
+                window.location.href = `../HomePages/pages/search.html?q=${encodeURIComponent(query)}`;
+                return;
+            }
+
             searchInput.classList.toggle('active');
             if (searchInput.classList.contains('active')) {
                 searchInput.focus(); 
             }
+        }
+
+        searchIcon.addEventListener('click', () => {
+            submitSearchQuery();
         });
 
         searchInput.addEventListener('blur', () => {
@@ -301,12 +312,10 @@
             }
         });
 
-        // 按回车触发搜索（可自定义逻辑）
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && searchInput.value.trim() !== '') {
-                alert('Searching for: ' + searchInput.value);
-                // 可替换为实际搜索逻辑，比如跳转搜索页面
-                // window.location.href = '../search.html?keyword=' + searchInput.value;
+                e.preventDefault();
+                submitSearchQuery();
             }
         });
     });

@@ -7,7 +7,7 @@ if (empty($inputAccount) || empty($inputPwd)) {
     exit;
 }
 
-$userFile = __DIR__ . "/../user_data.txt";
+$userFile = __DIR__ . "/../data/user_data.txt";
 $content  = file_exists($userFile) ? file_get_contents($userFile) : '';
 
 $isValid = false;
