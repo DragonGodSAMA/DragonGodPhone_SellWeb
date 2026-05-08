@@ -209,5 +209,40 @@
             "New"
         ],
         "created_at": "2026-05-08T13:56:59+00:00"
+    },
+    {
+        "id": "seller-product-69fded34e52fa8.00611104",
+        "name": "iPhone 17",
+        "brand": "Apple",
+        "base_price": 8888,
+        "condition": "New",
+        "description": "good",
+        "seller_name": "HTCZ",
+        "seller_role": "Seller",
+        "cover_image": "Recourses/SellerUploads/seller_69fded34e01521.50754886.jpg",
+        "colors": [
+            {
+                "name": "silver",
+                "image": "Recourses/SellerUploads/seller_69fded34e051a6.01419593.jpg"
+            }
+        ],
+        "storage": [
+            {
+                "label": "256GB",
+                "extra_price": 0
+            }
+        ],
+        "services": [
+            {
+                "name": "no",
+                "price": 7777
+            }
+        ],
+        "keywords": [
+            "iPhone 17",
+            "Apple",
+            "New"
+        ],
+        "created_at": "2026-05-08T14:03:32+00:00"
     }
 ]
