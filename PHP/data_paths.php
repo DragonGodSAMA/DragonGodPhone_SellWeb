@@ -52,4 +52,8 @@ function project_seller_products_path() {
 function project_seller_transactions_path() {
     return project_data_file_path('seller_transactions.json');
 }
+
+function project_seller_phone_data_path() {
+    return project_data_file_path('sellerPhone_data.txt');
+}
 ?>
