@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/data_paths.php';
+
 $fullName   = $_POST['fullName'] ?? '';
 $address    = $_POST['address'] ?? '';
 $phone      = $_POST['phone'] ?? '';
@@ -21,7 +23,7 @@ Role: $role
 ====================================
 ";
 
-file_put_contents(__DIR__ . "/../data/user_data.txt", $text, FILE_APPEND);
+file_put_contents(project_user_data_path(), $text, FILE_APPEND | LOCK_EX);
 
 header("Location: ../../HTML/Login&Registration/Login.html");
 exit;

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/data_paths.php';
+
 $inputAccount = trim($_POST['loginAccount'] ?? '');
 $inputPwd     = trim($_POST['loginPassword'] ?? '');
 
@@ -7,7 +9,7 @@ if (empty($inputAccount) || empty($inputPwd)) {
     exit;
 }
 
-$userFile = __DIR__ . "/../data/user_data.txt";
+$userFile = project_user_data_path();
 $content  = file_exists($userFile) ? file_get_contents($userFile) : '';
 
 $isValid = false;
