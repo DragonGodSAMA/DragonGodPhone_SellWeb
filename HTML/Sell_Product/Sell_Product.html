@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon God - Sell Product</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Style (Same as Registration.html) */
+        header {
+            background-color: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #222;
+            text-decoration: none;
+        }
+
+        /* Form Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .form-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #d9534f;
+        }
+
+        .btn-submit {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: #c9302c;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin: 20px 0;
+            color: #d9534f;
+        }
+
+        /* Footer (Same as Registration.html) */
+        footer {
+            background-color: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            margin-top: auto;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Logo -->
+    <header>
+        <a href="../HomePages/index.html" class="logo">Dragon God</a>
+    </header>
+
+    <div class="container">
+        <h2 class="form-title">Sell Your Electronic Product</h2>
+
+        <div class="card">
+            <form action="save_product.php" method="POST" enctype="multipart/form-data">
+                <!-- Basic Info -->
+                <div class="section-title">Basic Product Information</div>
+
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Brand</label>
+                    <input type="text" name="brand" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Base Price (￥)</label>
+                    <input type="number" step="0.01" name="base_price" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Condition</label>
+                    <select name="condition" required>
+                        <option value="New">New</option>
+                        <option value="Used - Like New">Used - Like New</option>
+                        <option value="Used - Good">Used - Good</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4" required></textarea>
+                </div>
+
+                <!-- Cover Image -->
+                <div class="form-group">
+                    <label>Product Cover Image</label>
+                    <input type="file" name="cover_image" accept="image/*" required>
+                </div>
+
+                <!-- Colors (Max 5) -->
+                <div class="section-title">Color Options (Max 5)</div>
+                <div class="form-group">
+                    <label>Color 1 Name</label>
+                    <input type="text" name="color_name[]">
+                </div>
+                <div class="form-group">
+                    <label>Color 1 Image</label>
+                    <input type="file" name="color_image[]" accept="image/*">
+                </div>
+
+                <!-- Storage (Max 5) -->
+                <div class="section-title">Storage / Memory (Max 5)</div>
+                <div class="form-group">
+                    <label>Storage 1</label>
+                    <input type="text" name="storage[]" placeholder="128GB">
+                </div>
+                <div class="form-group">
+                    <label>Extra Price</label>
+                    <input type="number" step="0.01" name="storage_price[]" value="0">
+                </div>
+
+                <!-- Warranty (Max 3) -->
+                <div class="section-title">Warranty & Services (Max 3)</div>
+                <div class="form-group">
+                    <label>Service 1 Name</label>
+                    <input type="text" name="warranty_name[]">
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" step="0.01" name="warranty_price[]" value="0">
+                </div>
+
+                <button type="submit" class="btn-submit">Publish Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Dragon God. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
