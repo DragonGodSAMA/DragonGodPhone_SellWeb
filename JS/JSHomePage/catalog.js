@@ -17,9 +17,32 @@ const UTILITY_LINKS = [
     { slug: "store", label: "DragonMall", href: "store.html" }
 ];
 
-const DETAIL_URL = "../../DetailIntroduction/DetailIntroductinoDragonGodXProMax.html?product=aether-fold-one&section=story&scene=phones-channel";
-const SELL_URL = "../../SellPage(addcar)/SellPage.html?sku=aether-fold-one-512&campaign=channel-pages&source=channel-pages";
+const DETAIL_PATH = "../../DetailIntroduction/DetailIntroductinoDragonGodXProMax.html";
+const SELL_PATH = "../../SellPage(addcar)/SellPage.html";
 const LOGIN_URL = "../../Login&Registration/Login.html?source=channel-pages&redirect=sell";
+
+function buildCatalogUrl(path, defaultParams, overrides = {}) {
+    return `${path}?${new URLSearchParams({
+        ...defaultParams,
+        ...overrides
+    }).toString()}`;
+}
+
+function detailUrl(overrides = {}) {
+    return buildCatalogUrl(DETAIL_PATH, {
+        product: "aether-fold-one",
+        section: "story",
+        scene: "phones-channel"
+    }, overrides);
+}
+
+function sellUrl(overrides = {}) {
+    return buildCatalogUrl(SELL_PATH, {
+        sku: "aether-fold-one-512",
+        campaign: "channel-pages",
+        source: "channel-pages"
+    }, overrides);
+}
 
 const PAGE_DATA = {
     phones: {
@@ -34,12 +57,12 @@ const PAGE_DATA = {
         heroKind: "phones",
         heroActions: [
             { label: "Open product homepage", href: "../index.html", style: "ghost" },
-            { label: "Specs placeholder", href: `${DETAIL_URL}&section=specs&scene=phones-channel`, style: "text" },
-            { label: "Buy placeholder", href: `${SELL_URL}&campaign=phones-channel&source=phones-page`, style: "solid" }
+            { label: "View specs", href: detailUrl({ section: "specs", scene: "phones-channel" }), style: "text" },
+            { label: "Buy now", href: sellUrl({ campaign: "phones-channel", source: "phones-page" }), style: "solid" }
         ],
         headerActions: [
             { label: "Product home", href: "../index.html" },
-            { label: "Buy placeholder", href: `${SELL_URL}&campaign=phones-subbar&source=phones-page` }
+            { label: "Buy now", href: sellUrl({ campaign: "phones-subbar", source: "phones-page" }) }
         ],
         metrics: [
             { value: "7.8-inch", label: "Foldable inner display" },
@@ -53,7 +76,7 @@ const PAGE_DATA = {
             { title: "Foldable flagship", text: "Aether Fold One remains the visual and functional anchor of the entire site." },
             { title: "Portrait imaging", text: "StarSight naming keeps portraits, night scenes, and zoom stories consistent across the range." },
             { title: "Lightweight line", text: "Aether Air keeps space open for a thinner everyday device and future team expansion." },
-            { title: "Direct handoff", text: "The buy and detail flows continue to the existing placeholder pages without changing those core files." }
+            { title: "Direct handoff", text: "The buy and detail flows continue to the existing pages without changing those core files." }
         ],
         storyTitle: "Lineup structure",
         storyIntro: "This page behaves as a real category entrance with product-family logic, not a repeated collection of identical product cards.",
@@ -76,7 +99,7 @@ const PAGE_DATA = {
         heroKind: "wearables",
         heroActions: [
             { label: "Open phones channel", href: "phones.html", style: "ghost" },
-            { label: "Service placeholder", href: LOGIN_URL, style: "text" },
+            { label: "Service support", href: LOGIN_URL, style: "text" },
             { label: "DragonMall entry", href: "store.html", style: "solid" }
         ],
         headerActions: [
@@ -118,7 +141,7 @@ const PAGE_DATA = {
         heroKind: "computers",
         heroActions: [
             { label: "Open DragonOS page", href: "dragonos.html", style: "ghost" },
-            { label: "Specs placeholder", href: `${DETAIL_URL}&section=workflow&scene=computers-channel`, style: "text" },
+            { label: "View specs", href: detailUrl({ section: "workflow", scene: "computers-channel" }), style: "text" },
             { label: "Business page", href: "business.html", style: "solid" }
         ],
         headerActions: [
@@ -132,7 +155,7 @@ const PAGE_DATA = {
             { value: "MultiSync", label: "Phone-laptop continuity" }
         ],
         sectionTitle: "Computers channel highlights",
-        sectionIntro: "The layout keeps the channel separate from product detail pages while still linking back into the homepage and placeholder flows.",
+        sectionIntro: "The layout keeps the channel separate from product detail pages while still linking back into the homepage and existing detail and purchase flows.",
         highlights: [
             { title: "Creator notebook", text: "AtlasBook Pro is positioned as the main premium laptop in the ecosystem." },
             { title: "Thin and light", text: "AtlasBook Air covers portability and broadens the category structure." },
@@ -160,7 +183,7 @@ const PAGE_DATA = {
         heroKind: "tablets",
         heroActions: [
             { label: "Open wearables", href: "wearables.html", style: "ghost" },
-            { label: "Detail placeholder", href: `${DETAIL_URL}&section=canvas&scene=tablets-channel`, style: "text" },
+            { label: "Product details", href: detailUrl({ section: "canvas", scene: "tablets-channel" }), style: "text" },
             { label: "Store page", href: "store.html", style: "solid" }
         ],
         headerActions: [
@@ -405,14 +428,14 @@ const PAGE_DATA = {
         pageLabel: "DragonGod Support",
         eyebrow: "DragonGod Phont",
         heroTitle: "Support pathways for devices, accounts, and after-sales service.",
-        heroSubtitle: "A real support landing page connected to login, product details, retail, and purchase placeholders.",
+        heroSubtitle: "A real support landing page connected to login, product details, retail, and the purchase page.",
         heroDescription: "This page gives the Support item a proper destination and stops it from behaving like a dead navigation label.",
         badgeLabel: "Fastest route",
         badgeValue: "Account and device help",
         heroKind: "support",
         heroActions: [
-            { label: "Login placeholder", href: LOGIN_URL, style: "ghost" },
-            { label: "Detail placeholder", href: `${DETAIL_URL}&section=support&scene=support-page`, style: "text" },
+            { label: "Login page", href: LOGIN_URL, style: "ghost" },
+            { label: "Product details", href: detailUrl({ section: "support", scene: "support-page" }), style: "text" },
             { label: "Retail page", href: "retail.html", style: "solid" }
         ],
         headerActions: [
@@ -428,16 +451,16 @@ const PAGE_DATA = {
         sectionTitle: "Support page highlights",
         sectionIntro: "Support should be a real page with its own structure, not just a button that loops back into the homepage.",
         highlights: [
-            { title: "Account entry", text: "The existing login and registration placeholder page remains the authentication destination." },
-            { title: "Device guidance", text: "Users can jump from support into detailed device placeholders when needed." },
+            { title: "Account entry", text: "The existing login and registration page remains the authentication destination." },
+            { title: "Device guidance", text: "Users can jump from support into detailed device pages when needed." },
             { title: "Retail routing", text: "Support and retail pages link to each other for in-person service flows." },
             { title: "Site consistency", text: "The same category bar remains present so the whole package still behaves like one site." }
         ],
         storyTitle: "Support pathways",
         storyIntro: "This section explains how users can move from support into the right type of page without confusion.",
         stories: [
-            { kicker: "Account", title: "Login and registration", text: "A direct route into the existing placeholder authentication page." },
-            { kicker: "Product", title: "Detail placeholder", text: "A continuation path for specification and feature explanation requests." },
+            { kicker: "Account", title: "Login and registration", text: "A direct route into the existing authentication page." },
+            { kicker: "Product", title: "Product details", text: "A continuation path for specification and feature explanation requests." },
             { kicker: "Offline", title: "Retail handoff", text: "A route for showroom, repair, or in-person assistance visits." }
         ],
         related: ["retail", "business", "phones"]
@@ -532,14 +555,14 @@ const PAGE_DATA = {
         eyebrow: "DragonGod Phont",
         heroTitle: "A store landing page that gathers categories before the actual product purchase flow.",
         heroSubtitle: "This is the utility-page equivalent of the Huawei mall entrance, not the single product purchase page.",
-        heroDescription: "The page gives the Store item a real HTML destination and still links forward into the existing SellPage placeholder when the featured product is selected.",
+        heroDescription: "The page gives the Store item a real HTML destination and still links forward into the existing SellPage when the featured product is selected.",
         badgeLabel: "Featured offer",
         badgeValue: "Aether Fold One 12 GB + 256 GB",
         heroKind: "store",
         heroActions: [
             { label: "Open phones channel", href: "phones.html", style: "ghost" },
-            { label: "Detail placeholder", href: `${DETAIL_URL}&section=store&scene=store-page`, style: "text" },
-            { label: "Sell placeholder", href: `${SELL_URL}&campaign=store-page&source=store-page`, style: "solid" }
+            { label: "Product details", href: detailUrl({ section: "store", scene: "store-page" }), style: "text" },
+            { label: "Buy page", href: sellUrl({ campaign: "store-page", source: "store-page" }), style: "solid" }
         ],
         headerActions: [
             { label: "Support", href: "support.html" },
@@ -549,18 +572,18 @@ const PAGE_DATA = {
             { value: "4 zones", label: "Product category groups" },
             { value: "Featured", label: "Current hero product" },
             { value: "Bundle", label: "Accessory pathway" },
-            { value: "Route", label: "Sell placeholder handoff" }
+            { value: "Route", label: "Buy page handoff" }
         ],
         sectionTitle: "Store page highlights",
-        sectionIntro: "This page behaves like a mall or store gateway and then hands users off to the already existing product-purchase placeholder.",
+        sectionIntro: "This page behaves like a mall or store gateway and then hands users off to the existing product purchase page.",
         highlights: [
             { title: "Featured phone", text: "Aether Fold One remains the highlighted purchase route for the current project package." },
             { title: "Accessory cross-sell", text: "Comet Pen, MagLock cases, and FluxCharge accessories fit naturally here." },
             { title: "Category routing", text: "Phones, wearables, tablets, and audio can all be reached without returning to the homepage." },
-            { title: "Sell handoff", text: "The final product buy step still goes to the unchanged SellPage placeholder." }
+            { title: "Sell handoff", text: "The final product buy step still goes to the existing SellPage purchase page." }
         ],
         storyTitle: "Store structure",
-        storyIntro: "The store page closes the gap between a global mall button and the actual product purchase placeholder.",
+        storyIntro: "The store page closes the gap between a global mall button and the actual product purchase page.",
         stories: [
             { kicker: "Featured", title: "Aether Fold One", text: "The flagship device currently promoted across the whole site." },
             { kicker: "Accessories", title: "Creator bundle", text: "Stylus, case, and charging accessories grouped as a coherent set." },
@@ -870,6 +893,11 @@ function renderPage(currentSlug) {
                 <nav class="channel-utility-nav" aria-label="Utility pages">
                     ${renderNavLinks(UTILITY_LINKS, currentSlug)}
                 </nav>
+
+                <form class="channel-search-form" action="search.html" method="get" role="search">
+                    <input class="channel-search-input" type="search" name="q" placeholder="Search phones">
+                    <button class="channel-search-button" type="submit" aria-label="Search">🔍</button>
+                </form>
             </div>
         </header>
 
@@ -967,18 +995,18 @@ function renderPage(currentSlug) {
         <footer class="channel-footer">
             <div class="channel-footer-copy">
                 <strong>DragonGod Phont</strong>
-                <p>Multi-page category site generated for the top navigation structure, while the existing placeholder pages for login, detail introduction, and sell remain unchanged.</p>
+                <p>Multi-page category site generated for the top navigation structure, while the existing login, detail, and purchase pages remain unchanged.</p>
             </div>
 
             <div class="channel-footer-actions">
                 <a href="../index.html">Back to homepage</a>
-                <a href="${DETAIL_URL}&section=footer&scene=${currentSlug}-page">Detail placeholder</a>
-                <a href="${SELL_URL}&campaign=${currentSlug}-footer&source=${currentSlug}-page">Buy placeholder</a>
+                <a href="${detailUrl({ section: "footer", scene: `${currentSlug}-page` })}">Product details</a>
+                <a href="${sellUrl({ campaign: `${currentSlug}-footer`, source: `${currentSlug}-page` })}">Buy page</a>
             </div>
         </footer>
 
         <aside class="channel-notice" id="channel-notice">
-            <p>This multi-page channel layer exists to make the top navigation fully clickable and interconnected, while keeping the original placeholder core pages unchanged.</p>
+            <p>This multi-page channel layer exists to make the top navigation fully clickable and interconnected, while keeping the original core pages unchanged.</p>
             <button class="channel-notice-close" type="button" aria-label="Dismiss channel notice">×</button>
         </aside>
     `;

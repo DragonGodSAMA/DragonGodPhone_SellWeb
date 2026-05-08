@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragonGod Search</title>
+    <link rel="stylesheet" href="../../../CSS/CSSHomePage/stylesofpages.css">
+</head>
+<body class="channel-page search-page">
+    <header class="channel-global-bar">
+        <div class="channel-global-inner">
+            <a class="channel-brand" href="../index.html" aria-label="DragonGod Phone homepage">
+                <span class="channel-brand-mark" aria-hidden="true"></span>
+                <span>DragonGod Phone</span>
+            </a>
+
+            <nav class="channel-site-nav" aria-label="Site categories">
+                <a href="phones.html">Phones</a>
+                <a href="wearables.html">Wearables</a>
+                <a href="computers.html">Computers</a>
+                <a href="tablets.html">Tablets</a>
+                <a href="visions.html">Vision</a>
+                <a href="audio.html">Audio</a>
+                <a href="wholehome.html">Whole Home</a>
+                <a href="routers.html">Routers</a>
+                <a href="dragonos.html">DragonOS 6</a>
+            </nav>
+
+            <nav class="channel-utility-nav" aria-label="Utility pages">
+                <a href="support.html">Support</a>
+                <a href="retail.html">Retail</a>
+                <a href="business.html">Business</a>
+                <a href="store.html">DragonMall</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="channel-subbar">
+        <div class="channel-subbar-inner">
+            <div class="channel-page-title">Search</div>
+
+            <nav class="channel-section-nav" aria-label="Search page shortcuts">
+                <a href="#search-box">Search</a>
+                <a href="#results">Results</a>
+            </nav>
+
+            <div class="channel-header-actions">
+                <a class="channel-header-action" href="../index.html">Homepage</a>
+                <a class="channel-header-action" href="../../Sell_Product/Sell_Product.html">Sell a Phone</a>
+                <a class="channel-header-action" href="../../Login&Registration/Login.html?source=search-page&redirect=search">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="channel-main">
+        <section class="channel-section channel-hero" id="search-box">
+            <div class="channel-panel search-lead">
+                <p class="channel-eyebrow">Search Center</p>
+                <h1 class="channel-hero-title">Search phones already on the site or uploaded by sellers.</h1>
+                <p class="channel-hero-description">
+                    Search by model name, brand, memory, service package, condition, or any basic keyword. The page searches the completed site catalog first and also includes seller-uploaded listings once that backend data is available.
+                </p>
+
+                <form id="searchForm" class="search-form" role="search">
+                    <input id="searchInput" name="q" type="search" placeholder="Try: Fold, WindRush, 512GB, used, DragonGod" autocomplete="off">
+                    <button class="channel-button solid" type="submit">Search</button>
+                </form>
+
+                <div id="searchStatus" class="search-status" hidden></div>
+                <div id="placeholderNote" class="search-placeholder-note" hidden></div>
+            </div>
+        </section>
+
+        <section class="channel-section" id="results">
+            <div class="channel-panel">
+                <div class="channel-section-header">
+                    <p class="channel-eyebrow">Results</p>
+                    <h2>Matching products</h2>
+                    <p id="resultsMeta" class="channel-section-intro">Enter a query to start searching.</p>
+                </div>
+
+                <div id="resultsGrid" class="search-results-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="channel-footer">
+        <div class="channel-footer-copy">
+            <strong>DragonGod Search</strong>
+            <p>Search ties together the homepage, category pages, current product pages, and seller-uploaded listings.</p>
+        </div>
+
+        <div class="channel-footer-actions">
+            <a href="../index.html">Back to homepage</a>
+            <a href="../../Sell_Product/Sell_Product.html">Seller upload page</a>
+            <a href="store.html">Open DragonMall</a>
+        </div>
+    </footer>
+
+    <script src="../../../JS/JSHomePage/offline-data.js"></script>
+    <script src="../../../JS/JSHomePage/offline-seller-listings.js"></script>
+    <script src="../../../JS/JSHomePage/search.js"></script>
+</body>
+</html>
