@@ -67,8 +67,8 @@ function buildOfflineResults(query) {
         price: record.basePrice,
         description: record.description,
         image: resolveSearchAssetPath(record.coverImagePath),
-        detailUrl: `../../Sell_Product/SellerProductDetail.html?id=${encodeURIComponent(record.id)}`,
-        buyUrl: `../../Sell_Product/SellerProductPurchase.html?id=${encodeURIComponent(record.id)}`,
+        detailUrl: `/HTML/Sell_Product/SellerProductDetail.html?id=${encodeURIComponent(record.id)}`,
+        buyUrl: `/HTML/Sell_Product/SellerProductPurchase.html?id=${encodeURIComponent(record.id)}`,
         storage: (record.storage || []).map((item) => item.label),
         services: (record.services || []).map((item) => item.name),
         keywords: record.keywords || []

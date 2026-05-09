@@ -11,10 +11,10 @@ const CATEGORY_LINKS = [
 ];
 
 const UTILITY_LINKS = [
-    { slug: "support", label: "Support", href: "support.html" },
-    { slug: "retail", label: "Retail", href: "retail.html" },
-    { slug: "business", label: "Business", href: "business.html" },
-    { slug: "store", label: "DragonMall", href: "store.html" }
+    { slug: "support", label: "Support", href: "/HTML/HomePages/pages/support.html" },
+    { slug: "retail", label: "Retail", href: "/HTML/HomePages/pages/retail.html" },
+    { slug: "business", label: "Business", href: "/HTML/HomePages/pages/business.html" },
+    { slug: "store", label: "DragonMall", href: "/HTML/HomePages/pages/store.html" }
 ];
 
 const DETAIL_PATH = "../../DetailIntroduction/DetailIntroductinoDragonGodXProMax.html";
@@ -100,11 +100,11 @@ const PAGE_DATA = {
         heroActions: [
             { label: "Open phones channel", href: "phones.html", style: "ghost" },
             { label: "Service support", href: LOGIN_URL, style: "text" },
-            { label: "DragonMall entry", href: "store.html", style: "solid" }
+            { label: "DragonMall entry", href: "/HTML/HomePages/pages/store.html", style: "solid" }
         ],
         headerActions: [
             { label: "Support", href: "support.html" },
-            { label: "Store", href: "store.html" }
+            { label: "Store", href: "/HTML/HomePages/pages/store.html" }
         ],
         metrics: [
             { value: "14 days", label: "Typical battery life" },
@@ -184,11 +184,11 @@ const PAGE_DATA = {
         heroActions: [
             { label: "Open wearables", href: "wearables.html", style: "ghost" },
             { label: "Product details", href: detailUrl({ section: "canvas", scene: "tablets-channel" }), style: "text" },
-            { label: "Store page", href: "store.html", style: "solid" }
+            { label: "Store page", href: "/HTML/HomePages/pages/store.html", style: "solid" }
         ],
         headerActions: [
             { label: "Support", href: "support.html" },
-            { label: "Store", href: "store.html" }
+            { label: "Store", href: "/HTML/HomePages/pages/store.html" }
         ],
         metrics: [
             { value: "12.4-inch", label: "Canvas display" },
@@ -268,7 +268,7 @@ const PAGE_DATA = {
         heroActions: [
             { label: "Open wearables", href: "wearables.html", style: "ghost" },
             { label: "Support page", href: "support.html", style: "text" },
-            { label: "Store page", href: "store.html", style: "solid" }
+            { label: "Store page", href: "/HTML/HomePages/pages/store.html", style: "solid" }
         ],
         headerActions: [
             { label: "Support", href: "support.html" },
@@ -612,7 +612,24 @@ function renderButtons(actions) {
 }
 
 function renderHeaderActions(actions) {
-    return actions.map((action) => `<a class="channel-header-action" href="${action.href}">${action.label}</a>`).join("");
+    const base = actions.map((action) => `<a class="channel-header-action" href="${action.href}">${action.label}</a>`).join("");
+
+    try {
+        const role = localStorage.getItem('userRole') || 'Buyer';
+        const isSeller = role.toLowerCase() === 'seller';
+
+        // Add cart total badge anchor (will be updated by common.js)
+        const cartAnchor = `<a class="channel-header-action" href="/HTML/SellPage(addcar)/Cart.html">Cart <span class="cart-badge">¥0</span></a>`;
+
+        if (isSeller) {
+            const addProduct = `<a class="channel-header-action" href="/HTML/Sell_Product/Sell_Product.html">Add Product</a>`;
+            return addProduct + cartAnchor + base;
+        }
+
+        return cartAnchor + base;
+    } catch (e) {
+        return base;
+    }
 }
 
 function renderMetrics(metrics) {

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>User Profile - DragonGod Phone</title>
+    <link rel="stylesheet" href="../../CSS/CSSHomePage/stylesofpages.css">
+    <style>
+        body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background:#f8fafc; color:#111; }
+        .container { max-width:900px; margin:40px auto; padding:24px; background:#fff; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+        .profile-row { display:flex; justify-content:space-between; align-items:center; gap:20px; }
+        .profile-info { display:flex; gap:18px; align-items:center; }
+        .avatar { width:72px; height:72px; border-radius:16px; background:linear-gradient(135deg,#eef2ff,#fff); display:flex; align-items:center; justify-content:center; font-weight:700; }
+        .meta { font-size:14px; color:#555; }
+        .actions { margin-top:18px; display:flex; gap:12px; }
+        .btn { padding:10px 16px; border-radius:8px; cursor:pointer; border:1px solid #ddd; background:#fff; }
+        .btn.primary { background:#e11d48; color:#fff; border-color:transparent; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container">
+            <form id="profileForm" action="../../PHP/update_user.php" method="POST">
+                <div style="border-top:1px solid #eef2f7;border-bottom:1px solid #eef2f7;padding:18px 0;">
+                    <div class="profile-row">
+                        <div class="profile-info">
+                            <div class="avatar" id="avatar">U</div>
+                            <div>
+                                <h2 id="displayName">User</h2>
+                                <div class="meta">Role: <strong id="displayRole">Buyer</strong></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="meta">Status</div>
+                            <div id="loginStatus">Logged in</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding:20px 0;">
+                    <h3 style="margin-bottom:12px;">Profile Information</h3>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <label>
+                            Nickname<br>
+                            <input name="fullName" id="fullName" type="text" style="width:100%;padding:10px;border:1px solid #e6edf3;border-radius:8px;">
+                        </label>
+
+                        <label>
+                            Address<br>
+                            <input name="address" id="address" type="text" style="width:100%;padding:10px;border:1px solid #e6edf3;border-radius:8px;">
+                        </label>
+
+                        <label>
+                            Phone<br>
+                            <input name="phone" id="phone" type="text" style="width:100%;padding:10px;border:1px solid #e6edf3;border-radius:8px;">
+                        </label>
+
+                        <label>
+                            Email<br>
+                            <input name="email" id="email" type="email" style="width:100%;padding:10px;border:1px solid #e6edf3;border-radius:8px;">
+                        </label>
+
+                        <label style="grid-column:1 / span 1;">
+                            Username (read-only)<br>
+                            <input name="regUsername" id="regUsername" type="text" readonly style="width:100%;padding:10px;border:1px solid #f0f0f0;border-radius:8px;background:#fafafa;">
+                        </label>
+
+                        <label style="grid-column:2 / span 1;">
+                            Role (Buyer / Seller)<br>
+                            <input name="role" id="role" type="text" readonly style="width:100%;padding:10px;border:1px solid #f0f0f0;border-radius:8px;background:#fafafa;">
+                        </label>
+                    </div>
+
+                    <div style="margin-top:14px;">
+                        <label>
+                            Change password (leave blank to keep current)<br>
+                            <input name="password" id="password" type="password" style="width:100%;padding:10px;border:1px solid #e6edf3;border-radius:8px;">
+                        </label>
+                    </div>
+
+                    <div class="actions" style="margin-top:18px;">
+                        <button class="btn" type="button" id="backHome">Back to Home</button>
+                        <button class="btn primary" type="submit" id="saveBtn" style="display:none;">Save Changes</button>
+                        <button class="btn" type="button" id="editProfile">Edit Profile</button>
+                        <a href="../../HTML/Sell_Product/Sell_Product.html" id="sellerUploadLink" style="display:none;" class="btn">Upload Product</a>
+                        <button class="btn" type="button" id="logoutBtn">Logout</button>
+                    </div>
+                </div>
+
+                <div style="border-top:1px solid #eef2f7;padding:12px 0;margin-top:18px;text-align:center;color:#7b8794;">
+                    Profile data is stored in the server-side `user_data.txt` file in the project's data folder. After saving, the page will refresh.
+                </div>
+            </form>
+        </div>
+    <script>
+        // Populate editable profile form from localStorage and handle interactions
+        (function(){
+            const username = localStorage.getItem('loggedInUser');
+            const role = localStorage.getItem('userRole') || 'Buyer';
+
+            const displayName = document.getElementById('displayName');
+            const displayRole = document.getElementById('displayRole');
+            const avatar = document.getElementById('avatar');
+            const sellerUploadLink = document.getElementById('sellerUploadLink');
+            const editBtn = document.getElementById('editProfile');
+            const saveBtn = document.getElementById('saveBtn');
+
+            if (username) {
+                displayName.textContent = username;
+                avatar.textContent = username.slice(0,2).toUpperCase();
+                document.getElementById('regUsername').value = username;
+            }
+
+            displayRole.textContent = role;
+            document.getElementById('role').value = role;
+
+            if (role.toLowerCase() === 'seller') {
+                sellerUploadLink.style.display = 'inline-block';
+            }
+
+            // Initially make fields read-only; fetch authoritative user data from server
+            function setEditable(enabled) {
+                ['fullName','address','phone','email','password'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    el.readOnly = !enabled;
+                    el.disabled = false;
+                });
+                saveBtn.style.display = enabled ? 'inline-block' : 'none';
+                editBtn.style.display = enabled ? 'none' : 'inline-block';
+            }
+
+            setEditable(false);
+
+            async function loadUser() {
+                if (!username) return;
+                try {
+                    const resp = await fetch(`../../PHP/get_user.php?username=${encodeURIComponent(username)}`);
+                    const json = await resp.json();
+                    if (json && json.ok && json.user) {
+                        document.getElementById('fullName').value = json.user.fullName || '';
+                        document.getElementById('address').value = json.user.address || '';
+                        document.getElementById('phone').value = json.user.phone || '';
+                        document.getElementById('email').value = json.user.email || '';
+                        document.getElementById('role').value = json.user.role || role;
+                    } else {
+                        // fallback to cached profile
+                        const helper = JSON.parse(localStorage.getItem('userProfile') || '{}');
+                        if (helper.fullName) document.getElementById('fullName').value = helper.fullName;
+                        if (helper.address) document.getElementById('address').value = helper.address;
+                        if (helper.phone) document.getElementById('phone').value = helper.phone;
+                        if (helper.email) document.getElementById('email').value = helper.email;
+                    }
+                } catch (e) {
+                    const helper = JSON.parse(localStorage.getItem('userProfile') || '{}');
+                    if (helper.fullName) document.getElementById('fullName').value = helper.fullName;
+                    if (helper.address) document.getElementById('address').value = helper.address;
+                    if (helper.phone) document.getElementById('phone').value = helper.phone;
+                    if (helper.email) document.getElementById('email').value = helper.email;
+                }
+            }
+
+            editBtn.addEventListener('click', function(){ setEditable(true); });
+
+            document.getElementById('logoutBtn').addEventListener('click', function(){
+                if (!confirm('Confirm logout?')) return;
+                localStorage.removeItem('loggedInUser');
+                localStorage.removeItem('userRole');
+                alert('Logged out');
+                window.location.href = '../../HTML/HomePages/index.html';
+            });
+
+            document.getElementById('backHome').addEventListener('click', function(){ window.location.href='../../HTML/HomePages/index.html';});
+
+            // Cache values locally before submitting to server
+            document.getElementById('profileForm').addEventListener('submit', function(){
+                const data = {
+                    fullName: document.getElementById('fullName').value || '',
+                    address: document.getElementById('address').value || '',
+                    phone: document.getElementById('phone').value || '',
+                    email: document.getElementById('email').value || ''
+                };
+                try { localStorage.setItem('userProfile', JSON.stringify(data)); } catch (e) {}
+            });
+
+            // load authoritative user data on page ready
+            loadUser();
+        })();
+    </script>
+</body>
+</html>

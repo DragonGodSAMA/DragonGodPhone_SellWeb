@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../PHP/seller_product_repository.php';
+require_once __DIR__ . '/seller_product_repository.php';
 
 $listingId = seller_clean_value($_GET['id'] ?? '');
 $product = $listingId !== '' ? find_seller_product($listingId) : null;
@@ -12,6 +12,14 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
     <title><?php echo htmlspecialchars($product ? $product['name'] . ' | Seller Detail' : 'Seller Product Detail'); ?></title>
     <link rel="stylesheet" href="../../CSS/CSSHomePage/stylesofpages.css">
     <style>
+        /* Make seller detail visually closer to official detail pages */
+        body.channel-page { background: linear-gradient(180deg,#fdfdfd,#fbfaf9); }
+        .seller-main-image { max-width: 1100px; margin: 0 auto; padding: 28px; background: #fff; border-radius: 12px; }
+        .seller-hero { text-align: center; max-width: 1100px; margin: 0 auto 28px; }
+        .seller-hero h1 { font-size: 36px; margin: 0 0 12px; }
+        .seller-hero p { color: #666; max-width:900px; margin:0 auto 18px; }
+        .seller-gallery-strip { justify-content:center; max-width:1100px; margin:16px auto 0; }
+        .seller-summary-panel { max-width:1100px; margin: 0 auto; }
         .seller-detail-grid {
             display: grid;
             grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -227,53 +235,41 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
                 </div>
             <?php else: ?>
                 <div class="seller-detail-grid">
-                    <div class="seller-media-panel">
-                        <div class="seller-main-image">
-                            <img src="<?php echo htmlspecialchars(seller_asset_web_path($product['cover_image_path'], '../../')); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                    <div>
+                        <div class="seller-hero">
+                            <div class="seller-main-image">
+                                <img src="<?php echo htmlspecialchars(seller_asset_web_path($product['cover_image_path'], '../../')); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" style="width:100%;height:auto;object-fit:cover;border-radius:10px;">
+                            </div>
+                            <h1><?php echo htmlspecialchars($product['name']); ?></h1>
+                            <p><?php echo htmlspecialchars($product['brand']); ?> — <?php echo htmlspecialchars($product['condition']); ?> — Sold by <?php echo htmlspecialchars($product['seller_name']); ?></p>
                         </div>
 
-                        <div class="seller-gallery-strip">
+                        <div class="seller-summary-panel">
+                            <div class="seller-status-row">
+                                <span class="seller-pill"><?php echo htmlspecialchars($product['condition']); ?></span>
+                                <span class="seller-pill">Sold by <?php echo htmlspecialchars($product['seller_name']); ?></span>
+                                <span class="seller-pill">Listing ID: <?php echo htmlspecialchars($product['id']); ?></span>
+                            </div>
+
+                            <div class="seller-price">From ¥<?php echo number_format((float) $product['base_price']); ?></div>
+
+                            <div class="channel-hero-description" style="margin-top:16px;">
+                                <?php echo nl2br(htmlspecialchars($product['description'])); ?>
+                            </div>
+
+                            <div class="seller-cta-row" style="margin-top:20px;">
+                                <a class="channel-button solid" href="SellerProductPurchase.php?id=<?php echo urlencode($product['id']); ?>">Buy this item</a>
+                                <a class="channel-button ghost" href="../HomePages/pages/search.html?q=<?php echo urlencode($product['name']); ?>">Search related</a>
+                                <a class="channel-text-link" href="Sell_Product.html">Back to upload</a>
+                            </div>
+                        </div>
+                    
+                        <div class="seller-gallery-strip" style="margin-top:22px;">
                             <?php foreach ($product['gallery_paths'] as $galleryPath): ?>
                                 <div class="seller-gallery-thumb">
                                     <img src="<?php echo htmlspecialchars(seller_asset_web_path($galleryPath, '../../')); ?>" alt="<?php echo htmlspecialchars($product['name']); ?> gallery image">
                                 </div>
                             <?php endforeach; ?>
-                        </div>
-                    </div>
-
-                    <div class="seller-summary-panel">
-                        <p class="channel-eyebrow">Second-hand Listing</p>
-                        <h1 class="channel-hero-title"><?php echo htmlspecialchars($product['name']); ?></h1>
-                        <p class="channel-hero-subtitle"><?php echo htmlspecialchars($product['brand']); ?> second-hand seller listing</p>
-                        <p class="channel-hero-description"><?php echo htmlspecialchars($product['description']); ?></p>
-
-                        <div class="seller-status-row">
-                            <span class="seller-pill"><?php echo htmlspecialchars($product['condition']); ?></span>
-                            <span class="seller-pill">Sold by <?php echo htmlspecialchars($product['seller_name']); ?></span>
-                            <span class="seller-pill">Single-unit second-hand flow</span>
-                        </div>
-
-                        <div class="seller-price">From ¥<?php echo number_format((float) $product['base_price']); ?></div>
-
-                        <div class="seller-meta">
-                            <div class="seller-meta-item">
-                                <span class="seller-meta-label">Listing ID</span>
-                                <strong><?php echo htmlspecialchars($product['id']); ?></strong>
-                            </div>
-                            <div class="seller-meta-item">
-                                <span class="seller-meta-label">Seller account</span>
-                                <strong><?php echo htmlspecialchars($product['seller_name']); ?></strong>
-                            </div>
-                            <div class="seller-meta-item">
-                                <span class="seller-meta-label">Created</span>
-                                <strong><?php echo htmlspecialchars($product['created_at'] !== '' ? $product['created_at'] : 'Unknown'); ?></strong>
-                            </div>
-                        </div>
-
-                        <div class="seller-cta-row">
-                            <a class="channel-button solid" href="SellerProductPurchase.php?id=<?php echo urlencode($product['id']); ?>">Open purchase page</a>
-                            <a class="channel-button ghost" href="../HomePages/pages/search.html?q=<?php echo urlencode($product['name']); ?>">Search related listings</a>
-                            <a class="channel-text-link" href="Sell_Product.html">Back to seller upload</a>
                         </div>
                     </div>
                 </div>
