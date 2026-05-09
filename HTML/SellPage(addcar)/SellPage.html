@@ -180,9 +180,11 @@
             <div class="sticky-info space-y-6">
                 <!-- Product Title & Price -->
                 <div class="border-b border-gray-200 pb-6">
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-                        HUAWEI Pura 90 Series
-                    </h1>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3" id="productTitle">
+                            HUAWEI Pura 90 Series
+                        </h1>
+                        <!-- Seller detail jump button (populated by script if seller id present) -->
+                        <div id="detailJumpContainer" style="margin-top:8px;"></div>
                     <div class="flex items-baseline gap-3 mb-2">
                         <span class="text-sm text-gray-500">Price:</span>
                         <span id="basePrice" class="text-3xl md:text-4xl font-bold text-red-600">From ¥6,499</span>
@@ -377,6 +379,23 @@
             renderThumbnails();
             setupEventListeners();
             updateUI();
+            createDetailJump();
+        }
+
+        // Create a detail-jump button below product title. If seller listing id is present in URL, link to seller detail PHP page.
+        function createDetailJump() {
+            const container = document.getElementById('detailJumpContainer');
+            if (!container) return;
+
+            const params = new URLSearchParams(window.location.search);
+            const sellerId = params.get('id') || params.get('seller_id') || params.get('listingId') || params.get('sku');
+            let href = '../../HTML/DetailIntroduction/DetailIntroductinoDragonGodXProMax.html';
+
+            if (sellerId) {
+                href = `../../PHP/SellerProductDetail.php?id=${encodeURIComponent(sellerId)}`;
+            }
+
+            container.innerHTML = `<a class="channel-text-link" href="${href}">查看商品详细介绍</a>`;
         }
         
         // Render Color Options
@@ -516,11 +535,36 @@
             // Show/hide scroll arrows based on scroll position
             thumbnailContainer.addEventListener('scroll', updateScrollArrows);
             
-            // Add to cart button
+            // Add to cart button: persist item to localStorage shoppingCart array and update global total
             addToCartBtn.addEventListener('click', () => {
-                if (isConfigurationValid()) {
-                    alert(`Added to cart!\n\nColor: ${getSelectedColorName()}\nStorage: ${getSelectedStorageName()}\nQuantity: ${state.quantity}\nTotal: ¥${calculateTotalPrice().toLocaleString()}`);
+                if (!isConfigurationValid()) return;
+
+                const item = {
+                    id: (new Date()).getTime() + '-' + Math.random().toString(36).slice(2,8),
+                    name: document.getElementById('productTitle') ? document.getElementById('productTitle').textContent.trim() : 'Product',
+                    color: getSelectedColorName(),
+                    storage: getSelectedStorageName(),
+                    unit_price: calculateTotalPrice() / state.quantity,
+                    quantity: state.quantity,
+                    total: calculateTotalPrice()
+                };
+
+                const cart = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
+                // if same configuration exists, accumulate quantity
+                const existingIndex = cart.findIndex(c => c.name === item.name && c.color === item.color && c.storage === item.storage && c.unit_price === item.unit_price);
+                if (existingIndex >= 0) {
+                    cart[existingIndex].quantity = Number(cart[existingIndex].quantity) + Number(item.quantity);
+                    cart[existingIndex].total = Number(cart[existingIndex].unit_price) * Number(cart[existingIndex].quantity);
+                } else {
+                    cart.push(item);
                 }
+
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+
+                // Update shared badge if available
+                if (window.DG_updateCartBadges) window.DG_updateCartBadges();
+
+                alert(`Added to cart!\n\nColor: ${item.color}\nStorage: ${item.storage}\nQuantity: ${item.quantity}\nTotal: ¥${item.total.toLocaleString()}`);
             });
             
             // Buy now button

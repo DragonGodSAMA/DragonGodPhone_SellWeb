@@ -53,8 +53,8 @@ function map_seller_product($record) {
         'price' => $record['base_price'] ?? 0,
         'description' => trim((string) ($record['description'] ?? 'Seller uploaded product listing.')),
         'image' => $imagePath,
-        'detailUrl' => '../../Sell_Product/SellerProductDetail.php?id=' . urlencode($productId),
-        'buyUrl' => '../../Sell_Product/SellerProductPurchase.php?id=' . urlencode($productId),
+        'detailUrl' => '/HTML/Sell_Product/SellerProductDetail.html?id=' . urlencode($productId),
+        'buyUrl' => '/HTML/Sell_Product/SellerProductPurchase.html?id=' . urlencode($productId),
         'storage' => $storage,
         'services' => $services,
         'keywords' => $record['keywords'] ?? []
@@ -74,8 +74,8 @@ $siteProducts = [
         'price' => 8999,
         'description' => 'Original DragonGod foldable flagship featured on the homepage and linked product pages.',
         'image' => '../../../Recourses/HomePage/hero-device.svg',
-        'detailUrl' => '../../DetailIntroduction/DetailIntroductinoDragonGodXProMax.html?product=aether-fold-one&section=story&scene=search',
-        'buyUrl' => '../../SellPage(addcar)/SellPage.html?sku=aether-fold-one-512&campaign=search&source=search-page',
+        'detailUrl' => '/HTML/DetailIntroduction/DetailIntroductinoDragonGodXProMax.html?product=aether-fold-one&section=story&scene=search',
+        'buyUrl' => '/HTML/SellPage(addcar)/SellPage.html?sku=aether-fold-one-512&campaign=search&source=search-page',
         'storage' => ['256GB', '512GB'],
         'services' => ['Official Warranty', 'Extended Warranty'],
         'keywords' => ['foldable', 'homepage', 'aether', 'dragonos', 'premium']
@@ -90,8 +90,8 @@ $siteProducts = [
         'price' => 6499,
         'description' => 'Main detail and configurable buy page device with color, storage, and service selection.',
         'image' => '../../../Recourses/DragonGodXProMax/design-color-1.png',
-        'detailUrl' => '../../DetailIntroduction/DetailIntroductinoDragonGodXProMax.html?product=x-pro-max&section=design&scene=search',
-        'buyUrl' => '../../SellPage(addcar)/SellPage.html?sku=x-pro-max-256&campaign=search&source=search-page',
+        'detailUrl' => '/HTML/DetailIntroduction/DetailIntroductinoDragonGodXProMax.html?product=x-pro-max&section=design&scene=search',
+        'buyUrl' => '/HTML/SellPage(addcar)/SellPage.html?sku=x-pro-max-256&campaign=search&source=search-page',
         'storage' => ['12GB+256GB', '12GB+512GB', '16GB+512GB', '16GB+1TB'],
         'services' => ['Huawei Care+', 'Extended Warranty', 'Screen Protection Plan'],
         'keywords' => ['camera', 'flagship', 'imaging', 'black', 'matcha', 'purple']
@@ -106,8 +106,8 @@ $siteProducts = [
         'price' => 6999,
         'description' => 'WindRush Edition product detail page with expandable top-nav search and flagship performance copy.',
         'image' => '../../../Recourses/DragonGod80ProMaxWindRush/DragonGodPhone.png',
-        'detailUrl' => '../../DetailIntroduction/DetailIntroductionDragonGod80ProMaxWindRush.html',
-        'buyUrl' => '../../DetailIntroduction/DetailIntroductionDragonGod80ProMaxWindRush.html',
+        'detailUrl' => '/HTML/DetailIntroduction/DetailIntroductionDragonGod80ProMaxWindRush.html',
+        'buyUrl' => '/HTML/DetailIntroduction/DetailIntroductionDragonGod80ProMaxWindRush.html',
         'storage' => ['256GB', '512GB'],
         'services' => ['Official Warranty'],
         'keywords' => ['windrush', 'display', 'battery', 'camera', 'performance']

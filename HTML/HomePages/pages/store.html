@@ -7,6 +7,54 @@
     <link rel="stylesheet" href="../../../CSS/CSSHomePage/stylesofpages.css">
 </head>
 <body data-page="store">
-    <script src="../../../JS/JSHomePage/catalog.js"></script>
+    <header class="channel-global-bar">
+        <div class="channel-global-inner">
+            <a class="channel-brand" href="/HTML/HomePages/index.html" aria-label="DragonGod Phone homepage">
+                <span class="channel-brand-mark" aria-hidden="true"></span>
+                <span>DragonGod Phone</span>
+            </a>
+
+            <nav class="channel-site-nav" aria-label="Site categories">
+                <a href="/HTML/HomePages/pages/phones.html">Phones</a>
+                <a href="/HTML/HomePages/pages/wearables.html">Wearables</a>
+                <a href="/HTML/HomePages/pages/computers.html">Computers</a>
+                <a href="/HTML/HomePages/pages/tablets.html">Tablets</a>
+            </nav>
+
+            <nav class="channel-utility-nav" aria-label="Utility pages">
+                <a href="/HTML/HomePages/pages/support.html">Support</a>
+                <a href="/HTML/HomePages/pages/retail.html">Retail</a>
+                <a href="/HTML/HomePages/pages/business.html">Business</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto p-6">
+        <h1 class="text-2xl font-semibold mb-6">DragonMall – All Products</h1>
+        <div id="storeRoot" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </main>
+
+    <script src="/JS/JSHomePage/search.js"></script>
+    <script src="/JS/JSHomePage/common.js"></script>
+    <script>
+        async function loadStore() {
+            const root = document.getElementById('storeRoot');
+            root.innerHTML = '<div class="text-gray-500">Loading products…</div>';
+            try {
+                const resp = await fetch('/PHP/search_products.php');
+                const data = await resp.json();
+                if (!Array.isArray(data.results) || data.results.length === 0) {
+                    root.innerHTML = '<div class="text-gray-500">No products available.</div>';
+                    return;
+                }
+
+                root.innerHTML = data.results.map((p) => (`<div class="channel-card">${renderProductCard(p)}</div>`)).join('');
+            } catch (e) {
+                root.innerHTML = '<div class="text-red-600">Failed to load store data. Ensure PHP server is running.</div>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadStore);
+    </script>
 </body>
 </html>

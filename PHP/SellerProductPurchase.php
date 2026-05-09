@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../PHP/seller_product_repository.php';
+require_once __DIR__ . '/seller_product_repository.php';
 
 $listingId = seller_clean_value($_GET['id'] ?? '');
 $product = $listingId !== '' ? find_seller_product($listingId) : null;
@@ -459,7 +459,7 @@ if ($product) {
                 });
 
                 thumbnailContainer.addEventListener('scroll', updateScrollArrows);
-                addToCartBtn.addEventListener('click', () => submitTransaction('add_to_cart'));
+                addToCartBtn.addEventListener('click', () => addSellerToCart());
                 buyNowBtn.addEventListener('click', () => submitTransaction('buy_now'));
 
                 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -618,6 +618,39 @@ if ($product) {
                 } catch (error) {
                     setTransactionMessage(error.message || 'The transaction could not be completed. Make sure the project is running through a PHP environment.', 'error');
                 }
+            }
+
+            // Persist seller listing configuration into localStorage shoppingCart
+            function addSellerToCart() {
+                if (!isConfigurationValid()) {
+                    updateUI();
+                    return;
+                }
+
+                const item = {
+                    id: productData.id + '-' + (new Date()).getTime(),
+                    listingId: productData.id,
+                    name: productData.name,
+                    sellerName: productData.sellerName || '',
+                    color: getSelectedColorName(),
+                    storage: getSelectedStorageName(),
+                    unit_price: calculateTotalPrice() / state.quantity,
+                    quantity: state.quantity,
+                    total: calculateTotalPrice()
+                };
+
+                const cart = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
+                const existingIndex = cart.findIndex(c => c.name === item.name && c.color === item.color && c.storage === item.storage && c.unit_price === item.unit_price);
+                if (existingIndex >= 0) {
+                    cart[existingIndex].quantity = Number(cart[existingIndex].quantity) + Number(item.quantity);
+                    cart[existingIndex].total = Number(cart[existingIndex].unit_price) * Number(cart[existingIndex].quantity);
+                } else {
+                    cart.push(item);
+                }
+
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+                if (window.DG_updateCartBadges) window.DG_updateCartBadges();
+                setTransactionMessage('Added seller listing to cart.', 'success');
             }
 
             document.addEventListener('DOMContentLoaded', init);
