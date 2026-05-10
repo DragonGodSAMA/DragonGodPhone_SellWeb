@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/data_paths.php';
+require_once __DIR__ . '/db_connect.php';
 
 $fullName   = $_POST['fullName'] ?? '';
 $address    = $_POST['address'] ?? '';
@@ -7,24 +7,26 @@ $phone      = $_POST['phone'] ?? '';
 $email      = $_POST['email'] ?? '';
 $regUsername= $_POST['regUsername'] ?? '';
 $password   = $_POST['password'] ?? '';
-$role       = $_POST['role'] ?? 'Buyer'; // 接收身份
-$time       = date("Y-m-d H:i:s");
+$role       = $_POST['role'] ?? 'Buyer';
 
-$text = "
-====================================
-Register Time: $time
-Full Name: $fullName
-Address: $address
-Phone: $phone
-Email: $email
-Username: $regUsername
-Password: $password
-Role: $role
-====================================
-";
+try {
+    $sql = "INSERT INTO users (full_name, address, phone, email, username, password, role) 
+            VALUES (:fullName, :address, :phone, :email, :username, :password, :role)";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':fullName' => $fullName,
+        ':address'  => $address,
+        ':phone'    => $phone,
+        ':email'    => $email,
+        ':username' => $regUsername,
+        ':password' => $password, 
+        ':role'     => $role
+    ]);
 
-file_put_contents(project_user_data_path(), $text, FILE_APPEND | LOCK_EX);
-
-header("Location: ../../HTML/Login&Registration/Login.html");
+    header("Location: ../../HTML/Login&Registration/Login.html");
+} catch (PDOException $e) {
+    echo "Registration Error: " . $e->getMessage();
+}
 exit;
 ?>
