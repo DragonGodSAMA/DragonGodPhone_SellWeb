@@ -252,6 +252,17 @@ a {
     background: #f5f5f5;
 }
 
+.shared-cart-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.cart-badge {
+    font-weight: 600;
+}
+
 .text-button:hover {
     color: var(--accent);
 }
