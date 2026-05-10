@@ -118,6 +118,6 @@ try {
 
 } catch (Exception $e) {
     $pdo->rollBack();
-    die("错误：" . $e->getMessage());
+    die("error：" . $e->getMessage());
 }
 ?>
