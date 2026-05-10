@@ -107,15 +107,28 @@
             align-items: center;
         }
 
-        .nav-actions span {
+        .nav-actions span,
+        .nav-actions .shared-cart-link {
             font-size: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
+            color: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .nav-actions span:hover {
+        .nav-actions span:hover,
+        .nav-actions .shared-cart-link:hover {
             color: #007bff;
             transform: scale(1.1);
+        }
+
+        .nav-actions .cart-badge,
+        .mobile-menu .cart-badge {
+            font-size: 14px;
+            font-weight: 600;
         }
 
         .btn-reserve {
@@ -168,6 +181,12 @@
             color: #333;
             padding: 10px 0;
             transition: all 0.3s ease;
+        }
+
+        .mobile-menu .shared-cart-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .mobile-menu a:hover {
@@ -607,8 +626,7 @@
                 <input type="text" class="search-input" placeholder="Search...">
                 <span id="searchIcon">🔍</span>
             </div>
-            <!-- 购物车图标 添加点击跳转事件 -->
-            <span id="cartIcon">🛒</span>
+            <a href="../SellPage(addcar)/Cart.html" class="shared-cart-link" aria-label="Open cart">🛒 <span class="cart-badge">¥0</span></a>
             <button class="ghost-button btn-reserve" type="button" data-route="login">Login</button>
         </div>
         <div class="hamburger" id="hamburger">☰</div>
@@ -622,7 +640,7 @@
         <a href="#performance">Performance</a>
         <a href="#battery">Battery</a>
         <button class="ghost-button" type="button" data-route="login" style="margin-top: 10px;">Login</button>
-        <a href="../SellPage(addcar)/SellPage.html">Cart</a>
+        <a href="../SellPage(addcar)/Cart.html" class="shared-cart-link">Cart <span class="cart-badge">¥0</span></a>
     </div>
 
     <!-- HERO -->
@@ -900,10 +918,6 @@
             window.location.href = '../HomePages/index.html';
         });
 
-        const cartIcon = document.getElementById('cartIcon');
-        cartIcon.addEventListener('click', () => {
-            window.location.href = '../SellPage(addcar)/SellPage.html';
-        });
     </script>
     <script src="../../JS/JSHomePage/common.js"></script>
     <script src="../../JS/JSHomePage/script.js"></script>

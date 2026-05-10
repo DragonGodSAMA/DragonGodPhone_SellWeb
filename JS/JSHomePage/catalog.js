@@ -71,12 +71,12 @@ const PAGE_DATA = {
             { value: "5300 mAh", label: "Flagship battery" }
         ],
         sectionTitle: "Phones channel highlights",
-        sectionIntro: "The channel sits above any one model and introduces the full device family, the same way the Huawei phone channel behaves above its product details.",
+        sectionIntro: "The phones channel introduces the full device family first, then leads customers into each flagship story and purchase path.",
         highlights: [
             { title: "Foldable flagship", text: "Aether Fold One remains the visual and functional anchor of the entire site." },
             { title: "Portrait imaging", text: "StarSight naming keeps portraits, night scenes, and zoom stories consistent across the range." },
             { title: "Lightweight line", text: "Aether Air keeps space open for a thinner everyday device and future team expansion." },
-            { title: "Direct handoff", text: "The buy and detail flows continue to the existing pages without changing those core files." }
+            { title: "Direct access", text: "Move from category discovery into product details and purchase without losing context." }
         ],
         storyTitle: "Lineup structure",
         storyIntro: "This page behaves as a real category entrance with product-family logic, not a repeated collection of identical product cards.",
@@ -93,7 +93,7 @@ const PAGE_DATA = {
         eyebrow: "DragonGod Phont",
         heroTitle: "Wearables that stay connected to the phone story.",
         heroSubtitle: "Watches, bands, and smart rings built to orbit the Aether phone family.",
-        heroDescription: "This page mirrors the Huawei-style category pages by acting as a separate landing page for a product family rather than a single item.",
+        heroDescription: "This page serves as a dedicated landing page for the wearable family rather than a single product card.",
         badgeLabel: "Hero wearable",
         badgeValue: "Halo Watch X",
         heroKind: "wearables",
@@ -121,7 +121,7 @@ const PAGE_DATA = {
             { title: "Phone continuity", text: "Everything here remains linked back to phones, support, and the store entry page." }
         ],
         storyTitle: "Wearable lineup",
-        storyIntro: "Huawei uses channel pages to introduce a family view first. This page follows that logic with a cleaner English presentation.",
+        storyIntro: "The wearable channel introduces the family view first, then lets visitors drill into individual products and services.",
         stories: [
             { kicker: "Daily health", title: "Halo Watch X", text: "Large display, strong battery life, and tighter continuity with Aether phones." },
             { kicker: "Fitness light", title: "Motion Band Lite", text: "A lighter entry point for motion tracking and notifications." },
@@ -135,7 +135,7 @@ const PAGE_DATA = {
         eyebrow: "DragonGod Phont",
         heroTitle: "Computers that extend the mobile workspace.",
         heroSubtitle: "Thin notebooks, creator models, and desktop workflows aligned with the Aether ecosystem.",
-        heroDescription: "The computer channel works as its own category entrance, mirroring how the Huawei site separates brand families before you enter a single product page.",
+        heroDescription: "The computer channel stands as its own category entrance, separating the DragonGod computing lineup from any single product page.",
         badgeLabel: "Flagship notebook",
         badgeValue: "AtlasBook Pro 14",
         heroKind: "computers",
@@ -219,7 +219,7 @@ const PAGE_DATA = {
         eyebrow: "DragonGod Phont",
         heroTitle: "Large-screen products that extend the home experience.",
         heroSubtitle: "Connected displays, smart panels, and cinematic living room hardware.",
-        heroDescription: "This channel replaces section jumps with a real standalone landing page, similar to the Huawei top-row category pages.",
+        heroDescription: "This channel replaces simple section jumps with a real standalone landing page for DragonGod's home entertainment lineup.",
         badgeLabel: "Hero display",
         badgeValue: "LumiView X 75",
         heroKind: "visions",
@@ -289,7 +289,7 @@ const PAGE_DATA = {
             { title: "Shared controls", text: "Store and support routes stay visible so the page feels fully connected." }
         ],
         storyTitle: "Audio family",
-        storyIntro: "This structure mirrors the category logic of the Huawei site while staying original in naming and copy.",
+        storyIntro: "This structure introduces the category first while keeping DragonGod's naming, visuals, and copy distinct.",
         stories: [
             { kicker: "Portable", title: "EchoBuds Pro", text: "Noise reduction, call clarity, and fast pairing with DragonGod phones." },
             { kicker: "Home", title: "Resonance Speaker", text: "A stationary speaker for living room music and voice control." },
@@ -491,7 +491,7 @@ const PAGE_DATA = {
             { value: "Repair ready", label: "Support crossover" }
         ],
         sectionTitle: "Retail page highlights",
-        sectionIntro: "A separate retail page is a better match for the Huawei-style utility navigation than a homepage anchor or empty button.",
+        sectionIntro: "A separate retail page gives store visits, product demos, and service access a real destination inside the site navigation.",
         highlights: [
             { title: "Showroom layout", text: "Phones, wearables, whole-home, and vision products each get a physical presentation zone." },
             { title: "Demo focus", text: "Retail helps larger devices and home products make sense before a purchase page is reached." },
@@ -554,7 +554,7 @@ const PAGE_DATA = {
         pageLabel: "DragonMall",
         eyebrow: "DragonGod Phont",
         heroTitle: "A store landing page that gathers categories before the actual product purchase flow.",
-        heroSubtitle: "This is the utility-page equivalent of the Huawei mall entrance, not the single product purchase page.",
+        heroSubtitle: "This utility page acts as the store gateway before customers move into a single product purchase page.",
         heroDescription: "The page gives the Store item a real HTML destination and still links forward into the existing SellPage when the featured product is selected.",
         badgeLabel: "Featured offer",
         badgeValue: "Aether Fold One 12 GB + 256 GB",
@@ -572,7 +572,7 @@ const PAGE_DATA = {
             { value: "4 zones", label: "Product category groups" },
             { value: "Featured", label: "Current hero product" },
             { value: "Bundle", label: "Accessory pathway" },
-            { value: "Route", label: "Buy page handoff" }
+            { value: "Route", label: "Purchase path" }
         ],
         sectionTitle: "Store page highlights",
         sectionIntro: "This page behaves like a mall or store gateway and then hands users off to the existing product purchase page.",
@@ -580,7 +580,7 @@ const PAGE_DATA = {
             { title: "Featured phone", text: "Aether Fold One remains the highlighted purchase route for the current project package." },
             { title: "Accessory cross-sell", text: "Comet Pen, MagLock cases, and FluxCharge accessories fit naturally here." },
             { title: "Category routing", text: "Phones, wearables, tablets, and audio can all be reached without returning to the homepage." },
-            { title: "Sell handoff", text: "The final product buy step still goes to the existing SellPage purchase page." }
+            { title: "Purchase ready", text: "The final step takes customers straight into the dedicated product purchase page." }
         ],
         storyTitle: "Store structure",
         storyIntro: "The store page closes the gap between a global mall button and the actual product purchase page.",
@@ -612,7 +612,48 @@ function renderButtons(actions) {
 }
 
 function renderHeaderActions(actions) {
-    return actions.map((action) => `<a class="channel-header-action" href="${action.href}">${action.label}</a>`).join("");
+    const base = actions.map((action) => `<a class="channel-header-action" href="${action.href}">${action.label}</a>`).join("");
+
+    try {
+        const role = localStorage.getItem('userRole') || 'Buyer';
+        const isSeller = String(role).trim().toLowerCase() === 'seller';
+        const cartAnchor = '<a class="channel-header-action" href="/HTML/SellPage(addcar)/Cart.html">Cart <span class="cart-badge">¥0</span></a>';
+
+        if (isSeller) {
+            const addProductAnchor = '<a class="channel-header-action" href="/HTML/Sell_Product/Sell_Product.html">Add Product</a>';
+            return addProductAnchor + cartAnchor + base;
+        }
+
+        return cartAnchor + base;
+    } catch (error) {
+        return base;
+    }
+}
+
+function getCartItemTotal(item) {
+    const directTotal = Number(item && item.total);
+    if (Number.isFinite(directTotal) && directTotal > 0) {
+        return directTotal;
+    }
+
+    return (Number(item && item.price) || 0) * (Number(item && item.quantity) || 1);
+}
+
+function readCartTotal() {
+    try {
+        const parsed = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
+        const cart = Array.isArray(parsed) ? parsed : [];
+        return cart.reduce((sum, item) => sum + getCartItemTotal(item), 0);
+    } catch (error) {
+        return 0;
+    }
+}
+
+function updateCatalogCartBadges() {
+    const total = readCartTotal();
+    document.querySelectorAll('.cart-badge').forEach((badge) => {
+        badge.textContent = `¥${total.toLocaleString()}`;
+    });
 }
 
 function renderMetrics(metrics) {
@@ -982,7 +1023,7 @@ function renderPage(currentSlug) {
                     <div class="channel-section-header">
                         <p class="channel-eyebrow">Related Pages</p>
                         <h2>Continue into other standalone pages</h2>
-                        <p class="channel-section-intro">These are real HTML pages inside the package, linked to each other like a multi-page brand website rather than homepage anchors.</p>
+                        <p class="channel-section-intro">Explore related DragonGod pages from here to compare categories, retail experiences, and support options in one connected site.</p>
                     </div>
 
                     <div class="channel-related-grid">
@@ -995,7 +1036,7 @@ function renderPage(currentSlug) {
         <footer class="channel-footer">
             <div class="channel-footer-copy">
                 <strong>DragonGod Phont</strong>
-                <p>Multi-page category site generated for the top navigation structure, while the existing login, detail, and purchase pages remain unchanged.</p>
+                <p>DragonGod category pages connect products, support, retail, and the store into one consistent browsing experience.</p>
             </div>
 
             <div class="channel-footer-actions">
@@ -1006,7 +1047,7 @@ function renderPage(currentSlug) {
         </footer>
 
         <aside class="channel-notice" id="channel-notice">
-            <p>This multi-page channel layer exists to make the top navigation fully clickable and interconnected, while keeping the original core pages unchanged.</p>
+            <p>Use the top navigation to move across DragonGod categories, support, retail, and store pages without losing your place.</p>
             <button class="channel-notice-close" type="button" aria-label="Dismiss channel notice">×</button>
         </aside>
     `;
@@ -1020,6 +1061,11 @@ function renderPage(currentSlug) {
             }
         });
     }
+
+    updateCatalogCartBadges();
+    window.DG_updateCartBadges = updateCatalogCartBadges;
+    window.addEventListener('focus', updateCatalogCartBadges);
+    window.addEventListener('storage', updateCatalogCartBadges);
 }
 
 renderPage(document.body.dataset.page);

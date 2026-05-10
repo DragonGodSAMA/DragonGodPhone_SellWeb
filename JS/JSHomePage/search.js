@@ -135,7 +135,7 @@ function renderActions(product) {
     }
 
     if (actions.length === 0) {
-        actions.push('<span class="search-placeholder-action">Seller listing saved. Dedicated detail and buy pages are still pending.</span>');
+        actions.push('<span class="search-placeholder-action">Open this listing from its related page to continue.</span>');
     }
 
     return actions.join('');

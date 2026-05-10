@@ -518,9 +518,44 @@
             
             // Add to cart button
             addToCartBtn.addEventListener('click', () => {
-                if (isConfigurationValid()) {
-                    alert(`Added to cart!\n\nColor: ${getSelectedColorName()}\nStorage: ${getSelectedStorageName()}\nQuantity: ${state.quantity}\nTotal: ¥${calculateTotalPrice().toLocaleString()}`);
+                if (!isConfigurationValid()) {
+                    return;
                 }
+
+                const selectedColor = productData.colors.find((color) => color.id === state.selectedColor);
+                const item = {
+                    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+                    name: document.getElementById('productTitle') ? document.getElementById('productTitle').textContent.trim() : 'Product',
+                    color: getSelectedColorName(),
+                    storage: getSelectedStorageName(),
+                    image: selectedColor ? selectedColor.image : mainImage.src,
+                    unit_price: calculateTotalPrice() / state.quantity,
+                    quantity: state.quantity,
+                    total: calculateTotalPrice()
+                };
+
+                let cart = [];
+                try {
+                    const parsed = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
+                    cart = Array.isArray(parsed) ? parsed : [];
+                } catch (error) {
+                    cart = [];
+                }
+
+                const existingIndex = cart.findIndex((entry) => entry.name === item.name && entry.color === item.color && entry.storage === item.storage && Number(entry.unit_price) === Number(item.unit_price));
+                if (existingIndex >= 0) {
+                    cart[existingIndex].quantity = Number(cart[existingIndex].quantity) + Number(item.quantity);
+                    cart[existingIndex].total = Number(cart[existingIndex].unit_price) * Number(cart[existingIndex].quantity);
+                } else {
+                    cart.push(item);
+                }
+
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+                if (window.DG_updateCartBadges) {
+                    window.DG_updateCartBadges();
+                }
+
+                alert(`Added to cart!\n\nColor: ${item.color}\nStorage: ${item.storage}\nQuantity: ${item.quantity}\nTotal: ¥${item.total.toLocaleString()}`);
             });
             
             // Buy now button
