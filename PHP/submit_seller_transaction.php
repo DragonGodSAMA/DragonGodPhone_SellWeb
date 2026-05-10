@@ -31,11 +31,14 @@ if (!$listing) {
     exit;
 }
 
-if ($buyerName === '' || $buyerRole !== 'Buyer') {
+$normalizedBuyerRole = strtolower($buyerRole);
+if ($buyerName === '' || !in_array($normalizedBuyerRole, ['buyer', 'seller'], true)) {
     http_response_code(403);
-    echo json_encode(['ok' => false, 'message' => 'A logged-in Buyer account is required to continue.']);
+    echo json_encode(['ok' => false, 'message' => 'A logged-in Buyer or Seller account is required to continue.']);
     exit;
 }
+
+$buyerRole = $normalizedBuyerRole === 'seller' ? 'Seller' : 'Buyer';
 
 $colorMatch = null;
 foreach ($listing['colors'] as $color) {

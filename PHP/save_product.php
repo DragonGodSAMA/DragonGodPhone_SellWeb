@@ -104,6 +104,13 @@ $description = clean_value($_POST['description'] ?? '');
 $sellerName = clean_value($_POST['seller_name'] ?? 'Seller');
 $sellerRole = clean_value($_POST['seller_role'] ?? 'Seller');
 
+if (strcasecmp($sellerRole, 'Seller') !== 0) {
+    header('Location: ../../HTML/Sell_Product/Sell_Product.html?error=seller_only');
+    exit;
+}
+
+$sellerRole = 'Seller';
+
 if ($name === '' || $brand === '' || $basePrice <= 0 || $description === '') {
     header('Location: ../../HTML/Sell_Product/Sell_Product.html?error=missing_fields');
     exit;

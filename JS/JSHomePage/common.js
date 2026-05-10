@@ -4,56 +4,107 @@ document.addEventListener('DOMContentLoaded', function() {
     const user = localStorage.getItem('loggedInUser');
     const role = localStorage.getItem('userRole') || 'Buyer';
 
-    // Update cart badges from localStorage
+    function readCart() {
+        try {
+            const parsed = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function getCartItemTotal(item) {
+        const directTotal = Number(item && item.total);
+        if (Number.isFinite(directTotal) && directTotal > 0) {
+            return directTotal;
+        }
+
+        return (Number(item && item.price) || 0) * (Number(item && item.quantity) || 1);
+    }
+
     function updateCartBadges() {
-        const cart = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
-        const total = cart.reduce((s, it) => s + (Number(it.total || 0) || 0), 0);
-        // refresh NodeList in case badges were injected after DOMContentLoaded
+        const total = readCart().reduce((sum, item) => sum + getCartItemTotal(item), 0);
         cartBadges = document.querySelectorAll('.cart-badge');
-        cartBadges.forEach(b => b.textContent = `¥${total.toLocaleString()}`);
-    }
-
-    // If logged in, replace login button behaviour to link to profile page
-    if (user && loginBtns && loginBtns.length > 0) {
-        loginBtns.forEach(loginBtn => {
-            loginBtn.innerText = `${user} (${role})`;
-            // navigate to profile page instead of direct logout
-            loginBtn.addEventListener('click', function() {
-                window.location.href = '/HTML/Login&Registration/UserProfile.html';
-            });
+        cartBadges.forEach((badge) => {
+            badge.textContent = `¥${total.toLocaleString()}`;
         });
-
-        // If user is a seller, inject an Add Product button into header areas
-        if (role.toLowerCase() === 'seller') {
-            // try to find common header action containers
-            const headerContainers = document.querySelectorAll('.channel-header-actions, .nav-actions, .channel-header-actions');
-            headerContainers.forEach(container => {
-                const anchor = document.createElement('a');
-                anchor.className = 'channel-header-action';
-                anchor.href = '/HTML/Sell_Product/Sell_Product.html';
-                anchor.textContent = 'Add Product';
-                container.insertBefore(anchor, container.firstChild);
-            });
-        }
-
-        // If there's no cart-badge anywhere, try to inject a small cart link into the first header actions container
-        if (!document.querySelector('.cart-badge')) {
-            const firstHeader = document.querySelector('.channel-header-actions, .nav-actions');
-            if (firstHeader) {
-                const cartAnchor = document.createElement('a');
-                cartAnchor.className = 'channel-header-action';
-                cartAnchor.href = '/HTML/SellPage(addcar)/Cart.html';
-                cartAnchor.innerHTML = `Cart <span class="cart-badge">¥0</span>`;
-                firstHeader.appendChild(cartAnchor);
-                // refresh cached NodeList
-                cartBadges = document.querySelectorAll('.cart-badge');
-            }
-        }
     }
 
-    // Ensure cart badge is up-to-date on pages that include it
-    updateCartBadges();
+    function hasActionLink(container, token) {
+        return Array.from(container.querySelectorAll('a[href]')).some((anchor) => {
+            const href = anchor.getAttribute('href') || '';
+            return href.includes(token);
+        });
+    }
 
-    // Expose function to update cart badges globally
+    function getActionClass(container, sharedType) {
+        if (container.matches('.header-actions')) {
+            return sharedType === 'cart' ? 'ghost-button shared-cart-link' : 'ghost-button';
+        }
+
+        return sharedType === 'cart' ? 'channel-header-action shared-cart-link' : 'channel-header-action';
+    }
+
+    function getInsertTarget(container) {
+        return container.querySelector('.ghost-button[data-route="login"], .btn-reserve, button[data-route="login"]');
+    }
+
+    function injectHeaderActions() {
+        const headerContainers = document.querySelectorAll('.channel-header-actions, .nav-actions, .header-actions');
+        const isSeller = String(role).trim().toLowerCase() === 'seller';
+
+        headerContainers.forEach((container) => {
+            if (isSeller && !hasActionLink(container, 'Sell_Product.html')) {
+                const addProductAnchor = document.createElement('a');
+                addProductAnchor.className = getActionClass(container, 'action');
+                addProductAnchor.href = '/HTML/Sell_Product/Sell_Product.html';
+                addProductAnchor.textContent = 'Add Product';
+
+                if (container.matches('.header-actions')) {
+                    const insertTarget = getInsertTarget(container);
+                    if (insertTarget) {
+                        container.insertBefore(addProductAnchor, insertTarget);
+                    } else {
+                        container.appendChild(addProductAnchor);
+                    }
+                } else {
+                    container.insertBefore(addProductAnchor, container.firstChild);
+                }
+            }
+
+            if (!hasActionLink(container, 'Cart.html')) {
+                const cartAnchor = document.createElement('a');
+                cartAnchor.className = getActionClass(container, 'cart');
+                cartAnchor.href = '/HTML/SellPage(addcar)/Cart.html';
+                cartAnchor.innerHTML = 'Cart <span class="cart-badge">¥0</span>';
+
+                const insertTarget = getInsertTarget(container);
+                if (insertTarget) {
+                    container.insertBefore(cartAnchor, insertTarget);
+                } else {
+                    container.appendChild(cartAnchor);
+                }
+            }
+        });
+    }
+
+    if (user && loginBtns.length > 0) {
+        loginBtns.forEach((loginBtn) => {
+            loginBtn.innerText = `${user} (${role})`;
+            loginBtn.onclick = function() {
+                if (confirm('Do you want to log out?')) {
+                    localStorage.removeItem('loggedInUser');
+                    localStorage.removeItem('userRole');
+                    alert('Logged out successfully!');
+                    location.reload();
+                }
+            };
+        });
+    }
+
+    injectHeaderActions();
+    updateCartBadges();
+    window.addEventListener('focus', updateCartBadges);
+    window.addEventListener('storage', updateCartBadges);
     window.DG_updateCartBadges = updateCartBadges;
 });

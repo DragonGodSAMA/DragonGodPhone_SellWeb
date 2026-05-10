@@ -256,7 +256,7 @@ if ($product) {
                             <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                             </svg>
-                            <div class="text-sm text-gray-600"><span class="font-semibold">Buyer note:</span> Buyer login is required before placing a second-hand cart or order action.</div>
+                            <div class="text-sm text-gray-600"><span class="font-semibold">Account note:</span> Buyer and Seller accounts can purchase; only Seller accounts can publish new listings.</div>
                         </div>
                     </div>
 
@@ -558,6 +558,57 @@ if ($product) {
                 return selectedStorage ? selectedStorage.name : '';
             }
 
+            function getSelectedColorImage() {
+                const selectedColor = productData.colors.find((color) => color.id === state.selectedColor);
+                return selectedColor ? selectedColor.image : mainImage.src;
+            }
+
+            function persistSellerCartItem() {
+                try {
+                    const item = {
+                        id: `${productData.id}-${Date.now()}`,
+                        listingId: productData.id,
+                        name: productData.name,
+                        sellerName: productData.sellerName || '',
+                        color: getSelectedColorName(),
+                        storage: getSelectedStorageName(),
+                        selectedServices: [...state.selectedServices].map((serviceId) => {
+                            const service = productData.services.find((entry) => entry.id === serviceId);
+                            return service ? service.name : serviceId;
+                        }),
+                        image: getSelectedColorImage(),
+                        unit_price: calculateTotalPrice() / state.quantity,
+                        quantity: state.quantity,
+                        total: calculateTotalPrice()
+                    };
+
+                    let cart = [];
+                    try {
+                        const parsed = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
+                        cart = Array.isArray(parsed) ? parsed : [];
+                    } catch (error) {
+                        cart = [];
+                    }
+
+                    const existingIndex = cart.findIndex((entry) => entry.listingId === item.listingId && entry.color === item.color && entry.storage === item.storage && Number(entry.unit_price) === Number(item.unit_price));
+                    if (existingIndex >= 0) {
+                        cart[existingIndex].quantity = Number(cart[existingIndex].quantity) + Number(item.quantity);
+                        cart[existingIndex].total = Number(cart[existingIndex].unit_price) * Number(cart[existingIndex].quantity);
+                    } else {
+                        cart.push(item);
+                    }
+
+                    localStorage.setItem('shoppingCart', JSON.stringify(cart));
+                    if (window.DG_updateCartBadges) {
+                        window.DG_updateCartBadges();
+                    }
+
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+            }
+
             function updateScrollArrows() {
                 const { scrollLeft: currentScroll, scrollWidth, clientWidth } = thumbnailContainer;
                 scrollLeft.style.opacity = currentScroll > 0 ? '1' : '0';
@@ -578,9 +629,10 @@ if ($product) {
 
                 const buyerName = localStorage.getItem('loggedInUser');
                 const buyerRole = localStorage.getItem('userRole') || 'Guest';
+                const normalizedBuyerRole = String(buyerRole).trim().toLowerCase();
 
-                if (!buyerName || buyerRole !== 'Buyer') {
-                    setTransactionMessage('A Buyer account login is required before continuing the second-hand transaction flow. Redirecting to login...', 'error');
+                if (!buyerName || !['buyer', 'seller'].includes(normalizedBuyerRole)) {
+                    setTransactionMessage('A Buyer or Seller account login is required before continuing the second-hand transaction flow. Redirecting to login...', 'error');
                     window.location.href = `../Login&Registration/Login.html?source=seller-purchase&redirectUrl=${encodeURIComponent(window.location.href)}`;
                     return;
                 }
@@ -612,6 +664,15 @@ if ($product) {
                     const result = await response.json();
                     if (!response.ok || !result.ok) {
                         throw new Error(result.message || 'The transaction could not be completed.');
+                    }
+
+                    if (actionType === 'add_to_cart') {
+                        const cartSaved = persistSellerCartItem();
+                        const cartMessage = cartSaved
+                            ? `${result.message} Transaction ID: ${result.transactionId}. Local cart updated.`
+                            : `${result.message} Transaction ID: ${result.transactionId}. Local cart could not be updated in this browser.`;
+                        setTransactionMessage(cartMessage, 'success');
+                        return;
                     }
 
                     setTransactionMessage(`${result.message} Transaction ID: ${result.transactionId}`, 'success');

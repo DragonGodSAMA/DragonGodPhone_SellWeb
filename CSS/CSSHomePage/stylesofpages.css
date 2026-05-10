@@ -179,6 +179,17 @@ a {
     background: #f4f4f4;
 }
 
+.shared-cart-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.cart-badge {
+    font-weight: 600;
+}
+
 .channel-search-form {
     display: inline-flex;
     align-items: center;

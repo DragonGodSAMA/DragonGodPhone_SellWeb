@@ -360,6 +360,8 @@
         const sellerRoleField = document.getElementById('sellerRoleField');
         const loggedInUser = localStorage.getItem('loggedInUser');
         const userRole = localStorage.getItem('userRole');
+        const normalizedUserRole = String(userRole || '').trim().toLowerCase();
+        const canSell = normalizedUserRole === 'seller';
         const isDirectFileMode = window.location.protocol === 'file:';
 
         function showStatus(message, tone) {
@@ -500,14 +502,41 @@
                 invalid_request: 'Invalid request. Please submit the form from this page.',
                 missing_fields: 'Please complete the required product information before publishing.',
                 cover_upload: 'The cover image could not be uploaded. Please try again with a valid image file.',
-                color_upload: 'One of the color images could not be uploaded. Please check the file type and try again.'
+                color_upload: 'One of the color images could not be uploaded. Please check the file type and try again.',
+                seller_only: 'Only Seller accounts can publish products. Buyer accounts can purchase only.'
             };
 
             showStatus(messages[params.get('error')] || 'The product could not be saved. Please try again.', 'error');
         }
 
+        if (sellerUploadForm && !canSell) {
+            const submitButton = sellerUploadForm.querySelector('.btn-submit');
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = loggedInUser ? 'Seller Account Required' : 'Login as Seller to Publish';
+            }
+
+            showStatus(
+                loggedInUser
+                    ? 'Only Seller accounts can publish products. Buyer accounts can purchase only.'
+                    : 'Please log in with a Seller account to publish a product. Buyer accounts can purchase only.',
+                'error'
+            );
+        }
+
         if (sellerUploadForm) {
             sellerUploadForm.addEventListener('submit', async (event) => {
+                if (!canSell) {
+                    event.preventDefault();
+                    showStatus(
+                        loggedInUser
+                            ? 'Only Seller accounts can publish products. Buyer accounts can purchase only.'
+                            : 'Please log in with a Seller account to publish a product. Buyer accounts can purchase only.',
+                        'error'
+                    );
+                    return;
+                }
+
                 if (!isDirectFileMode) {
                     return;
                 }

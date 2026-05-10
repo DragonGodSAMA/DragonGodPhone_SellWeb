@@ -425,11 +425,17 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            const listingId = new URLSearchParams(window.location.search).get('id') || '';
             const product = getProduct();
             const emptyState = document.getElementById('emptyState');
             const purchaseState = document.getElementById('purchaseState');
 
             if (!product) {
+                if (listingId && window.location.protocol !== 'file:') {
+                    window.location.replace(`SellerProductPurchase.php?id=${encodeURIComponent(listingId)}`);
+                    return;
+                }
+
                 emptyState.hidden = false;
                 return;
             }
