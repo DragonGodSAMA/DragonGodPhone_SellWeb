@@ -1,19 +1,13 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/db_config.php';
 require_once __DIR__ . '/seller_product_repository.php';
 
 function normalize_text($value) {
-    $text = trim((string) $value);
-    if ($text === '') {
-        return '';
-    }
-
-    if (function_exists('mb_strtolower')) {
-        return mb_strtolower($text, 'UTF-8');
-    }
-
-    return strtolower($text);
+    $text = trim((string)$value);
+    if ($text === '') return '';
+    return function_exists('mb_strtolower') ? mb_strtolower($text, 'UTF-8') : strtolower($text);
 }
 
 function build_haystack($product) {
@@ -27,41 +21,30 @@ function build_haystack($product) {
         implode(' ', $product['storage'] ?? []),
         implode(' ', $product['services'] ?? [])
     ];
-
     return normalize_text(implode(' ', $parts));
 }
 
-function map_seller_product($record) {
-    $storage = array_values(array_map(function ($item) {
-        return $item['label'] ?? '';
-    }, $record['storage'] ?? []));
+$sellerProducts = [];
+$rawProducts = load_seller_products();
 
-    $services = array_values(array_map(function ($item) {
-        return $item['name'] ?? '';
-    }, $record['services'] ?? []));
-
-    $imagePath = seller_asset_web_path($record['cover_image_path'] ?? '', '../../../');
-    $productId = $record['id'] ?? '';
-
-    return [
-        'id' => $productId,
+foreach ($rawProducts as $row) {
+    $sellerProducts[] = [
+        'id' => $row['id'],
         'source' => 'seller',
-        'name' => $record['name'] ?? 'Untitled Seller Listing',
-        'brand' => $record['brand'] ?? 'Seller Listing',
-        'series' => $record['series'] ?? '',
-        'condition' => $record['condition'] ?? 'Used',
-        'price' => $record['base_price'] ?? 0,
-        'description' => trim((string) ($record['description'] ?? 'Seller uploaded product listing.')),
-        'image' => $imagePath,
-        'detailUrl' => '../../Sell_Product/SellerProductDetail.php?id=' . urlencode($productId),
-        'buyUrl' => '../../Sell_Product/SellerProductPurchase.php?id=' . urlencode($productId),
-        'storage' => $storage,
-        'services' => $services,
-        'keywords' => $record['keywords'] ?? []
+        'name' => $row['name'] ?? 'Unnamed Product',
+        'brand' => $row['brand'] ?? 'Unknown Brand',
+        'series' => '',
+        'condition' => $row['condition'] ?? 'Used',
+        'price' => $row['base_price'] ?? 0,
+        'description' => $row['description'] ?? 'No description',
+        'image' => seller_asset_web_path($row['cover_image'], '../../../'),
+        'detailUrl' => '../../Sell_Product/SellerProductDetail.php?id=' . $row['id'],
+        'buyUrl' => '../../Sell_Product/SellerProductPurchase.php?id=' . $row['id'],
+        'storage' => [],
+        'services' => [],
+        'keywords' => []
     ];
 }
-
-$query = trim((string) ($_GET['q'] ?? ''));
 
 $siteProducts = [
     [
@@ -114,28 +97,24 @@ $siteProducts = [
     ]
 ];
 
-$sellerDatabasePath = seller_products_database_path();
-$sellerDataReady = file_exists($sellerDatabasePath);
-$sellerProducts = array_map('map_seller_product', load_seller_products());
-
 $allProducts = array_merge($sellerProducts, $siteProducts);
-$sellerListingCount = count($sellerProducts);
+$sellerCount = count($sellerProducts);
 
+$query = normalize_text($_GET['q'] ?? '');
 if ($query === '') {
     $results = $allProducts;
 } else {
-    $needle = normalize_text($query);
-    $results = array_values(array_filter($allProducts, function ($product) use ($needle) {
-        return strpos(build_haystack($product), $needle) !== false;
+    $results = array_values(array_filter($allProducts, function ($p) use ($query) {
+        return strpos(build_haystack($p), $query) !== false;
     }));
 }
 
 echo json_encode([
     'query' => $query,
-    'sellerDataReady' => $sellerDataReady,
-    'sellerListingCount' => $sellerListingCount,
+    'sellerDataReady' => true,
+    'sellerListingCount' => $sellerCount,
     'total' => count($results),
     'results' => array_values($results),
-    'placeholderMessage' => $sellerListingCount > 0 ? null : 'No seller-uploaded phones have been saved yet. Search is currently using the completed site product pages and will automatically include seller listings after the first seller submission.'
+    'placeholderMessage' => $sellerCount > 0 ? null : 'No seller-uploaded phones have been saved yet.'
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 ?>

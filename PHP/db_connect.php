@@ -1,4 +1,5 @@
 <?php
+// db_connect.php
 $host = 'localhost';
 $dbname = 'dragongod_db';
 $dbuser = 'root'; 

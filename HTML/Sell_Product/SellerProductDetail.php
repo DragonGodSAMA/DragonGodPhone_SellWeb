@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../../PHP/seller_product_repository.php';
-
 $listingId = seller_clean_value($_GET['id'] ?? '');
 $product = $listingId !== '' ? find_seller_product($listingId) : null;
 ?>
@@ -18,7 +17,6 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
             gap: 28px;
             align-items: start;
         }
-
         .seller-media-panel,
         .seller-summary-panel,
         .seller-info-card {
@@ -26,12 +24,10 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
             border-radius: var(--radius-lg);
             background: #ffffff;
         }
-
         .seller-media-panel,
         .seller-summary-panel {
             padding: 28px;
         }
-
         .seller-main-image {
             aspect-ratio: 1 / 1;
             padding: 22px;
@@ -39,20 +35,17 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
             border: 1px solid var(--line);
             background: linear-gradient(180deg, #ffffff, #f5f5f5);
         }
-
         .seller-main-image img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
-
         .seller-gallery-strip {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
             gap: 12px;
             margin-top: 16px;
         }
-
         .seller-gallery-thumb {
             aspect-ratio: 1 / 1;
             padding: 10px;
@@ -60,20 +53,17 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
             border: 1px solid var(--line);
             background: #fbfbfb;
         }
-
         .seller-gallery-thumb img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
-
         .seller-status-row {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin: 14px 0 0;
         }
-
         .seller-pill {
             display: inline-flex;
             align-items: center;
@@ -84,20 +74,17 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
             font-size: 0.84rem;
             font-weight: 600;
         }
-
         .seller-price {
             margin: 20px 0 0;
             color: var(--accent);
             font-size: 2rem;
             font-weight: 600;
         }
-
         .seller-meta {
             display: grid;
             gap: 12px;
             margin-top: 22px;
         }
-
         .seller-meta-item {
             display: flex;
             justify-content: space-between;
@@ -105,45 +92,37 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
             padding-bottom: 12px;
             border-bottom: 1px solid var(--line);
         }
-
         .seller-meta-item:last-child {
             border-bottom: 0;
             padding-bottom: 0;
         }
-
         .seller-meta-label {
             color: var(--muted);
         }
-
         .seller-cta-row {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
             margin-top: 26px;
         }
-
         .seller-info-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
         }
-
         .seller-info-card {
             padding: 24px;
         }
-
         .seller-info-card h3 {
             margin: 0 0 12px;
             font-size: 1.08rem;
         }
-
         .seller-info-card ul {
             margin: 0;
             padding-left: 18px;
             color: var(--muted);
             line-height: 1.8;
         }
-
         .seller-empty {
             max-width: 760px;
             padding: 36px;
@@ -151,7 +130,6 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
             border-radius: var(--radius-lg);
             background: #ffffff;
         }
-
         @media (max-width: 1100px) {
             .seller-detail-grid,
             .seller-info-grid {
@@ -167,7 +145,6 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
                 <span class="channel-brand-mark" aria-hidden="true"></span>
                 <span>DragonGod Phone</span>
             </a>
-
             <nav class="channel-site-nav" aria-label="Site categories">
                 <a href="../HomePages/pages/phones.html">Phones</a>
                 <a href="../HomePages/pages/wearables.html">Wearables</a>
@@ -179,30 +156,25 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
                 <a href="../HomePages/pages/routers.html">Routers</a>
                 <a href="../HomePages/pages/dragonos.html">DragonOS 6</a>
             </nav>
-
             <nav class="channel-utility-nav" aria-label="Utility pages">
                 <a href="../HomePages/pages/support.html">Support</a>
                 <a href="../HomePages/pages/retail.html">Retail</a>
                 <a href="../HomePages/pages/business.html">Business</a>
                 <a href="../HomePages/pages/store.html">DragonMall</a>
             </nav>
-
             <form class="channel-search-form" action="../HomePages/pages/search.html" method="get" role="search">
                 <input class="channel-search-input" type="search" name="q" placeholder="Search phones">
                 <button class="channel-search-button" type="submit" aria-label="Search">🔍</button>
             </form>
         </div>
     </header>
-
     <div class="channel-subbar">
         <div class="channel-subbar-inner">
             <div class="channel-page-title"><?php echo htmlspecialchars($product ? $product['name'] : 'Seller Product Detail'); ?></div>
-
             <nav class="channel-section-nav" aria-label="Seller detail shortcuts">
                 <a href="#overview">Overview</a>
                 <a href="#listing-info">Listing Info</a>
             </nav>
-
             <div class="channel-header-actions">
                 <a class="channel-header-action" href="../HomePages/pages/search.html">Search</a>
                 <a class="channel-header-action" href="Sell_Product.html">Seller upload</a>
@@ -212,7 +184,6 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
             </div>
         </div>
     </div>
-
     <main class="channel-main">
         <section class="channel-section channel-hero" id="overview">
             <?php if (!$product): ?>
@@ -229,9 +200,8 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
                 <div class="seller-detail-grid">
                     <div class="seller-media-panel">
                         <div class="seller-main-image">
-                            <img src="<?php echo htmlspecialchars(seller_asset_web_path($product['cover_image_path'], '../../')); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                            <img src="<?php echo htmlspecialchars(seller_asset_web_path($product['cover_image'], '../../')); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                         </div>
-
                         <div class="seller-gallery-strip">
                             <?php foreach ($product['gallery_paths'] as $galleryPath): ?>
                                 <div class="seller-gallery-thumb">
@@ -240,21 +210,17 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
                             <?php endforeach; ?>
                         </div>
                     </div>
-
                     <div class="seller-summary-panel">
                         <p class="channel-eyebrow">Second-hand Listing</p>
                         <h1 class="channel-hero-title"><?php echo htmlspecialchars($product['name']); ?></h1>
                         <p class="channel-hero-subtitle"><?php echo htmlspecialchars($product['brand']); ?> second-hand seller listing</p>
                         <p class="channel-hero-description"><?php echo htmlspecialchars($product['description']); ?></p>
-
                         <div class="seller-status-row">
                             <span class="seller-pill"><?php echo htmlspecialchars($product['condition']); ?></span>
                             <span class="seller-pill">Sold by <?php echo htmlspecialchars($product['seller_name']); ?></span>
                             <span class="seller-pill">Single-unit second-hand flow</span>
                         </div>
-
                         <div class="seller-price">From ¥<?php echo number_format((float) $product['base_price']); ?></div>
-
                         <div class="seller-meta">
                             <div class="seller-meta-item">
                                 <span class="seller-meta-label">Listing ID</span>
@@ -269,7 +235,6 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
                                 <strong><?php echo htmlspecialchars($product['created_at'] !== '' ? $product['created_at'] : 'Unknown'); ?></strong>
                             </div>
                         </div>
-
                         <div class="seller-cta-row">
                             <a class="channel-button solid" href="SellerProductPurchase.php?id=<?php echo urlencode($product['id']); ?>">Open purchase page</a>
                             <a class="channel-button ghost" href="../HomePages/pages/search.html?q=<?php echo urlencode($product['name']); ?>">Search related listings</a>
@@ -279,7 +244,6 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
                 </div>
             <?php endif; ?>
         </section>
-
         <?php if ($product): ?>
             <section class="channel-section" id="listing-info">
                 <div class="seller-info-grid">
@@ -291,7 +255,6 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
                             <?php endforeach; ?>
                         </ul>
                     </article>
-
                     <article class="seller-info-card">
                         <h3>Storage and memory</h3>
                         <ul>
@@ -300,7 +263,6 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
                             <?php endforeach; ?>
                         </ul>
                     </article>
-
                     <article class="seller-info-card">
                         <h3>Seller service options</h3>
                         <ul>
@@ -317,13 +279,11 @@ $product = $listingId !== '' ? find_seller_product($listingId) : null;
             </section>
         <?php endif; ?>
     </main>
-
     <footer class="channel-footer">
         <div class="channel-footer-copy">
             <strong>Seller product detail</strong>
             <p>This page turns a seller-uploaded phone into a browsable listing and connects directly into the second-hand purchase flow.</p>
         </div>
-
         <div class="channel-footer-actions">
             <a href="../HomePages/index.html">Back to homepage</a>
             <a href="../HomePages/pages/search.html">Open search</a>

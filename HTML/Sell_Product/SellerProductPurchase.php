@@ -1,9 +1,7 @@
 <?php
 require_once __DIR__ . '/../../PHP/seller_product_repository.php';
-
 $listingId = seller_clean_value($_GET['id'] ?? '');
 $product = $listingId !== '' ? find_seller_product($listingId) : null;
-
 $pageProduct = null;
 if ($product) {
     $pageProduct = [
@@ -20,7 +18,7 @@ if ($product) {
             return [
                 'id' => $color['id'],
                 'name' => $color['name'],
-                'image' => seller_asset_web_path($color['image_path'] ?? $product['cover_image_path'], '../../')
+                'image' => seller_asset_web_path($color['image_path'] ?? $product['cover_image'], '../../')
             ];
         }, $product['colors']),
         'storage' => array_map(function ($storage) {
@@ -55,59 +53,48 @@ if ($product) {
         .thumbnail-scroll::-webkit-scrollbar {
             height: 4px;
         }
-
         .thumbnail-scroll::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 2px;
         }
-
         .thumbnail-scroll::-webkit-scrollbar-thumb {
             background: #ccc;
             border-radius: 2px;
         }
-
         .thumbnail-scroll::-webkit-scrollbar-thumb:hover {
             background: #999;
         }
-
         .transition-all-smooth {
             transition: all 0.3s ease;
         }
-
         @media (min-width: 768px) {
             .sticky-info {
                 position: sticky;
                 top: 84px;
             }
         }
-
         .color-option.selected {
             border-color: #FF0000;
             box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
         }
-
         .storage-option.selected {
             border-color: #FF0000;
             background-color: #fff5f5;
         }
-
         .service-option.selected {
             border-color: #FF0000;
             background-color: #fff5f5;
         }
-
         .transaction-message {
             padding: 14px 16px;
             border-radius: 12px;
             font-size: 14px;
             line-height: 1.7;
         }
-
         .transaction-message.success {
             background: #dcfce7;
             color: #166534;
         }
-
         .transaction-message.error {
             background: #fee2e2;
             color: #991b1b;
@@ -124,7 +111,6 @@ if ($product) {
                         Online Store
                     </a>
                 </div>
-
                 <div class="hidden lg:flex items-center space-x-8">
                     <a href="../HomePages/index.html" class="text-gray-700 hover:text-red-600 font-medium transition-colors">Home</a>
                     <a href="../HomePages/pages/search.html" class="text-gray-700 hover:text-red-600 font-medium transition-colors">Search</a>
@@ -132,16 +118,13 @@ if ($product) {
                     <a href="../HomePages/pages/support.html" class="text-gray-700 hover:text-red-600 font-medium transition-colors">Support</a>
                     <a href="Sell_Product.html" class="text-gray-700 hover:text-red-600 font-medium transition-colors">Seller Upload</a>
                 </div>
-
                 <form action="../HomePages/pages/search.html" method="get" class="hidden xl:flex items-center gap-2 border border-gray-200 rounded-full px-3 py-1 bg-white">
                     <input type="search" name="q" placeholder="Search phones" class="w-40 text-sm text-gray-700 outline-none bg-transparent">
                     <button type="submit" class="w-8 h-8 rounded-full bg-red-600 text-white hover:bg-red-700 transition-colors" aria-label="Search">🔍</button>
                 </form>
-
                 <div class="hidden md:block">
                     <button class="ghost-button" type="button" data-route="login">Login</button>
                 </div>
-
                 <div class="md:hidden">
                     <button id="mobileMenuBtn" class="text-gray-700 hover:text-red-600 focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,7 +134,6 @@ if ($product) {
                 </div>
             </div>
         </div>
-
         <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-200">
             <div class="px-4 py-3 space-y-2">
                 <a href="../HomePages/index.html" class="block text-gray-700 hover:text-red-600 font-medium py-2 transition-colors">Home</a>
@@ -163,7 +145,6 @@ if ($product) {
             </div>
         </div>
     </nav>
-
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-16">
         <?php if (!$product): ?>
             <div class="max-w-3xl mx-auto bg-white border border-gray-200 rounded-2xl p-10 text-center">
@@ -179,25 +160,21 @@ if ($product) {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                 <div class="space-y-4">
                     <div class="relative bg-gray-50 rounded-lg overflow-hidden aspect-square flex items-center justify-center">
-                        <img id="mainImage" src="<?php echo htmlspecialchars(seller_asset_web_path($product['cover_image_path'], '../../')); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="w-full h-full object-contain p-8 transition-all-smooth">
+                        <img id="mainImage" src="<?php echo htmlspecialchars(seller_asset_web_path($product['cover_image'], '../../')); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="w-full h-full object-contain p-8 transition-all-smooth">
                     </div>
-
                     <div class="relative">
                         <button id="scrollLeft" class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-md rounded-full w-8 h-8 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                             </svg>
                         </button>
-
                         <div id="thumbnailContainer" class="thumbnail-scroll flex gap-3 overflow-x-auto scroll-smooth px-10 py-2"></div>
-
                         <button id="scrollRight" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-md rounded-full w-8 h-8 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
                         </button>
                     </div>
-
                     <div class="bg-gradient-to-r from-red-50 to-orange-50 border border-red-100 rounded-lg p-4">
                         <div class="flex items-center justify-between gap-4 flex-wrap">
                             <div class="flex items-center gap-3">
@@ -212,7 +189,6 @@ if ($product) {
                         </div>
                     </div>
                 </div>
-
                 <div class="sticky-info space-y-6">
                     <div class="border-b border-gray-200 pb-6">
                         <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3"><?php echo htmlspecialchars($product['name']); ?></h1>
@@ -227,22 +203,18 @@ if ($product) {
                             <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-xs font-semibold rounded-full">Single-unit transaction</span>
                         </div>
                     </div>
-
                     <div>
                         <h3 class="text-sm font-semibold text-gray-700 mb-3">Color: <span id="selectedColor" class="text-gray-900 font-normal">Not selected</span></h3>
                         <div id="colorOptions" class="flex flex-wrap gap-3"></div>
                     </div>
-
                     <div>
                         <h3 class="text-sm font-semibold text-gray-700 mb-3">Storage: <span id="selectedStorage" class="text-gray-900 font-normal">Not selected</span></h3>
                         <div id="storageOptions" class="flex flex-wrap gap-3"></div>
                     </div>
-
                     <div>
                         <h3 class="text-sm font-semibold text-gray-700 mb-3">Warranty & Services</h3>
                         <div id="serviceOptions" class="space-y-2"></div>
                     </div>
-
                     <div class="border-t border-gray-200 pt-4 space-y-3">
                         <div class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -259,15 +231,12 @@ if ($product) {
                             <div class="text-sm text-gray-600"><span class="font-semibold">Account note:</span> Buyer and Seller accounts can purchase; only Seller accounts can publish new listings.</div>
                         </div>
                     </div>
-
                     <div class="border-t border-gray-200 pt-6 space-y-4">
                         <div id="transactionMessage" class="transaction-message hidden"></div>
-
                         <div class="flex items-baseline justify-between">
                             <span class="text-sm text-gray-600">Total Price:</span>
                             <span id="totalPrice" class="text-3xl font-bold text-red-600">¥<?php echo number_format((float) $product['base_price']); ?></span>
                         </div>
-
                         <div class="flex items-center gap-4">
                             <span class="text-sm text-gray-700">Quantity:</span>
                             <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
@@ -285,30 +254,25 @@ if ($product) {
                             </div>
                             <span class="text-xs text-gray-500">(Second-hand listings are limited to 1 unit)</span>
                         </div>
-
                         <div class="flex gap-3 pt-2">
                             <button id="addToCartBtn" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-red-600" disabled>Add to Cart</button>
                             <button id="buyNowBtn" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-red-600" disabled>Buy Now</button>
                         </div>
-
                         <p id="validationMessage" class="text-sm text-red-600 text-center hidden">Please select all required configurations</p>
                     </div>
                 </div>
             </div>
         <?php endif; ?>
     </div>
-
     <?php if ($pageProduct): ?>
         <script>
             const productData = <?php echo json_encode($pageProduct, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
-
             let state = {
                 selectedColor: productData.colors.length === 1 ? productData.colors[0].id : null,
                 selectedStorage: productData.storage.length === 1 ? productData.storage[0].id : null,
                 selectedServices: new Set(),
                 quantity: 1
             };
-
             const mainImage = document.getElementById('mainImage');
             const thumbnailContainer = document.getElementById('thumbnailContainer');
             const colorOptions = document.getElementById('colorOptions');
@@ -359,7 +323,6 @@ if ($product) {
                     serviceOptions.innerHTML = '<p class="text-sm text-gray-500">No optional seller services were added for this second-hand listing.</p>';
                     return;
                 }
-
                 serviceOptions.innerHTML = productData.services.map((service) => `
                     <label class="service-option flex items-start gap-3 p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-red-400 transition-all-smooth ${state.selectedServices.has(service.id) ? 'selected' : ''}">
                         <input type="checkbox" class="mt-1 w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500" data-service="${service.id}" ${state.selectedServices.has(service.id) ? 'checked' : ''}>
@@ -385,10 +348,7 @@ if ($product) {
             function setupEventListeners() {
                 colorOptions.addEventListener('click', (event) => {
                     const button = event.target.closest('.color-option');
-                    if (!button) {
-                        return;
-                    }
-
+                    if (!button) return;
                     state.selectedColor = button.dataset.color;
                     updateMainImage();
                     updateUI();
@@ -396,35 +356,21 @@ if ($product) {
 
                 storageOptions.addEventListener('click', (event) => {
                     const button = event.target.closest('.storage-option');
-                    if (!button) {
-                        return;
-                    }
-
+                    if (!button) return;
                     state.selectedStorage = button.dataset.storage;
                     updateUI();
                 });
 
                 serviceOptions.addEventListener('change', (event) => {
-                    if (event.target.type !== 'checkbox') {
-                        return;
-                    }
-
+                    if (event.target.type !== 'checkbox') return;
                     const serviceId = event.target.dataset.service;
-                    if (event.target.checked) {
-                        state.selectedServices.add(serviceId);
-                    } else {
-                        state.selectedServices.delete(serviceId);
-                    }
-
+                    event.target.checked ? state.selectedServices.add(serviceId) : state.selectedServices.delete(serviceId);
                     updateUI();
                 });
 
                 thumbnailContainer.addEventListener('click', (event) => {
                     const thumbnail = event.target.closest('.thumbnail-item');
-                    if (!thumbnail) {
-                        return;
-                    }
-
+                    if (!thumbnail) return;
                     state.selectedColor = thumbnail.dataset.color;
                     updateMainImage();
                     updateUI();
@@ -464,12 +410,10 @@ if ($product) {
 
                 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
                 const mobileMenu = document.getElementById('mobileMenu');
-
                 if (mobileMenuBtn && mobileMenu) {
                     mobileMenuBtn.addEventListener('click', () => {
                         mobileMenu.classList.toggle('hidden');
                     });
-
                     mobileMenu.querySelectorAll('a').forEach((link) => {
                         link.addEventListener('click', () => {
                             mobileMenu.classList.add('hidden');
@@ -480,10 +424,7 @@ if ($product) {
 
             function updateMainImage() {
                 const activeColor = productData.colors.find((color) => color.id === state.selectedColor) || productData.colors[0];
-                if (!activeColor) {
-                    return;
-                }
-
+                if (!activeColor) return;
                 mainImage.style.opacity = '0';
                 setTimeout(() => {
                     mainImage.src = activeColor.image;
@@ -495,18 +436,15 @@ if ($product) {
                 document.querySelectorAll('.color-option').forEach((button) => {
                     button.classList.toggle('selected', button.dataset.color === state.selectedColor);
                 });
-
                 document.querySelectorAll('.storage-option').forEach((button) => {
                     button.classList.toggle('selected', button.dataset.storage === state.selectedStorage);
                 });
-
                 document.querySelectorAll('.service-option').forEach((label) => {
                     const checkbox = label.querySelector('input[type="checkbox"]');
                     if (checkbox) {
                         label.classList.toggle('selected', checkbox.checked);
                     }
                 });
-
                 document.querySelectorAll('.thumbnail-item').forEach((thumbnail) => {
                     thumbnail.classList.toggle('border-red-600', thumbnail.dataset.color === state.selectedColor);
                     thumbnail.classList.toggle('ring-2', thumbnail.dataset.color === state.selectedColor);
@@ -534,13 +472,11 @@ if ($product) {
                 if (selectedStorage) {
                     total += Number(selectedStorage.priceAdjust || 0);
                 }
-
                 productData.services.forEach((service) => {
                     if (state.selectedServices.has(service.id)) {
                         total += Number(service.price || 0);
                     }
                 });
-
                 return total * state.quantity;
             }
 
@@ -581,7 +517,6 @@ if ($product) {
                         quantity: state.quantity,
                         total: calculateTotalPrice()
                     };
-
                     let cart = [];
                     try {
                         const parsed = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
@@ -589,7 +524,6 @@ if ($product) {
                     } catch (error) {
                         cart = [];
                     }
-
                     const existingIndex = cart.findIndex((entry) => entry.listingId === item.listingId && entry.color === item.color && entry.storage === item.storage && Number(entry.unit_price) === Number(item.unit_price));
                     if (existingIndex >= 0) {
                         cart[existingIndex].quantity = Number(cart[existingIndex].quantity) + Number(item.quantity);
@@ -597,12 +531,10 @@ if ($product) {
                     } else {
                         cart.push(item);
                     }
-
                     localStorage.setItem('shoppingCart', JSON.stringify(cart));
                     if (window.DG_updateCartBadges) {
                         window.DG_updateCartBadges();
                     }
-
                     return true;
                 } catch (error) {
                     return false;
@@ -626,19 +558,15 @@ if ($product) {
                     updateUI();
                     return;
                 }
-
                 const buyerName = localStorage.getItem('loggedInUser');
                 const buyerRole = localStorage.getItem('userRole') || 'Guest';
                 const normalizedBuyerRole = String(buyerRole).trim().toLowerCase();
-
                 if (!buyerName || !['buyer', 'seller'].includes(normalizedBuyerRole)) {
                     setTransactionMessage('A Buyer or Seller account login is required before continuing the second-hand transaction flow. Redirecting to login...', 'error');
                     window.location.href = `../Login&Registration/Login.html?source=seller-purchase&redirectUrl=${encodeURIComponent(window.location.href)}`;
                     return;
                 }
-
                 setTransactionMessage(actionType === 'buy_now' ? 'Submitting second-hand order...' : 'Adding seller listing to the cart flow...', 'success');
-
                 try {
                     const response = await fetch('../../PHP/submit_seller_transaction.php', {
                         method: 'POST',
@@ -660,12 +588,10 @@ if ($product) {
                             totalPrice: String(calculateTotalPrice())
                         }).toString()
                     });
-
                     const result = await response.json();
                     if (!response.ok || !result.ok) {
                         throw new Error(result.message || 'The transaction could not be completed.');
                     }
-
                     if (actionType === 'add_to_cart') {
                         const cartSaved = persistSellerCartItem();
                         const cartMessage = cartSaved
@@ -674,7 +600,6 @@ if ($product) {
                         setTransactionMessage(cartMessage, 'success');
                         return;
                     }
-
                     setTransactionMessage(`${result.message} Transaction ID: ${result.transactionId}`, 'success');
                 } catch (error) {
                     setTransactionMessage(error.message || 'The transaction could not be completed. Make sure the project is running through a PHP environment.', 'error');
@@ -684,7 +609,6 @@ if ($product) {
             document.addEventListener('DOMContentLoaded', init);
         </script>
     <?php endif; ?>
-
     <script src="../../JS/JSHomePage/common.js"></script>
     <script src="../../JS/JSHomePage/script.js"></script>
 </body>

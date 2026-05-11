@@ -9,7 +9,6 @@ ini_set('display_errors', 1);
 
 require_once __DIR__ . '/db_config.php';
 require_once __DIR__ . '/seller_product_repository.php';
-
 $uploadDir = __DIR__ . '/../Recourses/SellerUploads';
 
 if (!is_dir($uploadDir)) {
@@ -43,7 +42,7 @@ try {
     
     $coverImage = upload_single_image($_FILES['cover_image'], $uploadDir);
     if (!$coverImage) {
-        throw new Exception("Failed to upload the cover image. Please check the file format and size.");
+        throw new Exception("封面图上传失败，请检查文件格式和大小");
     }
 
     $stmt = $pdo->prepare("INSERT INTO products (
@@ -56,7 +55,7 @@ try {
         !empty($_POST['seller_role']) ? $_POST['seller_role'] : 'Seller',
         $_POST['name'],
         $_POST['brand'],
-        !empty($_POST['base_price']) ? (float)$_POST['base_price'] : 0.00, 
+        !empty($_POST['base_price']) ? (float)$_POST['base_price'] : 0.00, // 价格强制转数字
         !empty($_POST['condition']) ? $_POST['condition'] : 'Used - Good',
         !empty($_POST['description']) ? $_POST['description'] : 'No description provided.',
         $coverImage
@@ -99,7 +98,6 @@ try {
             $stmt->execute([$productId, $label, $extraPrice]);
         }
     }
-
     if (!empty($_POST['warranty_name'])) {
         $stmt = $pdo->prepare("INSERT INTO product_services (product_id, service_name, price, description) VALUES (?, ?, ?, ?)");
         foreach ($_POST['warranty_name'] as $i => $name) {
@@ -118,6 +116,6 @@ try {
 
 } catch (Exception $e) {
     $pdo->rollBack();
-    die("error：" . $e->getMessage());
+    die("Error：" . $e->getMessage());
 }
 ?>
