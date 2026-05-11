@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon God - Sell Product</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Style (Same as Registration.html) */
+        header {
+            background-color: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #222;
+            text-decoration: none;
+        }
+
+        /* Form Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .form-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #d9534f;
+        }
+
+        .btn-submit {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: #c9302c;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin: 20px 0;
+            color: #d9534f;
+        }
+
+        /* Footer (Same as Registration.html) */
+        footer {
+            background-color: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            margin-top: auto;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .verification-note {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .sample-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .sample-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fafafa;
+        }
+
+        .sample-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            background: #fff;
+        }
+
+        .sample-card-body {
+            padding: 16px;
+        }
+
+        .sample-card h3 {
+            font-size: 17px;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .sample-card p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .sample-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .sample-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: #fff0ef;
+            color: #c9302c;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .sample-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .sample-links a {
+            color: #d9534f;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .sample-links a:hover {
+            text-decoration: underline;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Logo -->
+    <header>
+        <a href="../HomePages/index.html" class="logo">Dragon God</a>
+    </header>
+
+    <div class="container">
+        <h2 class="form-title">Sell Your Electronic Product</h2>
+
+        <div class="card">
+            <div id="statusMessage" class="message" hidden></div>
+
+            <form id="sellerUploadForm" action="../../PHP/save_product.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="seller_name" id="sellerNameField" value="Seller">
+                <input type="hidden" name="seller_role" id="sellerRoleField" value="Seller">
+
+                <!-- Basic Info -->
+                <div class="section-title">Basic Product Information</div>
+
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Brand</label>
+                    <input type="text" name="brand" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Base Price (￥)</label>
+                    <input type="number" step="0.01" name="base_price" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Condition</label>
+                    <select name="condition" required>
+                        <option value="New">New</option>
+                        <option value="Used - Like New">Used - Like New</option>
+                        <option value="Used - Good">Used - Good</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4" required></textarea>
+                </div>
+
+                <!-- Cover Image -->
+                <div class="form-group">
+                    <label>Product Cover Image</label>
+                    <input type="file" name="cover_image" accept="image/*" required>
+                </div>
+
+                <!-- Colors (Max 5) -->
+                <div class="section-title">Color Options (Max 5)</div>
+                <div class="form-group">
+                    <label>Color 1 Name</label>
+                    <input type="text" name="color_name[]">
+                </div>
+                <div class="form-group">
+                    <label>Color 1 Image</label>
+                    <input type="file" name="color_image[]" accept="image/*">
+                </div>
+
+                <!-- Storage (Max 5) -->
+                <div class="section-title">Storage / Memory (Max 5)</div>
+                <div class="form-group">
+                    <label>Storage 1</label>
+                    <input type="text" name="storage[]" placeholder="128GB">
+                </div>
+                <div class="form-group">
+                    <label>Extra Price</label>
+                    <input type="number" step="0.01" name="storage_price[]" value="0">
+                </div>
+
+                <!-- Warranty (Max 3) -->
+                <div class="section-title">Warranty & Services (Max 3)</div>
+                <div class="form-group">
+                    <label>Service 1 Name</label>
+                    <input type="text" name="warranty_name[]">
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" step="0.01" name="warranty_price[]" value="0">
+                </div>
+
+                <button type="submit" class="btn-submit">Publish Product</button>
+            </form>
+
+            <p class="verification-note">When the project runs through PHP, this form publishes real seller listings to the backend. When you open this file directly from a folder, the same form now saves an offline preview listing into this browser so you can still verify search, detail, and purchase locally.</p>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Verification Sample Uploads</div>
+            <div class="sample-grid">
+                <article class="sample-card">
+                    <img src="../../Recourses/DragongGodXProMax_Sell/mainPic.jpg" alt="DragonGod X Pro Max Resale Edition">
+                    <div class="sample-card-body">
+                        <h3>DragonGod X Pro Max Resale Edition</h3>
+                        <p>Search keyword: X Pro Max Resale. This sample is already stored in the seller listing data source for end-to-end verification.</p>
+                        <div class="sample-meta">
+                            <span class="sample-tag">Used - Like New</span>
+                            <span class="sample-tag">From ¥4,280</span>
+                            <span class="sample-tag">Seller: SecondHandLab</span>
+                        </div>
+                        <div class="sample-links">
+                            <a href="../HomePages/pages/search.html?q=X%20Pro%20Max%20Resale">Search</a>
+                            <a href="SellerProductDetail.html?id=seller-product-sample-x-pro-max">Detail</a>
+                            <a href="SellerProductPurchase.html?id=seller-product-sample-x-pro-max">Purchase</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="sample-card">
+                    <img src="../../Recourses/DragonGod80ProMaxWindRush/DragonGodPhone.png" alt="DragonGod 80 Pro Max WindRush Seller Sample">
+                    <div class="sample-card-body">
+                        <h3>DragonGod 80 Pro Max WindRush Seller Sample</h3>
+                        <p>Search keyword: WindRush Seller Sample. Use this sample to verify seller detail rendering and second-hand purchase submission.</p>
+                        <div class="sample-meta">
+                            <span class="sample-tag">Used - Good</span>
+                            <span class="sample-tag">From ¥4,860</span>
+                            <span class="sample-tag">Seller: MetroMobileSeller</span>
+                        </div>
+                        <div class="sample-links">
+                            <a href="../HomePages/pages/search.html?q=WindRush%20Seller%20Sample">Search</a>
+                            <a href="SellerProductDetail.html?id=seller-product-sample-windrush">Detail</a>
+                            <a href="SellerProductPurchase.html?id=seller-product-sample-windrush">Purchase</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Dragon God. All rights reserved.</p>
+    </footer>
+
+    <script src="../../JS/JSHomePage/offline-data.js"></script>
+    <script src="../../JS/JSHomePage/offline-seller-listings.js"></script>
+    <script>
+        const statusMessage = document.getElementById('statusMessage');
+        const params = new URLSearchParams(window.location.search);
+        const sellerUploadForm = document.getElementById('sellerUploadForm');
+        const sellerNameField = document.getElementById('sellerNameField');
+        const sellerRoleField = document.getElementById('sellerRoleField');
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const userRole = localStorage.getItem('userRole');
+        const normalizedUserRole = String(userRole || '').trim().toLowerCase();
+        const canSell = normalizedUserRole === 'seller';
+        const isDirectFileMode = window.location.protocol === 'file:';
+
+        function showStatus(message, tone) {
+            statusMessage.hidden = false;
+            statusMessage.className = `message ${tone}`;
+            statusMessage.innerHTML = message;
+        }
+
+        function formatCurrency(value) {
+            return `¥${Number(value || 0).toLocaleString('en-US')}`;
+        }
+
+        function getTrimmedValues(formData, fieldName) {
+            return formData.getAll(fieldName).map((item) => String(item || '').trim());
+        }
+
+        async function createOfflineListing(formData) {
+            const offlineStore = window.DRAGONGOD_OFFLINE_SELLER_LISTINGS;
+
+            if (!offlineStore) {
+                throw new Error('Offline seller storage is unavailable.');
+            }
+
+            const name = String(formData.get('name') || '').trim();
+            const brand = String(formData.get('brand') || '').trim();
+            const description = String(formData.get('description') || '').trim();
+            const condition = String(formData.get('condition') || '').trim();
+            const basePrice = Number(formData.get('base_price') || 0);
+            const sellerName = String(formData.get('seller_name') || 'Seller').trim() || 'Seller';
+            const defaultImagePath = 'Recourses/HomePage/hero-device.svg';
+            const coverImagePath = await offlineStore.buildImageReference(formData.get('cover_image'), defaultImagePath);
+
+            const colorNames = getTrimmedValues(formData, 'color_name[]');
+            const colorFiles = formData.getAll('color_image[]');
+            const colors = [];
+
+            for (let index = 0; index < Math.max(colorNames.length, colorFiles.length); index += 1) {
+                const colorName = colorNames[index] || '';
+                const colorFile = colorFiles[index];
+                const hasImage = colorFile instanceof File && colorFile.size > 0;
+
+                if (!colorName && !hasImage) {
+                    continue;
+                }
+
+                const imagePath = await offlineStore.buildImageReference(colorFile, coverImagePath);
+                colors.push({
+                    id: `seller-color-${index + 1}`,
+                    name: colorName || `Color ${index + 1}`,
+                    imagePath
+                });
+            }
+
+            if (!colors.length) {
+                colors.push({
+                    id: 'seller-color-1',
+                    name: 'Standard color',
+                    imagePath: coverImagePath
+                });
+            }
+
+            const storageLabels = getTrimmedValues(formData, 'storage[]');
+            const storagePrices = formData.getAll('storage_price[]');
+            const storage = storageLabels
+                .map((label, index) => ({
+                    id: `seller-storage-${index + 1}`,
+                    label,
+                    extraPrice: Number(storagePrices[index] || 0)
+                }))
+                .filter((item) => item.label);
+
+            if (!storage.length) {
+                storage.push({
+                    id: 'seller-storage-1',
+                    label: 'Standard configuration',
+                    extraPrice: 0
+                });
+            }
+
+            const serviceNames = getTrimmedValues(formData, 'warranty_name[]');
+            const servicePrices = formData.getAll('warranty_price[]');
+            const services = serviceNames
+                .map((serviceName, index) => ({
+                    id: `seller-service-${index + 1}`,
+                    name: serviceName,
+                    price: Number(servicePrices[index] || 0),
+                    description: serviceName ? `${serviceName} saved in offline preview mode.` : ''
+                }))
+                .filter((item) => item.name);
+
+            return {
+                id: offlineStore.createId(name),
+                name,
+                brand,
+                condition,
+                description,
+                basePrice,
+                sellerName,
+                sellerRole: String(formData.get('seller_role') || 'Seller').trim() || 'Seller',
+                createdAt: new Date().toISOString(),
+                coverImagePath,
+                galleryPaths: Array.from(new Set([coverImagePath, ...colors.map((item) => item.imagePath)].filter(Boolean))),
+                colors,
+                storage,
+                services,
+                keywords: offlineStore.buildKeywords([
+                    name,
+                    brand,
+                    description,
+                    condition,
+                    sellerName,
+                    ...storage.map((item) => item.label),
+                    ...services.map((item) => item.name)
+                ]),
+                maxQuantity: 1,
+                offlinePreview: true
+            };
+        }
+
+        if (loggedInUser && sellerNameField) {
+            sellerNameField.value = loggedInUser;
+        }
+
+        if (userRole && sellerRoleField) {
+            sellerRoleField.value = userRole;
+        }
+
+        if (params.get('success') === '1') {
+            const listingId = params.get('id');
+            const detailLink = listingId ? `SellerProductDetail.php?id=${encodeURIComponent(listingId)}` : '../HomePages/pages/search.html';
+            const purchaseLink = listingId ? `SellerProductPurchase.php?id=${encodeURIComponent(listingId)}` : '../HomePages/pages/search.html';
+
+            showStatus(`Product saved successfully. It is now available to the search feature. <a href="../HomePages/pages/search.html" style="color: inherit; text-decoration: underline; font-weight: 600;">Open Search</a> <span style="margin: 0 6px;">|</span> <a href="${detailLink}" style="color: inherit; text-decoration: underline; font-weight: 600;">Preview Detail Page</a> <span style="margin: 0 6px;">|</span> <a href="${purchaseLink}" style="color: inherit; text-decoration: underline; font-weight: 600;">Preview Purchase Page</a>`, 'success');
+        }
+
+        if (params.get('error')) {
+            const messages = {
+                invalid_request: 'Invalid request. Please submit the form from this page.',
+                missing_fields: 'Please complete the required product information before publishing.',
+                cover_upload: 'The cover image could not be uploaded. Please try again with a valid image file.',
+                color_upload: 'One of the color images could not be uploaded. Please check the file type and try again.',
+                seller_only: 'Only Seller accounts can publish products. Buyer accounts can purchase only.'
+            };
+
+            showStatus(messages[params.get('error')] || 'The product could not be saved. Please try again.', 'error');
+        }
+
+        if (sellerUploadForm && !canSell) {
+            const submitButton = sellerUploadForm.querySelector('.btn-submit');
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = loggedInUser ? 'Seller Account Required' : 'Login as Seller to Publish';
+            }
+
+            showStatus(
+                loggedInUser
+                    ? 'Only Seller accounts can publish products. Buyer accounts can purchase only.'
+                    : 'Please log in with a Seller account to publish a product. Buyer accounts can purchase only.',
+                'error'
+            );
+        }
+
+        if (sellerUploadForm) {
+            sellerUploadForm.addEventListener('submit', async (event) => {
+                if (!canSell) {
+                    event.preventDefault();
+                    showStatus(
+                        loggedInUser
+                            ? 'Only Seller accounts can publish products. Buyer accounts can purchase only.'
+                            : 'Please log in with a Seller account to publish a product. Buyer accounts can purchase only.',
+                        'error'
+                    );
+                    return;
+                }
+
+                if (!isDirectFileMode) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const submitButton = sellerUploadForm.querySelector('.btn-submit');
+                const formData = new FormData(sellerUploadForm);
+                const name = String(formData.get('name') || '').trim();
+                const brand = String(formData.get('brand') || '').trim();
+                const description = String(formData.get('description') || '').trim();
+                const basePrice = Number(formData.get('base_price') || 0);
+
+                if (!name || !brand || !description || !Number.isFinite(basePrice) || basePrice <= 0) {
+                    showStatus('Please complete the required product information before saving the offline preview.', 'error');
+                    return;
+                }
+
+                submitButton.disabled = true;
+                submitButton.textContent = 'Saving Offline Preview...';
+
+                try {
+                    const listing = await createOfflineListing(formData);
+                    window.DRAGONGOD_OFFLINE_SELLER_LISTINGS.saveListing(listing);
+
+                    const searchLink = `../HomePages/pages/search.html?q=${encodeURIComponent(listing.name)}`;
+                    const detailLink = `SellerProductDetail.html?id=${encodeURIComponent(listing.id)}`;
+                    const purchaseLink = `SellerProductPurchase.html?id=${encodeURIComponent(listing.id)}`;
+                    const usedPlaceholder = listing.coverImagePath === 'Recourses/HomePage/hero-device.svg';
+                    const imageNote = usedPlaceholder ? ` <span style="display: inline-block; margin-top: 8px;">Large or unavailable local images fall back to a placeholder in offline mode.</span>` : '';
+
+                    showStatus(`Offline preview saved locally for ${listing.name} at ${formatCurrency(listing.basePrice)}. You can verify it immediately through <a href="${searchLink}" style="color: inherit; text-decoration: underline; font-weight: 600;">Search</a> <span style="margin: 0 6px;">|</span> <a href="${detailLink}" style="color: inherit; text-decoration: underline; font-weight: 600;">Detail</a> <span style="margin: 0 6px;">|</span> <a href="${purchaseLink}" style="color: inherit; text-decoration: underline; font-weight: 600;">Purchase</a>.${imageNote}`, 'success');
+
+                    sellerUploadForm.reset();
+
+                    if (loggedInUser && sellerNameField) {
+                        sellerNameField.value = loggedInUser;
+                    }
+
+                    if (userRole && sellerRoleField) {
+                        sellerRoleField.value = userRole;
+                    }
+                } catch (error) {
+                    showStatus('The offline preview could not be saved. The browser may have blocked local storage or the selected image was too large.', 'error');
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Publish Product';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

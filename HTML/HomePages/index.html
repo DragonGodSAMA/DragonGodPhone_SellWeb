@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DragonGod Phont | Aether Fold One</title>
-    <meta name="description" content="DragonGod Phont Aether Fold One is an original student homepage concept for a premium foldable smartphone launch.">
+    <meta name="description" content="DragonGod Phont Aether Fold One is DragonGod's flagship foldable homepage, presenting design, imaging, performance, accessories, and purchase pathways in one connected experience.">
     <link rel="stylesheet" href="../../CSS/CSSHomePage/stylesofindex.css">
 </head>
 <body>
@@ -32,6 +32,10 @@
                 <a href="pages/retail.html">Retail</a>
                 <a href="pages/business.html">Business</a>
                 <a href="pages/store.html">Store</a>
+                <form class="global-search-form" action="pages/search.html" method="get" role="search">
+                    <input class="global-search-input" type="search" name="q" placeholder="Search phones">
+                    <button class="global-search-button" type="submit" aria-label="Search">🔍</button>
+                </form>
             </div>
         </div>
     </div>
@@ -54,6 +58,10 @@
             </nav>
 
             <div class="header-actions">
+                <form class="global-search-form" action="pages/search.html" method="get" role="search">
+                    <input class="global-search-input" type="search" name="q" placeholder="Search phones">
+                    <button class="global-search-button" type="submit" aria-label="Search">🔍</button>
+                </form>
                 <button class="ghost-button" type="button" data-route="detail" data-query='{"section":"specs","scene":"subnav"}'>Specs</button>
                 <button class="ghost-button" type="button" data-route="login">Login</button>
                 <button class="solid-button" type="button" data-route="sell" data-query='{"entry":"top-nav"}'>Buy</button>
@@ -67,9 +75,10 @@
                     <h1>Aether Fold One</h1>
                     <p class="hero-slogan">Open wide. Stay precise.</p>
                     <p class="hero-text">
-                        A revised homepage designed to stay visually aligned with the Huawei-style pages used by the team,
-                        while keeping all brand names, product names, copy, and artwork original.
+                        DragonGod's foldable homepage brings together flagship design, imaging, productivity, and ecosystem stories,
+                        then connects them to the product detail, account, and purchase journeys without breaking the experience.
                     </p>
+
                     <p class="hero-price"><strong>¥ 8,999*</strong><span>Starting from</span></p>
 
                     <div class="cta-group">
@@ -108,9 +117,9 @@
                     <div>
                         <p class="eyebrow">Design Story</p>
                         <h2>Wide when opened. Controlled when closed.</h2>
-                        <p>The revised layout reduces decorative effects and keeps the product presentation closer to Huawei's restrained launch-page rhythm.</p>
+                        <p>The homepage keeps the focus on clean product storytelling, large visuals, and a calm launch-page rhythm that feels premium from the first screen.</p>
                     </div>
-                    <button class="text-button" type="button" data-route="detail" data-query='{"section":"display"}'>View detail route</button>
+                    <button class="text-button" type="button" data-route="detail" data-query='{"section":"display"}'>View details page</button>
                 </article>
 
                 <article class="feature-card">
@@ -128,17 +137,17 @@
                 <article class="feature-card">
                     <img src="../../Recourses/HomePage/feature-core.svg" alt="Stylized performance core illustration">
                     <h3>DrakeSilicon D1</h3>
-                    <p>Original platform naming replaces Huawei product terms while preserving a premium launch-page tone.</p>
+                    <p>Original platform naming gives DragonGod its own performance identity while preserving a premium flagship tone.</p>
                 </article>
             </section>
 
             <section class="story-grid section" id="story">
                 <div class="story-copy">
                     <p class="eyebrow">Launch Narrative</p>
-                    <h2>A homepage that covers the brand story while reserving purchase and account flows for teammates.</h2>
+                    <h2>A homepage that carries the brand story from first impression to purchase intent.</h2>
                     <p>
-                        The official reference uses a long-form product narrative. This version keeps that structure but rewrites the content,
-                        replaces all names, and exposes handoff points through route-aware buttons and placeholder targets.
+                        Aether Fold One is introduced as a complete flagship, balancing immersive visuals, practical highlights,
+                        and clear next steps into support, product details, and purchase.
                     </p>
                 </div>
 
@@ -167,7 +176,7 @@
                     <p class="eyebrow">Interactive Highlights</p>
                     <h2>Switch the focus without leaving the product page.</h2>
                     <p>
-                        This block acts as a simplified feature carousel. The styling is flatter and more neutral so it sits closer to the Huawei reference.
+                        This switcher keeps the product story active and easy to explore, letting visitors jump between creative, imaging, travel, and workflow scenes.
                     </p>
                     <div class="switcher" role="tablist" aria-label="Feature showcase switcher">
                         <button class="switch-chip active" type="button" data-showcase="canvas">Canvas AI</button>
@@ -183,7 +192,7 @@
                         <p class="eyebrow" id="showcase-tag">Creative AI</p>
                         <h3 id="showcase-title">Mythic Canvas AI turns quick sketches into presentable concepts.</h3>
                         <p id="showcase-text">
-                            Students can demonstrate AI-inspired creativity on the homepage without duplicating the official Huawei wording or app naming.
+                            Creative AI is framed as a flagship experience for sketching, ideation, and quick concept refinement across the large foldable canvas.
                         </p>
                         <ul id="showcase-points" class="showcase-points">
                             <li>Sketch-to-scene prompts</li>
@@ -197,10 +206,9 @@
             <section class="performance section" id="performance">
                 <div class="performance-copy">
                     <p class="eyebrow">Power Stack</p>
-                    <h2>Original naming, premium layout, and a clean separation of responsibilities.</h2>
+                    <h2>Original naming, premium layout, and a clear performance story.</h2>
                     <p>
-                        The landing page introduces performance, durability, and ecosystem value. It does not duplicate the product order matrix,
-                        which is intentionally delegated to the SellPage placeholder route.
+                        The landing page introduces performance, durability, and ecosystem value, while the configuration matrix stays streamlined inside the purchase page.
                     </p>
                 </div>
 
@@ -224,7 +232,7 @@
             <section class="ecosystem section section-slab" id="ecosystem">
                 <div class="ecosystem-copy">
                     <p class="eyebrow">Accessories</p>
-                    <h2>Supporting products are introduced here, while purchasing remains inside the SellPage contract.</h2>
+                    <h2>Supporting products expand the flagship story while staying one step away from checkout.</h2>
                 </div>
 
                 <div class="ecosystem-grid">
@@ -245,31 +253,31 @@
 
             <section class="handoff section" id="handoff">
                 <div class="handoff-copy">
-                    <p class="eyebrow">Reserved Interfaces</p>
-                    <h2>Cross-page routes are already wired for teammate integration.</h2>
+                    <p class="eyebrow">Connected Journeys</p>
+                    <h2>Move from discovery to account access, product details, and purchase without losing context.</h2>
                     <p>
-                        Replace the placeholder file paths later, but keep the query parameters so the integration contract remains stable across the project.
+                        Each entry point below continues the DragonGod experience in a focused way, whether the visitor wants support, deeper product reading, or a direct purchase path.
                     </p>
                 </div>
 
                 <div class="handoff-grid">
                     <article class="handoff-card">
-                        <span>Team Member A</span>
-                        <h3>Login / Registration</h3>
-                        <p>Reserved query contract: mode, source, and redirect.</p>
-                        <button class="ghost-button" type="button" data-route="login" data-query='{"source":"handoff","redirect":"sell"}'>Open Login Route</button>
+                        <span>Account</span>
+                        <h3>Sign in or create an account</h3>
+                        <p>Manage preferences, keep purchase progress, and unlock seller publishing when needed.</p>
+                        <button class="ghost-button" type="button" data-route="login" data-query='{"source":"handoff","redirect":"sell"}'>Open Account Page</button>
                     </article>
                     <article class="handoff-card">
-                        <span>Team Member B</span>
-                        <h3>Detail Introduction</h3>
-                        <p>Reserved query contract: product, section, and scene.</p>
-                        <button class="ghost-button" type="button" data-route="detail" data-query='{"product":"aether-fold-one","section":"camera","scene":"handoff"}'>Open Detail Route</button>
+                        <span>Product Story</span>
+                        <h3>Explore the detailed product page</h3>
+                        <p>Dive deeper into design, camera, display, performance, and battery highlights for the flagship line.</p>
+                        <button class="ghost-button" type="button" data-route="detail" data-query='{"product":"aether-fold-one","section":"camera","scene":"handoff"}'>Open Product Details</button>
                     </article>
                     <article class="handoff-card">
-                        <span>Team Member C</span>
-                        <h3>SellPage</h3>
-                        <p>Reserved query contract: sku, campaign, and source.</p>
-                        <button class="solid-button" type="button" data-route="sell" data-query='{"sku":"aether-fold-one-512","campaign":"handoff","source":"homepage"}'>Open Sell Route</button>
+                        <span>Purchase</span>
+                        <h3>Choose a configuration and buy</h3>
+                        <p>Continue into the purchase page to select storage, accessories, and a final checkout-ready setup.</p>
+                        <button class="solid-button" type="button" data-route="sell" data-query='{"sku":"aether-fold-one-512","campaign":"handoff","source":"homepage"}'>Open Purchase Page</button>
                     </article>
                 </div>
             </section>
@@ -278,21 +286,22 @@
         <footer class="site-footer">
             <div>
                 <strong>DragonGod Phont</strong>
-                <p>Student homepage package by Chen Hetian. The revised visual direction is intentionally closer to Huawei's layout language, while the product identity and content remain original.</p>
+                <p>DragonGod's flagship homepage introduces the foldable lineup with clear paths into details, support, accessories, and purchase.</p>
             </div>
             <div class="footer-actions">
-                <button class="text-button" type="button" data-route="detail" data-query='{"section":"footer"}'>Detail placeholder</button>
-                <button class="text-button" type="button" data-route="sell" data-query='{"entry":"footer"}'>Sell placeholder</button>
+                <button class="text-button" type="button" data-route="detail" data-query='{"section":"footer"}'>Details Page</button>
+                <button class="text-button" type="button" data-route="sell" data-query='{"entry":"footer"}'>Buy Page</button>
             </div>
         </footer>
     </div>
 
     <aside class="notice-bar" id="notice-bar">
-        <p>This practice site is a local team prototype. It keeps an original brand identity while aligning more closely with the shared Huawei-style layout direction.</p>
+        <p>Explore the full DragonGod experience across homepage, category, detail, support, and purchase pages from one connected site.</p>
         <button type="button" class="notice-close" aria-label="Dismiss project notice">Close</button>
     </aside>
 
     <script>window.ASSET_BASE = '../../Recourses/HomePage/';</script>
     <script src="../../JS/JSHomePage/script.js"></script>
+    <script src="../../JS/JSHomePage/common.js"></script>
 </body>
 </html>
