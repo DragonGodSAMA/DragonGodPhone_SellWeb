@@ -20,13 +20,12 @@ try {
         ':phone'    => $phone,
         ':email'    => $email,
         ':username' => $regUsername,
-        ':password' => $password, // 建议使用 password_hash() 加密
+        ':password' => $password, 
         ':role'     => $role
     ]);
 
     header("Location: ../../HTML/Login&Registration/Login.html");
 } catch (PDOException $e) {
-    // 如果用户名或手机重复，会抛出异常
     echo "Registration Error: " . $e->getMessage();
 }
 exit;

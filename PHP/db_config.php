@@ -1,5 +1,4 @@
 <?php
-// db_config.php
 $host = 'localhost';
 $db   = 'dragon_god_db';
 $user = 'root';

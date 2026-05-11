@@ -10,7 +10,6 @@ if (empty($inputAccount) || empty($inputPwd)) {
 }
 
 try {
-    // 允许通过用户名、手机或邮箱登录
     $sql = "SELECT username, role, password FROM users 
             WHERE username = :account OR phone = :account OR email = :account 
             LIMIT 1";
@@ -19,7 +18,6 @@ try {
     $stmt->execute([':account' => $inputAccount]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // 验证用户存在且密码匹配
     if ($user && $user['password'] === $inputPwd) {
         $matchName = $user['username'];
         $userRole  = $user['role'];
