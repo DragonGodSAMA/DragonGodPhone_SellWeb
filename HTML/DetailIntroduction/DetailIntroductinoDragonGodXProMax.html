@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragonGod X Pro Max - Premium Flagship Smartphone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            color: #333;
+            background: #fffcf6;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 999;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #111;
+            cursor: pointer; /* 添加鼠标指针样式 */
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 36px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #007bff;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: #007bff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* --- SEARCH BOX --- */
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            border-radius: 6px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.9);
+            transition: all 0.3s ease;
+        }
+
+        .search-input.active {
+            width: 180px;
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-actions span,
+        .nav-actions .shared-cart-link {
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-actions span:hover,
+        .nav-actions .shared-cart-link:hover {
+            color: #007bff;
+            transform: scale(1.1);
+        }
+
+        .nav-actions .cart-badge,
+        .mobile-menu .cart-badge {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-reserve {
+            background: #005bb5;
+            color: white;
+            padding: 9px 18px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reserve:hover {
+            background: #007bff;
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 26px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .hamburger:hover {
+            color: #007bff;
+            transform: rotate(90deg);
+        }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            right: 0;
+            width: 240px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: -2px 4px 10px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 998;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu .shared-cart-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mobile-menu a:hover {
+            color: #007bff;
+            padding-left: 8px;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 60px;
+            background: linear-gradient(to bottom, #f9f9f9, #f1f1f1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            max-width: 1400px;
+            border-radius: 12px;
+        }
+
+        .hero-text {
+            margin-top: 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: 46px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .hero-text .slogan {
+            font-size: 19px;
+            color: #666;
+            margin-bottom: 26px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background: #005bb5;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #007bff;
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #005bb5;
+            border: 1px solid #005bb5;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f7ff;
+            transform: translateY(-3px);
+        }
+
+        /* --- SECTION --- */
+        .section {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 34px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .section p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 36px;
+        }
+
+        .full-img {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-radius: 14px;
+        }
+
+        .full-video{
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-radius: 14px;
+        }
+
+        /* --- GRID --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* --- CAMERA SECTION ENLARGED & BALANCED --- */
+        #camera img {
+            width: 100%;
+            transform: scale(1.05);
+            border-radius: 12px;
+        }
+
+        #camera .grid-2 div:last-child {
+            transform: scale(1.05);
+            line-height: 1.7;
+        }
+
+        /* --- PERFORMANCE SECTION --- */
+        #performance img {
+            width: 100%;
+            transform: scale(1.05);
+            border-radius: 12px;
+        }
+
+        #performance .grid-2 div:first-child {
+            transform: scale(1.05);
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        /* --- COLOR SWITCHER --- */
+        .color-preview {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            border-radius: 12px;
+        }
+
+        .color-switcher {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .color-dot {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .color-dot.active {
+            border-color: #333;
+            transform: scale(1.15);
+        }
+
+        .color-dot:hover {
+            transform: scale(1.1);
+        }
+
+        .dot-orange { background: linear-gradient(45deg, #4a90e2, #fff, #ff9500); }
+        .dot-purple { background: linear-gradient(45deg, #6a5acd, #fddfcb); }
+        .dot-green { background: linear-gradient(45deg, #5ca05c, #fff); }
+        .dot-gold { background: #f3e9d5; }
+        .dot-black { background: #111; }
+
+        /* --- SPECS --- */
+        .spec-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .spec-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .spec-tab.active {
+            border-color: #007bff;
+            font-weight: 600;
+        }
+
+        .spec-tab:hover {
+            color: #007bff;
+        }
+
+        .spec-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* --- PRICING --- */
+        .storage-options {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .storage {
+            padding: 14px 26px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .storage.active {
+            border-color: #007bff;
+            background: #f5f9ff;
+        }
+
+        .storage:hover {
+            border-color: #007bff;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        /* --- BATTERY STATS --- */
+        .battery-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .battery-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 30px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            margin-top: 15%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .battery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .battery-card .icon {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #005bb5;
+        }
+
+        .battery-card .stat-number {
+            font-size: 38px;
+            font-weight: 700;
+            color: #005bb5;
+            margin: 10px 0;
+        }
+
+        .battery-card .stat-label {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #f8f8f8;
+            padding: 60px 5% 30px;
+            color: #666;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto 40px;
+        }
+        .footer-link {
+            color: #666;
+            text-decoration: none;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* ------------------------------ */
+        /* --- RESPONSIVE FOR TABLET & PHONE --- */
+        /* ------------------------------ */
+        @media (max-width: 1024px) {
+            .grid-2 {
+                gap: 30px;
+                padding: 0 20px;
+            }
+            #camera img, #performance img {
+                transform: scale(1.02);
+            }
+            .battery-card .stat-number {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu, .nav-actions { display: none; }
+            .hamburger { display: block; }
+            .hero-img { height: 45vh; }
+            .hero-text h1 { font-size: 30px; }
+            .hero-text .slogan { font-size: 16px; }
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            #camera .grid-2 div:last-child, #performance .grid-2 div:first-child {
+                text-align: center;
+                transform: scale(1);
+            }
+            .section h2 {
+                font-size: 26px;
+            }
+            /* Battery stats responsive */
+            .battery-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 20px;
+            }
+            .battery-card {
+                padding: 25px 15px;
+            }
+            .battery-card .stat-number {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 80px 15px 40px;
+            }
+            .hero-img {
+                height: 38vh;
+            }
+            .hero-text h1 {
+                font-size: 24px;
+            }
+            .btn-primary, .btn-secondary {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .section {
+                padding: 50px 15px;
+            }
+            .battery-card .stat-number {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <!-- Logo 添加点击跳转事件 -->
+        <a href="../HomePages/index.html" class="logo" id="logo" style="text-decoration: none;">DragonGod</a>
+        <div class="nav-menu">
+            <a href="#design">Design</a>
+            <a href="#camera">Camera</a>
+            <a href="#display">Display</a>
+            <a href="#performance">Performance</a>
+            <a href="#battery">Battery</a>
+        </div>
+        <div class="nav-actions">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search...">
+                <span id="searchIcon">🔍</span>
+            </div>
+            <a href="../SellPage(addcar)/Cart.html" class="shared-cart-link" aria-label="Open cart">🛒 <span class="cart-badge">¥0</span></a>
+            <button class="ghost-button btn-reserve" type="button" data-route="login">Login</button>
+        </div>
+        <div class="hamburger" id="hamburger">☰</div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#design">Design</a>
+        <a href="#camera">Camera</a>
+        <a href="#display">Display</a>
+        <a href="#performance">Performance</a>
+        <a href="#battery">Battery</a>
+        <button class="ghost-button" type="button" data-route="login" style="margin-top: 10px;">Login</button>
+        <a href="../SellPage(addcar)/Cart.html" class="shared-cart-link">Cart <span class="cart-badge">¥0</span></a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-img">
+            <img id="mainPhone" src="../../Recourses/DragonGodXProMax/design-color-1.png" alt="Flagship Phone">
+        </div>
+        <div class="hero-text">
+            <h1>DragonGod X Pro Max</h1>
+            <p class="slogan">Redefine Premium Flagship Imaging</p>
+            <div class="hero-buttons">
+                <a href="../SellPage(addcar)/SellPage.html" class="btn-primary" style="text-decoration: none;">Buy Now</a>
+                <a href="#design" class="btn-secondary" style="text-decoration: none;">View Specs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DESIGN -->
+    <section class="section" id="design">
+        <h2>Ultra Premium Design</h2>
+        <p>Sleek curvature, premium craftsmanship, iconic camera module</p>
+        <video class="full-video" src="../../Recourses/DragonGodXProMax/DragonGodXProMaxVedio.mp4" alt="Video" autoplay muted loop></video>
+    </section>
+
+    <!-- CAMERA (ENLARGED & BALANCED) -->
+    <section class="section" id="camera">
+        <h2>Ultra Lighting Image System</h2>
+        <div class="grid-2">
+            <div>
+                <img src="../../Recourses/DragonGodXProMax/DragonGodXProMaxCamera.png" alt="Camera">
+            </div>
+            <div>
+                <h3>Professional-Grade Camera</h3>
+                <p>Main Camera • Ultra Wide • Telephoto • Front Camera</p>
+                <p>Stunning night mode, portrait, and ultra-clear photography</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DISPLAY -->
+    <section class="section" id="display">
+        <h2>Ultimate HD Eye-Care Flagship Screen</h2>
+        <p>High resolution • High refresh rate • Peak brightness • Eye protection</p>
+        <div class="grid-3">
+            <div>6.85-inch</div>
+            <div>120Hz</div>
+            <div>2800 nits</div>
+        </div>
+        <br>
+        <img class="full-img" src="../../Recourses/DragonGodXProMax/DragonGodXProMax.png" alt="Display Image">
+    </section>
+
+    <!-- PERFORMANCE -->
+    <section class="section" id="performance">
+        <h2>Flagship Performance + Smooth Experience</h2>
+        <p>Top processor, large RAM, efficient cooling system</p>
+        <div class="grid-2">
+            <div>
+                <h3>Next-Gen Processing Power</h3>
+                <p>Equipped with the latest 4nm flagship processor, delivering up to 35% higher performance and 20% lower power consumption compared to previous generation.</p>
+                <p>12GB LPDDR5X ultra-fast RAM ensures seamless multitasking, while the advanced vapor chamber cooling system keeps temperatures in check even during intense gaming sessions.</p>
+                <p>UFS 4.0 storage provides lightning-fast read/write speeds for instant app launches and smooth file transfers.</p>
+            </div>
+            <div>
+                <img src="../../Recourses/DragonGodXProMax/DragonGodXProMaxPerformance.png" alt="Performance">
+            </div>
+        </div>
+    </section>
+
+    <!-- BATTERY -->
+    <section class="section" id="battery">
+        <h2>All-Day Battery & Fast Charging</h2>
+        <div class="battery-stats">
+            <div class="battery-card">
+                <div class="icon">🔋</div>
+                <div class="stat-number" id="batteryNum">0</div>
+                <div class="stat-label">Large Battery (mAh)</div>
+            </div>
+            <div class="battery-card">
+                <div class="icon">⚡</div>
+                <div class="stat-number" id="wiredChargeNum">0</div>
+                <div class="stat-label">Wired Fast Charge (W)</div>
+            </div>
+            <div class="battery-card">
+                <div class="icon">🔌</div>
+                <div class="stat-number" id="wirelessChargeNum">0</div>
+                <div class="stat-label">Wireless Charge (W)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLOR SWITCHER -->
+    <section class="section">
+        <h2>Choose Your Color</h2>
+        <img id="colorPreview" class="color-preview" src="../../Recourses/DragonGodXProMax/design-color-1.png" alt="Color Preview">
+        <div class="color-switcher">
+            <div class="color-dot dot-orange active" data-img="../../Recourses/DragonGodXProMax/design-color-1.png"></div>
+            <div class="color-dot dot-purple" data-img="../../Recourses/DragonGodXProMax/design-color-2.png"></div>
+            <div class="color-dot dot-green" data-img="../../Recourses/DragonGodXProMax/design-color-3.png"></div>
+            <div class="color-dot dot-gold" data-img="../../Recourses/DragonGodXProMax/design-color-4.png"></div>
+            <div class="color-dot dot-black" data-img="../../Recourses/DragonGodXProMax/design-color-5.png"></div>
+        </div>
+    </section>
+
+    <!-- SPECS -->
+    <section class="section">
+        <h2>Full Specifications</h2>
+        <div class="spec-tabs">
+            <div class="spec-tab active">Core Specs</div>
+            <div class="spec-tab">Display</div>
+            <div class="spec-tab">Camera</div>
+            <div class="spec-tab">Battery</div>
+        </div>
+        <div class="spec-content">
+            <div class="spec-row"><span>Model</span><span>DragonGod X Pro Max</span></div>
+            <div class="spec-row"><span>Processor</span><span>Next-Gen Flagship Chip</span></div>
+            <div class="spec-row"><span>RAM</span><span>Up to 12GB</span></div>
+            <div class="spec-row"><span>Storage</span><span>Up to 1TB</span></div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" style="background:#f9f9f9;">
+        <h2>Buy Now</h2>
+        <div class="storage-options">
+            <div class="storage active">8+256GB</div>
+            <div class="storage">12+512GB</div>
+            <div class="storage">12+1TB</div>
+        </div>
+        <div class="price">$999</div>
+        <a href="../SellPage(addcar)/SellPage.html" class="btn-primary" style="text-decoration: none;">Buy Now</a>
+        <p style="margin-top:20px;">Nationwide warranty • Interest-free installments • Trade-in</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div>
+                <h4>DragonGod</h4>
+                <p>Premium flagship technology</p>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <p>Service Hotline: 400-123-4567</p>
+            </div>
+            <div>
+                <h4>Policy</h4>
+                <a href="../Login&Registration/Privacy.html" class="footer-link">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 DragonGod Phone. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // HAMBURGER MENU
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('mouseenter', () => {
+            mobileMenu.style.display = 'flex';
+        });
+        hamburger.addEventListener('mouseleave', () => {
+            setTimeout(() => {
+                mobileMenu.style.display = 'none';
+            }, 300);
+        });
+
+        // ------------------------------
+        // SEARCH BOX (EXPAND ON CLICK / CLOSE WHEN EMPTY)
+        // ------------------------------
+        const searchIcon = document.getElementById('searchIcon');
+        const searchInput = document.querySelector('.search-input');
+
+        function submitSearchQuery() {
+            const query = searchInput.value.trim();
+
+            if (query) {
+                window.location.href = `../HomePages/pages/search.html?q=${encodeURIComponent(query)}`;
+                return;
+            }
+
+            searchInput.classList.toggle('active');
+            if (searchInput.classList.contains('active')) {
+                searchInput.focus();
+            }
+        }
+
+        searchIcon.addEventListener('click', () => {
+            submitSearchQuery();
+        });
+
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                submitSearchQuery();
+            }
+        });
+
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value.trim() === '') {
+                searchInput.classList.remove('active');
+            }
+        });
+
+        // COLOR SWITCHER
+        const dots = document.querySelectorAll('.color-dot');
+        const mainImg = document.getElementById('mainPhone');
+        const colorPreview = document.getElementById('colorPreview');
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                dots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                const imgSrc = dot.getAttribute('data-img');
+                mainImg.src = imgSrc;
+                colorPreview.src = imgSrc;
+            });
+        });
+
+        // SPEC TABS
+        const tabs = document.querySelectorAll('.spec-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // STORAGE & PRICE
+        const storages = document.querySelectorAll('.storage');
+        const price = document.querySelector('.price');
+        const prices = [999, 1199, 1499];
+        storages.forEach((sto, idx) => {
+            sto.addEventListener('click', () => {
+                storages.forEach(s => s.classList.remove('active'));
+                sto.classList.add('active');
+                price.innerText = '$' + prices[idx];
+            });
+        });
+
+        // BATTERY NUMBER COUNTER ANIMATION
+        function animateNumber(elementId, target, duration = 2000) {
+            const element = document.getElementById(elementId);
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 16);
+        }
+
+        // Intersection Observer to trigger animation when battery section is in view
+        const batterySection = document.getElementById('battery');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateNumber('batteryNum', 5800);
+                    animateNumber('wiredChargeNum', 120);
+                    animateNumber('wirelessChargeNum', 50);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        observer.observe(batterySection);
+
+        const logo = document.getElementById('logo');
+        logo.addEventListener('click', () => {
+            window.location.href = '../HomePages/index.html';
+        });
+
+    </script>
+    <script src="../../JS/JSHomePage/common.js"></script>
+    <script src="../../JS/JSHomePage/script.js"></script>
+</body>
+</html>
