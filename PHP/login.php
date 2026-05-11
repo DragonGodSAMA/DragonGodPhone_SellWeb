@@ -5,7 +5,7 @@ $inputAccount = trim($_POST['loginAccount'] ?? '');
 $inputPwd     = trim($_POST['loginPassword'] ?? '');
 
 if (empty($inputAccount) || empty($inputPwd)) {
-    header("Location: ../../HTML/Login&Registration/Login.html?error=1");
+    echo "Account and password cannot be empty";
     exit;
 }
 
@@ -18,16 +18,16 @@ try {
     $stmt->execute([':account' => $inputAccount]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && $user['password'] === $inputPwd) {
+    if ($user && password_verify($inputPwd, $user['password'])) {
         $matchName = $user['username'];
         $userRole  = $user['role'];
         
         header("Location: ../../HTML/Login&Registration/Login.html?success=1&username=".urlencode($matchName)."&role=".$userRole);
     } else {
-        header("Location: ../../HTML/Login&Registration/Login.html?error=1");
+        echo "Incorrect account or password";
     }
 } catch (PDOException $e) {
-    die("Login Error: " . $e->getMessage());
+    echo "Login failed";
 }
 exit;
 ?>
